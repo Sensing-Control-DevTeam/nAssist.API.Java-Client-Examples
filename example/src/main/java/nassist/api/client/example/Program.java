@@ -22,6 +22,8 @@ import nassist.api.client.example.dto.CameraPhotoResponse;
 import nassist.api.client.example.dto.DataPoint;
 import nassist.api.client.example.dto.EventsBatch;
 import nassist.api.client.example.dto.EventsBatchResponse;
+import nassist.api.client.example.dto.InstallationDetails;
+import nassist.api.client.example.dto.InstallationDetailsResponse;
 import nassist.api.client.example.dto.InstallationSensors;
 import nassist.api.client.example.dto.InstallationSensorsResponse;
 import nassist.api.client.example.dto.Photo;
@@ -42,7 +44,7 @@ public class Program {
 
 	private static String BASE_URL = "http://dev.nassist-test.com/api";
 
-	private static String INSTALLATION_ID = "00000000-0000-0000-0000-b827eb9e544b";
+	private static String INSTALLATION_ID = "00000000-0000-0000-0000-b827eb3761f7";
 	private static String SENSOR_ID = "127126ef-a96a-4177-9a7f-cd28f0e79326";
 	private static String CAMERA_ID = "4c03631b-c62b-4ce4-ad0c-998cdbffbfc7";
 
@@ -59,6 +61,8 @@ public class Program {
 		client = new JsonServiceClient(BASE_URL);
 		authDetails = client.post(auth);
 
+		getInstallationDetails();
+		
 		uploadSensorValues();
 
 		uploadSensorStatuses();
@@ -76,6 +80,15 @@ public class Program {
 		downloadPicture();
 	}
 
+	public static void getInstallationDetails(){
+		InstallationDetails request = new InstallationDetails();
+		request.setId(INSTALLATION_ID);
+		
+		InstallationDetailsResponse response = client.get(request);
+		
+		System.out.println("Installation Name: " + response.Installation.getName() + " Owner Id: " + response.Installation.getOwnerId());
+	}
+	
 	public static void uploadSensorValues(){
 		SensorValues uploadValuesRequest = new SensorValues();
 		uploadValuesRequest.setId(SENSOR_ID);
