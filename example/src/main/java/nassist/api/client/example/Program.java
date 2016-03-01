@@ -238,7 +238,7 @@ public class Program {
 		AzureEvent event = new AzureEvent();
 		event.setDate(new Date());
 		event.setType("custom");
-		event.setSubtype("ruleengine");
+		event.setSubtype("custom");
 		event.setDescription("My custom event text");
 		event.setInstallationId(INSTALLATION_ID);
 		event.setInstallation(installationDetails.getName());
