@@ -20,8 +20,10 @@ import nassist.api.client.example.dto.AzureEvent;
 import nassist.api.client.example.dto.CameraPhoto;
 import nassist.api.client.example.dto.CameraPhotoResponse;
 import nassist.api.client.example.dto.DataPoint;
+import nassist.api.client.example.dto.Events;
 import nassist.api.client.example.dto.EventsBatch;
 import nassist.api.client.example.dto.EventsBatchResponse;
+import nassist.api.client.example.dto.Installation;
 import nassist.api.client.example.dto.InstallationDetails;
 import nassist.api.client.example.dto.InstallationDetailsResponse;
 import nassist.api.client.example.dto.InstallationSensors;
@@ -53,6 +55,8 @@ public class Program {
 	
 	private static SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd");
 	
+	private static Installation installationDetails;
+	
 	public static void main (String[] args){
 		Authenticate auth = new Authenticate();
 		auth.setUserName(USERNAME);
@@ -78,6 +82,8 @@ public class Program {
 		uploadPicture();
 
 		downloadPicture();
+		
+		createCustomNotification();
 	}
 
 	public static void getInstallationDetails(){
@@ -85,6 +91,8 @@ public class Program {
 		request.setId(INSTALLATION_ID);
 		
 		InstallationDetailsResponse response = client.get(request);
+		
+		installationDetails = response.Installation;
 		
 		System.out.println("Installation Name: " + response.Installation.getName() + " Owner Id: " + response.Installation.getOwnerId());
 	}
@@ -226,6 +234,33 @@ public class Program {
 		}
 	}
 
+	private static void createCustomNotification() {
+		AzureEvent event = new AzureEvent();
+		event.setDate(new Date());
+		event.setType("custom");
+		event.setSubtype("ruleengine");
+		event.setDescription("My custom event text");
+		event.setInstallationId(INSTALLATION_ID);
+		event.setInstallation(installationDetails.getName());
+		event.setPending(true);
+
+		Events request = new Events();
+		request.setEvent(event);
+		
+		ArrayList<Integer> usersToNotify = new ArrayList<Integer>();
+		usersToNotify.add(installationDetails.OwnerId);
+		
+		request.setUserIds(usersToNotify);
+		
+		try{
+			client.post(request);
+			System.out.println("Event created successfully");
+		} catch (Exception e){
+			System.out.println("Error creating an event");
+			e.printStackTrace();
+		}
+	}
+	
 	// Helpers
 	public static String imageToBase64(String fileName) throws IOException
 	{
