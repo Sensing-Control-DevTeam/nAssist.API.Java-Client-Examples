@@ -1,43 +1,13 @@
-/* Options:
-Date: 2016-02-02 17:17:18
-Version: 4.046
-BaseUrl: http://dev.nassist-test.com/api
-
-Package: nassist.api.client.example
-GlobalNamespace: dto
-//AddPropertyAccessors: True
-//SettersReturnThis: True
-AddServiceStackTypes: True
-AddResponseStatus: False
-//AddImplicitVersion: 
-//IncludeTypes: 
-//ExcludeTypes: 
-//TreatTypesAsStrings: 
-//DefaultImports: java.math.*,java.util.*,net.servicestack.client.*,com.google.gson.annotations.*,com.google.gson.reflect.*
-*/
-
 package nassist.api.client.example;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.UUID;
-
-import com.google.gson.reflect.TypeToken;
-
-import net.servicestack.client.ApiMember;
-import net.servicestack.client.DataContract;
-import net.servicestack.client.DataMember;
-import net.servicestack.client.IReturn;
-import net.servicestack.client.Ignore;
-import net.servicestack.client.ResponseStatus;
-import net.servicestack.client.Route;
+import java.util.*;
+import net.servicestack.client.*;
 
 public class dto
 {
 
     @Route(Path="/cameras", Verbs="PATCH")
-    public static class CamerasPatch extends QueryBase_1<Camera> implements IReturn<QueryResponse<Camera>>
+    public static class CamerasPatch implements IReturn<Camera>
     {
         @ApiMember(Verb="PATCH", ParameterType="body", Name="Camera", Description="Camera object", DataType="Camera", IsRequired=true)
         public Camera Camera = null;
@@ -49,7 +19,7 @@ public class dto
         public CamerasPatch setCamera(Camera value) { this.Camera = value; return this; }
         public ArrayList<String> getFields() { return Fields; }
         public CamerasPatch setFields(ArrayList<String> value) { this.Fields = value; return this; }
-        private static Object responseType = new TypeToken<QueryResponse<Camera>>(){}.getType();
+        private static Object responseType = Camera.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -73,6 +43,7 @@ public class dto
     }
 
     @Route(Path="/cameras/{Id}/details", Verbs="GET")
+    // @Route(Path="/cameras/{Id}/details", Verbs="PUT")
     // @Route(Path="/cameras/{Id}", Verbs="DELETE")
     public static class CameraDetails implements IReturn<CameraDetailsResponse>
     {
@@ -81,12 +52,92 @@ public class dto
 
         @ApiMember(Name="InstallationId", Description="InstallationId", ParameterType="body", DataType="string", IsRequired=true, Verb="DELETE")
         public String InstallationId = null;
+
+        @ApiMember(Name="Name", Description="Name", ParameterType="body", DataType="string", IsRequired=true, Verb="PUT")
+        public String Name = null;
+
+        @ApiMember(Name="Description", Description="Description", ParameterType="body", DataType="string", IsRequired=true, Verb="PUT")
+        public String Description = null;
+
+        @ApiMember(Name="User", Description="User", ParameterType="body", DataType="string", IsRequired=true, Verb="PUT")
+        public String User = null;
+
+        @ApiMember(Name="Password", Description="Password", ParameterType="body", DataType="string", IsRequired=true, Verb="PUT")
+        public String Password = null;
+
+        @ApiMember(Name="IpAddress", Description="IpAddress", ParameterType="body", DataType="string", IsRequired=true, Verb="PUT")
+        public String IpAddress = null;
+
+        @ApiMember(Name="Port", Description="Port", ParameterType="body", DataType="int", IsRequired=true, Verb="PUT")
+        public Integer Port = null;
         
         public String getId() { return Id; }
         public CameraDetails setId(String value) { this.Id = value; return this; }
         public String getInstallationId() { return InstallationId; }
         public CameraDetails setInstallationId(String value) { this.InstallationId = value; return this; }
+        public String getName() { return Name; }
+        public CameraDetails setName(String value) { this.Name = value; return this; }
+        public String getDescription() { return Description; }
+        public CameraDetails setDescription(String value) { this.Description = value; return this; }
+        public String getUser() { return User; }
+        public CameraDetails setUser(String value) { this.User = value; return this; }
+        public String getPassword() { return Password; }
+        public CameraDetails setPassword(String value) { this.Password = value; return this; }
+        public String getIpAddress() { return IpAddress; }
+        public CameraDetails setIpAddress(String value) { this.IpAddress = value; return this; }
+        public Integer getPort() { return Port; }
+        public CameraDetails setPort(Integer value) { this.Port = value; return this; }
         private static Object responseType = CameraDetailsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/cameras/{Id}/statuses", Verbs="GET")
+    // @Route(Path="/cameras/{Id}/statuses", Verbs="POST")
+    public static class CameraStatuses implements IReturn<CameraStatusesResponse>
+    {
+        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true)
+        public String Id = null;
+
+        @ApiMember(Name="FromDate", Description="FromDate", ParameterType="query", DataType="string", Verb="GET")
+        public String FromDate = null;
+
+        @ApiMember(Name="ToDate", Description="ToDate", ParameterType="query", DataType="string", Verb="GET")
+        public String ToDate = null;
+
+        @ApiMember(Name="PageNumber", Description="Pagination parameter page number", ParameterType="query", DataType="int", Verb="GET")
+        public Integer PageNumber = null;
+
+        @ApiMember(Name="PageSize", Description="Pagination parameter page size", ParameterType="query", DataType="int", Verb="GET")
+        public Integer PageSize = null;
+
+        @ApiMember(Name="StatusPoints", Description="Collection of statuses to insert", ParameterType="body", DataType="List<StatusPoint>", IsRequired=true, Verb="POST")
+        public ArrayList<StatusPoint> StatusPoints = null;
+        
+        public String getId() { return Id; }
+        public CameraStatuses setId(String value) { this.Id = value; return this; }
+        public String getFromDate() { return FromDate; }
+        public CameraStatuses setFromDate(String value) { this.FromDate = value; return this; }
+        public String getToDate() { return ToDate; }
+        public CameraStatuses setToDate(String value) { this.ToDate = value; return this; }
+        public Integer getPageNumber() { return PageNumber; }
+        public CameraStatuses setPageNumber(Integer value) { this.PageNumber = value; return this; }
+        public Integer getPageSize() { return PageSize; }
+        public CameraStatuses setPageSize(Integer value) { this.PageSize = value; return this; }
+        public ArrayList<StatusPoint> getStatusPoints() { return StatusPoints; }
+        public CameraStatuses setStatusPoints(ArrayList<StatusPoint> value) { this.StatusPoints = value; return this; }
+        private static Object responseType = CameraStatusesResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/cameras/statuses", Verbs="POST")
+    public static class CameraStatusesBatch implements IReturn<CameraStatusesBatchResponse>
+    {
+        @ApiMember(Name="CameraStatusPoints", Description="Collection of statuspoints to insert", ParameterType="body", DataType="List<SensorStatusPoint>", IsRequired=true, Verb="POST")
+        public ArrayList<SensorStatusPoint> CameraStatusPoints = null;
+        
+        public ArrayList<SensorStatusPoint> getCameraStatusPoints() { return CameraStatusPoints; }
+        public CameraStatusesBatch setCameraStatusPoints(ArrayList<SensorStatusPoint> value) { this.CameraStatusPoints = value; return this; }
+        private static Object responseType = CameraStatusesBatchResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -191,6 +242,33 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/cameras/{Id}/historyphotoandvideo", Verbs="GET")
+    public static class CameraHistoryPhotoAndVideo implements IReturn<CameraPhotoAndVideoResponse>
+    {
+        @ApiMember(Name="Id", Description="Camera Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="InstallationId", Description="Installation Id ", ParameterType="query", DataType="string", IsRequired=true)
+        public String InstallationId = null;
+
+        @ApiMember(Name="FromPhoto", Description="Initial Photo", ParameterType="query", DataType="int", IsRequired=true)
+        public Integer FromPhoto = null;
+
+        @ApiMember(Name="PageSize", Description="Page Size", ParameterType="query", DataType="int", IsRequired=true)
+        public Integer PageSize = null;
+        
+        public String getId() { return Id; }
+        public CameraHistoryPhotoAndVideo setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public CameraHistoryPhotoAndVideo setInstallationId(String value) { this.InstallationId = value; return this; }
+        public Integer getFromPhoto() { return FromPhoto; }
+        public CameraHistoryPhotoAndVideo setFromPhoto(Integer value) { this.FromPhoto = value; return this; }
+        public Integer getPageSize() { return PageSize; }
+        public CameraHistoryPhotoAndVideo setPageSize(Integer value) { this.PageSize = value; return this; }
+        private static Object responseType = CameraPhotoAndVideoResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/cameras/{Id}/video/endpoint", Verbs="GET")
     public static class CameraVideoStreamingEndpoint implements IReturn<CameraVideoStreamingEndpointResponse>
     {
@@ -237,6 +315,50 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/cameras/{Id}/video", Verbs="DELETE")
+    public static class CameraVideoDelete implements IReturn<CameraVideoDeleteResponse>
+    {
+        @ApiMember(Name="Id", Description="Camera Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="InstallationId", Description="Installation Id", ParameterType="body", DataType="string", IsRequired=true, Verb="DELETE")
+        public String InstallationId = null;
+
+        @ApiMember(Name="Date", Description="Date", ParameterType="body", DataType="string", IsRequired=true, Verb="DELETE")
+        public String Date = null;
+
+        @ApiMember(Name="RemoveBlobOnly ", Description="Indicates if only cloud blob should be removed (no gw contacted) ", ParameterType="body", DataType="bool", IsRequired=true, Verb="DELETE")
+        public Boolean RemoveBlobOnly = null;
+        
+        public String getId() { return Id; }
+        public CameraVideoDelete setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public CameraVideoDelete setInstallationId(String value) { this.InstallationId = value; return this; }
+        public String getDate() { return Date; }
+        public CameraVideoDelete setDate(String value) { this.Date = value; return this; }
+        public Boolean isRemoveBlobOnly() { return RemoveBlobOnly; }
+        public CameraVideoDelete setRemoveBlobOnly(Boolean value) { this.RemoveBlobOnly = value; return this; }
+        private static Object responseType = CameraVideoDeleteResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/cameras/{Id}/video/record", Verbs="POST")
+    public static class CameraRecordVideo implements IReturn<CameraRecordVideoResponse>
+    {
+        @ApiMember(Name="Id", Description="Camera Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="Installation Id", Description="Installation Id", ParameterType="body", DataType="string", IsRequired=true)
+        public String InstallationId = null;
+        
+        public String getId() { return Id; }
+        public CameraRecordVideo setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public CameraRecordVideo setInstallationId(String value) { this.InstallationId = value; return this; }
+        private static Object responseType = CameraRecordVideoResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/cameranodes/details", Verbs="GET")
     // @Route(Path="/cameranodes", Verbs="POST")
     // @Route(Path="/cameranodes", Verbs="DELETE")
@@ -252,6 +374,37 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/cameras/{id}/areas", Verbs="PUT")
+    public static class CameraAreas implements IReturn<CameraAreasResponse>
+    {
+        @ApiMember(Name="Id", Description="Camera id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        public UUID InstallationId = null;
+        public ArrayList<AssignableArea> Areas = null;
+        
+        public String getId() { return Id; }
+        public CameraAreas setId(String value) { this.Id = value; return this; }
+        public UUID getInstallationId() { return InstallationId; }
+        public CameraAreas setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public ArrayList<AssignableArea> getAreas() { return Areas; }
+        public CameraAreas setAreas(ArrayList<AssignableArea> value) { this.Areas = value; return this; }
+        private static Object responseType = CameraAreasResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/cameras/{Id}/area", Verbs="GET")
+    public static class CameraAreaRequest implements IReturn<CameraAreaResponse>
+    {
+        @ApiMember(Name="Id", Description="Camera id", ParameterType="path", DataType="string", IsRequired=true)
+        public String Id = null;
+        
+        public String getId() { return Id; }
+        public CameraAreaRequest setId(String value) { this.Id = value; return this; }
+        private static Object responseType = CameraAreaResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/cameras/{Id}/installations", Verbs="GET")
     public static class CameraInstallations implements IReturn<AssignableInstallationsResponse>
     {
@@ -260,6 +413,18 @@ public class dto
         
         public String getId() { return Id; }
         public CameraInstallations setId(String value) { this.Id = value; return this; }
+        private static Object responseType = AssignableInstallationsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/cameras/{Id}/installations/assignable", Verbs="GET")
+    public static class CameraAssignableInstallations implements IReturn<AssignableInstallationsResponse>
+    {
+        @ApiMember(Name="Id", Description="CameraId", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
+        public String Id = null;
+        
+        public String getId() { return Id; }
+        public CameraAssignableInstallations setId(String value) { this.Id = value; return this; }
         private static Object responseType = AssignableInstallationsResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -286,15 +451,12 @@ public class dto
 
     @Route(Path="/users/{UserId}/events/", Verbs="GET")
     // @Route(Path="/users/{UserId}/events/{Type}", Verbs="GET")
-    // @Route(Path="/users/{UserId}/events/{Type}", Verbs="DELETE")
     public static class EventsBatch implements IReturn<EventsBatchResponse>
     {
         @ApiMember(Name="UserId", Description="Show events for specified user id", ParameterType="path", DataType="string", IsRequired=true, Verb="GET", ExcludeInSchema=true)
-        // @ApiMember(Name="UserId", Description="Show events for specified user id", ParameterType="path", DataType="string", IsRequired=true, Verb="DELETE", ExcludeInSchema=true)
         public String UserId = null;
 
         @ApiMember(Name="Type", Description="Only return events of specified type", ParameterType="path", DataType="string", Verb="GET", ExcludeInSchema=true)
-        // @ApiMember(Name="Type", Description="Deletes events of specified type", ParameterType="path", DataType="string", Verb="DELETE", ExcludeInSchema=true)
         public String Type = null;
 
         @ApiMember(Name="Pending", Description="Only return pending events", ParameterType="query", DataType="bool?", Verb="GET")
@@ -308,6 +470,8 @@ public class dto
 
         public Date DateFrom = null;
         public Date DateTo = null;
+        @ApiMember(Name="InstallationId", Description="Show events for specified installation id", ParameterType="query", DataType="string", Verb="GET")
+        public String InstallationId = null;
         
         public String getUserId() { return UserId; }
         public EventsBatch setUserId(String value) { this.UserId = value; return this; }
@@ -323,6 +487,8 @@ public class dto
         public EventsBatch setDateFrom(Date value) { this.DateFrom = value; return this; }
         public Date getDateTo() { return DateTo; }
         public EventsBatch setDateTo(Date value) { this.DateTo = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public EventsBatch setInstallationId(String value) { this.InstallationId = value; return this; }
         private static Object responseType = EventsBatchResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -365,7 +531,6 @@ public class dto
     }
 
     @Route(Path="/events", Verbs="POST")
-    // @Route(Path="/events/{Type}", Verbs="DELETE")
     public static class Events implements IReturn<EventsResponse>
     {
         public AzureEvent Event = null;
@@ -396,11 +561,16 @@ public class dto
 
         @ApiMember(Name="Type", Description="Event type", ParameterType="path", DataType="string", IsRequired=true, Verb="PUT", ExcludeInSchema=true)
         public String EventType = null;
+
+        @ApiMember(Name="InstallationId", Description="Installation id", ParameterType="query", DataType="string", Verb="PUT", ExcludeInSchema=true)
+        public String InstallationId = null;
         
         public String getUserId() { return UserId; }
         public EventsForTypePendingBatch setUserId(String value) { this.UserId = value; return this; }
         public String getEventType() { return EventType; }
         public EventsForTypePendingBatch setEventType(String value) { this.EventType = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public EventsForTypePendingBatch setInstallationId(String value) { this.InstallationId = value; return this; }
         private static Object responseType = EventsPendingResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -422,23 +592,6 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
-    @Route(Path="/users/{UserId}/events/pending/", Verbs="PATCH")
-    public static class EventsPendingBatch implements IReturn<EventsPendingResponse>
-    {
-        @ApiMember(Name="UserId", Description="User id", ParameterType="path", DataType="string", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public String UserId = null;
-
-        @ApiMember(Name="EventIds", Description="Events to be updated", ParameterType="body", DataType="List<string>", IsRequired=true, Verb="PATCH")
-        public ArrayList<String> EventIds = null;
-        
-        public String getUserId() { return UserId; }
-        public EventsPendingBatch setUserId(String value) { this.UserId = value; return this; }
-        public ArrayList<String> getEventIds() { return EventIds; }
-        public EventsPendingBatch setEventIds(ArrayList<String> value) { this.EventIds = value; return this; }
-        private static Object responseType = EventsPendingResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
     @Route(Path="/users/{UserId}/events/{EventId}/delete", Verbs="DELETE")
     public static class EventsDelete
     {
@@ -446,12 +599,29 @@ public class dto
         public String UserId = null;
 
         @ApiMember(Name="EventId", Description="Event id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="DELETE", ExcludeInSchema=true)
-        public UUID EventId = null;
+        public String EventId = null;
         
         public String getUserId() { return UserId; }
         public EventsDelete setUserId(String value) { this.UserId = value; return this; }
-        public UUID getEventId() { return EventId; }
-        public EventsDelete setEventId(UUID value) { this.EventId = value; return this; }
+        public String getEventId() { return EventId; }
+        public EventsDelete setEventId(String value) { this.EventId = value; return this; }
+    }
+
+    @Route(Path="/users/{Id}/events/admin", Verbs="POST")
+    public static class EventsAdminSentNotification implements IReturn<EventsAdminSentNotificationResponse>
+    {
+        @ApiMember(Name="Id", Description="User id", ParameterType="path", DataType="int", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public Integer Id = null;
+
+        @ApiMember(Name="Event", Description="Event", ParameterType="body", DataType="AzureEvent", IsRequired=true, Verb="POST")
+        public AzureEvent Event = null;
+        
+        public Integer getId() { return Id; }
+        public EventsAdminSentNotification setId(Integer value) { this.Id = value; return this; }
+        public AzureEvent getEvent() { return Event; }
+        public EventsAdminSentNotification setEvent(AzureEvent value) { this.Event = value; return this; }
+        private static Object responseType = EventsAdminSentNotificationResponse.class;
+        public Object getResponseType() { return responseType; }
     }
 
     @Route(Path="/events/{UserId}/{EventId}/lastPhoto/", Verbs="GET")
@@ -508,6 +678,18 @@ public class dto
     {
         
         private static Object responseType = EventsOldResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/events/pending/notify", Verbs="POST")
+    public static class EventsPendingCountNotify implements IReturn<EventsPendingCountNotifyResponse>
+    {
+        @ApiMember(Name="UserIds", Description="User ids", ParameterType="body", DataType="List<int>", IsRequired=true, Verb="POST")
+        public ArrayList<Integer> UserIds = null;
+        
+        public ArrayList<Integer> getUserIds() { return UserIds; }
+        public EventsPendingCountNotify setUserIds(ArrayList<Integer> value) { this.UserIds = value; return this; }
+        private static Object responseType = EventsPendingCountNotifyResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -674,6 +856,23 @@ public class dto
         public String getCsString() { return CSString; }
         public GatewayCloudStorageString setCsString(String value) { this.CSString = value; return this; }
         private static Object responseType = GatewayCloudStorageStringResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/iothubstring", Verbs="POST")
+    public static class GatewayIoTHubString implements IReturn<GatewayIoTHubStringResponse>
+    {
+        @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="IoTHubString", Description="IoT Hub Connection String", ParameterType="body", DataType="string", IsRequired=true)
+        public String IoTHubString = null;
+        
+        public String getId() { return Id; }
+        public GatewayIoTHubString setId(String value) { this.Id = value; return this; }
+        public String getIoTHubString() { return IoTHubString; }
+        public GatewayIoTHubString setIoTHubString(String value) { this.IoTHubString = value; return this; }
+        private static Object responseType = GatewayIoTHubStringResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -914,6 +1113,25 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/gateways/{Id}/addwibeeesensor", Verbs="POST")
+    public static class GatewayAddWibeeeSensor implements IReturn<GatewayAddWibeeeSensorResponse>
+    {
+        @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        public String SensorId = null;
+        public String MAC = null;
+        
+        public String getId() { return Id; }
+        public GatewayAddWibeeeSensor setId(String value) { this.Id = value; return this; }
+        public String getSensorId() { return SensorId; }
+        public GatewayAddWibeeeSensor setSensorId(String value) { this.SensorId = value; return this; }
+        public String getMac() { return MAC; }
+        public GatewayAddWibeeeSensor setMac(String value) { this.MAC = value; return this; }
+        private static Object responseType = GatewayAddWibeeeSensorResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/gateways/{Id}/thermostat/{ThermostatId}/setpoint", Verbs="POST")
     public static class GatewayThermostatSetPoint implements IReturn<GatewayThermostatSetPointResponse>
     {
@@ -961,7 +1179,7 @@ public class dto
     }
 
     @Route(Path="/gateways/{Id}/thermostat/{SensorId}/toggle", Verbs="POST")
-    public static class GatewayThermostatToggle implements IReturn<GatewayThermostatToggleResponse>
+    public static class GatewayThermostatMode implements IReturn<GatewayThermostatModeResponse>
     {
         @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
         public String Id = null;
@@ -969,18 +1187,18 @@ public class dto
         @ApiMember(Name="ThermostatId", Description="ThermostatId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
         public String ThermostatId = null;
 
-        public Boolean Value = null;
+        public SensorThermostatMode Mode = null;
         public String UserId = null;
         
         public String getId() { return Id; }
-        public GatewayThermostatToggle setId(String value) { this.Id = value; return this; }
+        public GatewayThermostatMode setId(String value) { this.Id = value; return this; }
         public String getThermostatId() { return ThermostatId; }
-        public GatewayThermostatToggle setThermostatId(String value) { this.ThermostatId = value; return this; }
-        public Boolean isValue() { return Value; }
-        public GatewayThermostatToggle setValue(Boolean value) { this.Value = value; return this; }
+        public GatewayThermostatMode setThermostatId(String value) { this.ThermostatId = value; return this; }
+        public SensorThermostatMode getMode() { return Mode; }
+        public GatewayThermostatMode setMode(SensorThermostatMode value) { this.Mode = value; return this; }
         public String getUserId() { return UserId; }
-        public GatewayThermostatToggle setUserId(String value) { this.UserId = value; return this; }
-        private static Object responseType = GatewayThermostatToggleResponse.class;
+        public GatewayThermostatMode setUserId(String value) { this.UserId = value; return this; }
+        private static Object responseType = GatewayThermostatModeResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -1095,6 +1313,93 @@ public class dto
         public String getCameraId() { return CameraId; }
         public GatewayCameraRemove setCameraId(String value) { this.CameraId = value; return this; }
         private static Object responseType = GatewayCameraRemoveResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/camera/{CameraId}/uploadvideo", Verbs="POST")
+    public static class GatewayUploadVideo implements IReturn<GatewayUploadVideoResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="CameraId", Description="CameraId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String CameraId = null;
+
+        @ApiMember(Name="VideoDate", Description="VideoDate", ParameterType="body", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String VideoDate = null;
+        
+        public String getId() { return Id; }
+        public GatewayUploadVideo setId(String value) { this.Id = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public GatewayUploadVideo setCameraId(String value) { this.CameraId = value; return this; }
+        public String getVideoDate() { return VideoDate; }
+        public GatewayUploadVideo setVideoDate(String value) { this.VideoDate = value; return this; }
+        private static Object responseType = GatewayUploadVideoResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/camera/{CameraId}/streamfile", Verbs="POST")
+    public static class GatewayCameraFileStreaming implements IReturn<GatewayCameraFileStreamingResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="CameraId", Description="CameraId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String CameraId = null;
+
+        @ApiMember(Name="Date", Description="Date", ParameterType="query", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Date = null;
+        
+        public String getId() { return Id; }
+        public GatewayCameraFileStreaming setId(String value) { this.Id = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public GatewayCameraFileStreaming setCameraId(String value) { this.CameraId = value; return this; }
+        public String getDate() { return Date; }
+        public GatewayCameraFileStreaming setDate(String value) { this.Date = value; return this; }
+        private static Object responseType = GatewayCameraFileStreamingResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/camera/{CameraId}/videodelete", Verbs="POST")
+    public static class GatewayCameraVideoDelete implements IReturn<GatewayCameraVideoDeleteResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="CameraId", Description="CameraId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String CameraId = null;
+
+        @ApiMember(Name="Date", Description="Date", ParameterType="body", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Date = null;
+        
+        public String getId() { return Id; }
+        public GatewayCameraVideoDelete setId(String value) { this.Id = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public GatewayCameraVideoDelete setCameraId(String value) { this.CameraId = value; return this; }
+        public String getDate() { return Date; }
+        public GatewayCameraVideoDelete setDate(String value) { this.Date = value; return this; }
+        private static Object responseType = GatewayCameraVideoDeleteResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/camera/{CameraId}/video/record", Verbs="POST")
+    public static class GatewayCameraRecordVideo implements IReturn<GatewayCameraRecordVideoResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="CameraId", Description="CameraId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String CameraId = null;
+
+        public String UserId = null;
+        
+        public String getId() { return Id; }
+        public GatewayCameraRecordVideo setId(String value) { this.Id = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public GatewayCameraRecordVideo setCameraId(String value) { this.CameraId = value; return this; }
+        public String getUserId() { return UserId; }
+        public GatewayCameraRecordVideo setUserId(String value) { this.UserId = value; return this; }
+        private static Object responseType = GatewayCameraRecordVideoResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -1246,6 +1551,27 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/gateways/{Id}/actuator/{ActuatorId}/togglestatus", Verbs="POST")
+    public static class GatewayActuatorToggleStatus implements IReturn<GatewayActuatorToggleStatusResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="ActuatorId", Description="ActuatorId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String ActuatorId = null;
+
+        public String UserId = null;
+        
+        public String getId() { return Id; }
+        public GatewayActuatorToggleStatus setId(String value) { this.Id = value; return this; }
+        public String getActuatorId() { return ActuatorId; }
+        public GatewayActuatorToggleStatus setActuatorId(String value) { this.ActuatorId = value; return this; }
+        public String getUserId() { return UserId; }
+        public GatewayActuatorToggleStatus setUserId(String value) { this.UserId = value; return this; }
+        private static Object responseType = GatewayActuatorToggleStatusResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/gateways/{Id}/bypass/{SensorId}", Verbs="POST")
     public static class GatewayBypassSensor implements IReturn<GatewayBypassSensorResponse>
     {
@@ -1342,6 +1668,117 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/gateways/{Id}/setsensorsmetadata", Verbs="POST")
+    public static class GatewaySetSensorsMetadata implements IReturn<GatewaySetSensorsMetadataResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="Metadata", Description="Metadata", ParameterType="body", DataType="Dictionary<sting, Dictionary<string, object>>", IsRequired=true, Verb="POST")
+        public HashMap<String,HashMap<String,Object>> Metadata = null;
+        
+        public String getId() { return Id; }
+        public GatewaySetSensorsMetadata setId(String value) { this.Id = value; return this; }
+        public HashMap<String,HashMap<String,Object>> getMetadata() { return Metadata; }
+        public GatewaySetSensorsMetadata setMetadata(HashMap<String,HashMap<String,Object>> value) { this.Metadata = value; return this; }
+        private static Object responseType = GatewaySetSensorsMetadataResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/addorupdateusers", Verbs="POST")
+    public static class GatewayAddOrUpdateUsers implements IReturn<GatewayAddOrUpdateUsersResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="Users", Description="Users", ParameterType="body", DataType="List<UserAuth>", IsRequired=true, Verb="POST")
+        public ArrayList<UserAuthWithCredentials> Users = null;
+        
+        public String getId() { return Id; }
+        public GatewayAddOrUpdateUsers setId(String value) { this.Id = value; return this; }
+        public ArrayList<UserAuthWithCredentials> getUsers() { return Users; }
+        public GatewayAddOrUpdateUsers setUsers(ArrayList<UserAuthWithCredentials> value) { this.Users = value; return this; }
+        private static Object responseType = GatewayAddOrUpdateUsersResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/removeusers", Verbs="POST")
+    public static class GatewayRemoveUsers implements IReturn<GatewayRemoveUsersResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="UserIds", Description="UserIds", ParameterType="body", DataType="List<int>", IsRequired=true, Verb="POST")
+        public ArrayList<Integer> UserIds = null;
+        
+        public String getId() { return Id; }
+        public GatewayRemoveUsers setId(String value) { this.Id = value; return this; }
+        public ArrayList<Integer> getUserIds() { return UserIds; }
+        public GatewayRemoveUsers setUserIds(ArrayList<Integer> value) { this.UserIds = value; return this; }
+        private static Object responseType = GatewayRemoveUsersResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/clearusers", Verbs="POST")
+    public static class GatewayClearUsers implements IReturn<GatewayClearUsersResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+        
+        public String getId() { return Id; }
+        public GatewayClearUsers setId(String value) { this.Id = value; return this; }
+        private static Object responseType = GatewayClearUsersResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/syncusers", Verbs="POST")
+    public static class GatewaySyncUsers implements IReturn<GatewaySyncUsersResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+        
+        public String getId() { return Id; }
+        public GatewaySyncUsers setId(String value) { this.Id = value; return this; }
+        private static Object responseType = GatewaySyncUsersResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/syncsensorsmetadata", Verbs="POST")
+    public static class GatewaySyncSensorsMetadata implements IReturn<GatewaySyncSensorsMetadataResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+        
+        public String getId() { return Id; }
+        public GatewaySyncSensorsMetadata setId(String value) { this.Id = value; return this; }
+        private static Object responseType = GatewaySyncSensorsMetadataResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/thermostat/{SensorId}/fanmode", Verbs="PATCH")
+    public static class GatewayThermostatFanMode implements IReturn<GatewayThermostatFanModeResponse>
+    {
+        @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="string", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="ThermostatId", Description="Thermostat Id", ParameterType="path", DataType="string", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
+        public String ThermostatId = null;
+
+        public SensorThermostatFanMode FanMode = null;
+        public String UserId = null;
+        
+        public String getId() { return Id; }
+        public GatewayThermostatFanMode setId(String value) { this.Id = value; return this; }
+        public String getThermostatId() { return ThermostatId; }
+        public GatewayThermostatFanMode setThermostatId(String value) { this.ThermostatId = value; return this; }
+        public SensorThermostatFanMode getFanMode() { return FanMode; }
+        public GatewayThermostatFanMode setFanMode(SensorThermostatFanMode value) { this.FanMode = value; return this; }
+        public String getUserId() { return UserId; }
+        public GatewayThermostatFanMode setUserId(String value) { this.UserId = value; return this; }
+        private static Object responseType = GatewayThermostatFanModeResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/gateways/{Id}/ping", Verbs="POST")
     public static class GatewayPing implements IReturn<GatewayPingResponse>
     {
@@ -1426,9 +1863,14 @@ public class dto
     {
         @ApiMember(Name="Id", Description="Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
         public UUID Id = null;
+
+        @ApiMember(Name="Protocol", Description="Protocol", ParameterType="query", DataType="SensorProtocolType", Verb="GET")
+        public SensorProtocolType Protocol = null;
         
         public UUID getId() { return Id; }
         public GatewayDevices setId(UUID value) { this.Id = value; return this; }
+        public SensorProtocolType getProtocol() { return Protocol; }
+        public GatewayDevices setProtocol(SensorProtocolType value) { this.Protocol = value; return this; }
         private static Object responseType = GatewayDevicesResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1542,6 +1984,23 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/gateways/{Id}/camera/{CameraId}/availablevideos", Verbs="GET")
+    public static class GatewayAvailableVideos implements IReturn<GatewayAvailableVideosResponse>
+    {
+        @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, Verb="GET", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="CameraId", Description="CameraId", ParameterType="path", DataType="string", IsRequired=true, Verb="GET", ExcludeInSchema=true)
+        public String CameraId = null;
+        
+        public String getId() { return Id; }
+        public GatewayAvailableVideos setId(String value) { this.Id = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public GatewayAvailableVideos setCameraId(String value) { this.CameraId = value; return this; }
+        private static Object responseType = GatewayAvailableVideosResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/gateways/{Id}/scheduler/poll", Verbs="GET")
     public static class GatewaySchedulerPoll implements IReturn<GatewaySchedulerPollResponse>
     {
@@ -1566,6 +2025,23 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/gateways/{Id}/notify/gatewaylifecyclestatus", Verbs="POST")
+    public static class GatewayNotifyLifecycleStatus implements IReturn<GatewayNotifyLifecycleStatusResponse>
+    {
+        @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="GatewayStatus", Description="Gateway Status", ParameterType="body", DataType="string", IsRequired=true)
+        public String GatewayStatus = null;
+        
+        public String getId() { return Id; }
+        public GatewayNotifyLifecycleStatus setId(String value) { this.Id = value; return this; }
+        public String getGatewayStatus() { return GatewayStatus; }
+        public GatewayNotifyLifecycleStatus setGatewayStatus(String value) { this.GatewayStatus = value; return this; }
+        private static Object responseType = GatewayNotifyLifecycleStatusResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/gateways/{Id}/notify/addorremovesensor", Verbs="POST")
     public static class GatewayNotifyAddOrRemoveSensor implements IReturn<GatewayNotifyAddOrRemoveSensorResponse>
     {
@@ -1574,11 +2050,16 @@ public class dto
 
         @ApiMember(Name="IsAdded", Description="Sensor Addition or Removal indicator", ParameterType="body", DataType="bool", IsRequired=true)
         public Boolean IsAdded = null;
+
+        @ApiMember(Name="SensorId", Description="Sensor Id", ParameterType="body", DataType="string")
+        public String SensorId = null;
         
         public String getId() { return Id; }
         public GatewayNotifyAddOrRemoveSensor setId(String value) { this.Id = value; return this; }
         public Boolean getIsAdded() { return IsAdded; }
         public GatewayNotifyAddOrRemoveSensor setIsAdded(Boolean value) { this.IsAdded = value; return this; }
+        public String getSensorId() { return SensorId; }
+        public GatewayNotifyAddOrRemoveSensor setSensorId(String value) { this.SensorId = value; return this; }
         private static Object responseType = GatewayNotifyAddOrRemoveSensorResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1631,6 +2112,33 @@ public class dto
         public String getStatus() { return Status; }
         public GatewayNotifyNetworkStatus setStatus(String value) { this.Status = value; return this; }
         private static Object responseType = GatewayNotifyNetworkStatusResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/gateways/{Id}/notify/videouploaded", Verbs="POST")
+    public static class GatewayNotifyVideoUploaded implements IReturn<GatewayNotifyVideoUploadedResponse>
+    {
+        @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="CameraId", Description="CameraId", ParameterType="body", DataType="string", IsRequired=true)
+        public String CameraId = null;
+
+        @ApiMember(Name="Date", Description="Date", ParameterType="body", DataType="string", IsRequired=true)
+        public String Date = null;
+
+        @ApiMember(Name="Url", Description="Url", ParameterType="body", DataType="string", IsRequired=true)
+        public String Url = null;
+        
+        public String getId() { return Id; }
+        public GatewayNotifyVideoUploaded setId(String value) { this.Id = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public GatewayNotifyVideoUploaded setCameraId(String value) { this.CameraId = value; return this; }
+        public String getDate() { return Date; }
+        public GatewayNotifyVideoUploaded setDate(String value) { this.Date = value; return this; }
+        public String getUrl() { return Url; }
+        public GatewayNotifyVideoUploaded setUrl(String value) { this.Url = value; return this; }
+        private static Object responseType = GatewayNotifyVideoUploadedResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -1858,6 +2366,25 @@ public class dto
         public String getName() { return Name; }
         public InstallationActivate setName(String value) { this.Name = value; return this; }
         private static Object responseType = InstallationActivateResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/installations/{Id}/activateandassign", Verbs="POST")
+    public static class InstallationActivateAndAssign implements IReturn<InstallationActivateAndAssignResponse>
+    {
+        @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public UUID Id = null;
+
+        public String Name = null;
+        public Integer OwnerId = null;
+        
+        public UUID getId() { return Id; }
+        public InstallationActivateAndAssign setId(UUID value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public InstallationActivateAndAssign setName(String value) { this.Name = value; return this; }
+        public Integer getOwnerId() { return OwnerId; }
+        public InstallationActivateAndAssign setOwnerId(Integer value) { this.OwnerId = value; return this; }
+        private static Object responseType = InstallationActivateAndAssignResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -2292,28 +2819,6 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
-    @Route(Path="/installations/{Id}/energy/oldconsumption/values", Verbs="GET")
-    public static class InstallationOldConsumptionValues implements IReturn<InstallationConsumptionValuesResponse>
-    {
-        @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
-        public UUID Id = null;
-
-        @ApiMember(Name="UserTimeZone", Description="UserTimeZone", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
-        public String UserTimeZone = null;
-
-        @ApiMember(Name="ConsumptionPeriod", Description="ConsumptionPeriod", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
-        public String ConsumptionPeriod = null;
-        
-        public UUID getId() { return Id; }
-        public InstallationOldConsumptionValues setId(UUID value) { this.Id = value; return this; }
-        public String getUserTimeZone() { return UserTimeZone; }
-        public InstallationOldConsumptionValues setUserTimeZone(String value) { this.UserTimeZone = value; return this; }
-        public String getConsumptionPeriod() { return ConsumptionPeriod; }
-        public InstallationOldConsumptionValues setConsumptionPeriod(String value) { this.ConsumptionPeriod = value; return this; }
-        private static Object responseType = InstallationConsumptionValuesResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
     @Route(Path="/installations/{Id}/energy/percentageconsumption/values", Verbs="GET")
     public static class InstallationPercentageConsumptionValues implements IReturn<InstallationPercentageConsumptionValuesResponse>
     {
@@ -2547,11 +3052,16 @@ public class dto
 
         @ApiMember(Name="SecurityStatus", Description="SecurityStatus", ParameterType="body", DataType="string", IsRequired=true)
         public String SecurityStatus = null;
+
+        @ApiMember(Name="Trigger", Description="Trigger", ParameterType="body", DataType="string")
+        public String Trigger = null;
         
         public String getId() { return Id; }
         public InstallationGatewaySecurityStatus setId(String value) { this.Id = value; return this; }
         public String getSecurityStatus() { return SecurityStatus; }
         public InstallationGatewaySecurityStatus setSecurityStatus(String value) { this.SecurityStatus = value; return this; }
+        public String getTrigger() { return Trigger; }
+        public InstallationGatewaySecurityStatus setTrigger(String value) { this.Trigger = value; return this; }
         private static Object responseType = InstallationGatewaySecurityStatusResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -2626,20 +3136,30 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
-    @Route(Path="/installations/{Id}/city", Verbs="PATCH")
-    public static class InstallationCity implements IReturn<InstallationCityResponse>
+    @Route(Path="/installations/{Id}/geolocation", Verbs="PATCH")
+    public static class InstallationGeolocation implements IReturn<InstallationGeolocationResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="string", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
         public String Id = null;
 
-        @ApiMember(Name="Woeid", Description="City Woeid", ParameterType="body", DataType="int", IsRequired=true, Verb="PATCH")
-        public Integer Woeid = null;
+        @ApiMember(Name="Longitude", Description="Longitude", ParameterType="body", DataType="double", IsRequired=true, Verb="PATCH")
+        public Double Longitude = null;
+
+        @ApiMember(Name="Latitude", Description="Latitude", ParameterType="body", DataType="double", IsRequired=true, Verb="PATCH")
+        public Double Latitude = null;
+
+        @ApiMember(Name="City", Description="City name", ParameterType="body", DataType="string", IsRequired=true, Verb="PATCH")
+        public String City = null;
         
         public String getId() { return Id; }
-        public InstallationCity setId(String value) { this.Id = value; return this; }
-        public Integer getWoeid() { return Woeid; }
-        public InstallationCity setWoeid(Integer value) { this.Woeid = value; return this; }
-        private static Object responseType = InstallationCityResponse.class;
+        public InstallationGeolocation setId(String value) { this.Id = value; return this; }
+        public Double getLongitude() { return Longitude; }
+        public InstallationGeolocation setLongitude(Double value) { this.Longitude = value; return this; }
+        public Double getLatitude() { return Latitude; }
+        public InstallationGeolocation setLatitude(Double value) { this.Latitude = value; return this; }
+        public String getCity() { return City; }
+        public InstallationGeolocation setCity(String value) { this.City = value; return this; }
+        private static Object responseType = InstallationGeolocationResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -2683,6 +3203,7 @@ public class dto
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
         public String Id = null;
 
+        public String Name = null;
         public String Manufacturer = null;
         public String Model = null;
         public String Version = null;
@@ -2693,6 +3214,8 @@ public class dto
         
         public String getId() { return Id; }
         public InstallationAddWMBusSensor setId(String value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public InstallationAddWMBusSensor setName(String value) { this.Name = value; return this; }
         public String getManufacturer() { return Manufacturer; }
         public InstallationAddWMBusSensor setManufacturer(String value) { this.Manufacturer = value; return this; }
         public String getModel() { return Model; }
@@ -2708,6 +3231,42 @@ public class dto
         public Double getInstantScale() { return InstantScale; }
         public InstallationAddWMBusSensor setInstantScale(Double value) { this.InstantScale = value; return this; }
         private static Object responseType = InstallationAddWMBusSensorResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/installations/{Id}/addwibeeesensor", Verbs="POST")
+    public static class InstallationAddWibeeeSensor implements IReturn<InstallationAddWibeeeSensorResponse>
+    {
+        @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        public String MAC = null;
+        public String Name = null;
+        
+        public String getId() { return Id; }
+        public InstallationAddWibeeeSensor setId(String value) { this.Id = value; return this; }
+        public String getMac() { return MAC; }
+        public InstallationAddWibeeeSensor setMac(String value) { this.MAC = value; return this; }
+        public String getName() { return Name; }
+        public InstallationAddWibeeeSensor setName(String value) { this.Name = value; return this; }
+        private static Object responseType = InstallationAddWibeeeSensorResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/installations/{Id}/adddevice", Verbs="POST")
+    public static class InstallationAddDevice implements IReturn<InstallationAddDeviceResponse>
+    {
+        @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="Device", Description="Device", ParameterType="body", DataType="Device", IsRequired=true)
+        public Device Device = null;
+        
+        public String getId() { return Id; }
+        public InstallationAddDevice setId(String value) { this.Id = value; return this; }
+        public Device getDevice() { return Device; }
+        public InstallationAddDevice setDevice(Device value) { this.Device = value; return this; }
+        private static Object responseType = InstallationAddDeviceResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -2810,6 +3369,23 @@ public class dto
         public ArrayList<AssignableUser> getUsers() { return Users; }
         public InstallationsUsersBatch setUsers(ArrayList<AssignableUser> value) { this.Users = value; return this; }
         private static Object responseType = InstallationsUsersBatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/installations/{Id}/gateway/credentials", Verbs="GET")
+    public static class InstallationGatewayCredentials implements IReturn<InstallationGatewayCredentialsResponse>
+    {
+        @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
+        public String Id = null;
+
+        @ApiMember(Name="Token", Description="Security Token", ParameterType="query", DataType="string", IsRequired=true)
+        public String Token = null;
+        
+        public String getId() { return Id; }
+        public InstallationGatewayCredentials setId(String value) { this.Id = value; return this; }
+        public String getToken() { return Token; }
+        public InstallationGatewayCredentials setToken(String value) { this.Token = value; return this; }
+        private static Object responseType = InstallationGatewayCredentialsResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -3071,11 +3647,16 @@ public class dto
 
         @ApiMember(Name="SensorId", Description="Sensor id", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String SensorId = null;
+
+        @ApiMember(Name="CameraId", Description="Camera id", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
+        public String CameraId = null;
         
         public UUID getId() { return Id; }
         public InstallationFloorplansWithAreasBatch setId(UUID value) { this.Id = value; return this; }
         public String getSensorId() { return SensorId; }
         public InstallationFloorplansWithAreasBatch setSensorId(String value) { this.SensorId = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public InstallationFloorplansWithAreasBatch setCameraId(String value) { this.CameraId = value; return this; }
         private static Object responseType = InstallationFloorplansWithAreasBatchResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3117,7 +3698,7 @@ public class dto
     }
 
     @Route(Path="/installations", Verbs="PATCH")
-    public static class InstallationsPatch extends QueryBase_1<Installation> implements IReturn<QueryResponse<Installation>>
+    public static class InstallationsPatch implements IReturn<Installation>
     {
         @ApiMember(Name="installation", Description="Intallation object", ParameterType="body", DataType="Installation", IsRequired=true, Verb="PATCH")
         public Installation Installation = null;
@@ -3129,7 +3710,7 @@ public class dto
         public InstallationsPatch setInstallation(Installation value) { this.Installation = value; return this; }
         public ArrayList<String> getFields() { return Fields; }
         public InstallationsPatch setFields(ArrayList<String> value) { this.Fields = value; return this; }
-        private static Object responseType = new TypeToken<QueryResponse<Installation>>(){}.getType();
+        private static Object responseType = Installation.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -3179,6 +3760,117 @@ public class dto
         
         private static Object responseType = UnassignedInstallationsResponse.class;
         public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/reports", Verbs="GET")
+    public static class ReportsList implements IReturn<ReportsListResponse>
+    {
+        
+        private static Object responseType = ReportsListResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/users/{Id}/reports", Verbs="GET")
+    public static class UserReports implements IReturn<UserReportsResponse>
+    {
+        @ApiMember(Name="Id", Description="User id", ParameterType="path", DataType="string", IsRequired=true)
+        public String Id = null;
+        
+        public String getId() { return Id; }
+        public UserReports setId(String value) { this.Id = value; return this; }
+        private static Object responseType = UserReportsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/reports", Verbs="POST")
+    // @Route(Path="/reports", Verbs="PUT")
+    // @Route(Path="/reports/{Id}", Verbs="GET")
+    // @Route(Path="/reports/{Id}", Verbs="DELETE")
+    public static class Reports implements IReturn<ReportDetailsResponse>
+    {
+        @ApiMember(Name="Id", Description="Report id", ParameterType="path", DataType="int", IsRequired=true, Verb="GET")
+        // @ApiMember(Name="Id", Description="Report id", ParameterType="path", DataType="int", IsRequired=true, Verb="DELETE")
+        public Integer Id = null;
+
+        @ApiMember(Name="Report", Description="Report details", ParameterType="body", DataType="Report", IsRequired=true, Verb="POST")
+        // @ApiMember(Name="Report", Description="Report details", ParameterType="body", DataType="Report", IsRequired=true, Verb="PUT")
+        public Report Report = null;
+        
+        public Integer getId() { return Id; }
+        public Reports setId(Integer value) { this.Id = value; return this; }
+        public Report getReport() { return Report; }
+        public Reports setReport(Report value) { this.Report = value; return this; }
+        private static Object responseType = ReportDetailsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/reportinstallations/{Id}", Verbs="POST")
+    // @Route(Path="/reportinstallations/{Id}", Verbs="PUT")
+    // @Route(Path="/reportinstallations/{Id}", Verbs="GET")
+    // @Route(Path="/reportinstallations/{Id}", Verbs="DELETE")
+    public static class ReportInstallations implements IReturn<ReportInstallationsResponse>
+    {
+        @ApiMember(Name="Id", Description="Report id", ParameterType="path", DataType="int", IsRequired=true, Verb="GET")
+        public Integer Id = null;
+
+        @ApiMember(Name="ReportInstallation", Description="Report Installation", ParameterType="body", DataType="ReportInstallation", IsRequired=true, Verb="POST")
+        // @ApiMember(Name="ReportInstallation", Description="Report Installation", ParameterType="body", DataType="ReportInstallation", IsRequired=true, Verb="PUT")
+        // @ApiMember(Name="ReportInstallation", Description="Report Installation", ParameterType="body", DataType="ReportInstallation", IsRequired=true, Verb="DELETE")
+        public ArrayList<UUID> Installations = null;
+        
+        public Integer getId() { return Id; }
+        public ReportInstallations setId(Integer value) { this.Id = value; return this; }
+        public ArrayList<UUID> getInstallations() { return Installations; }
+        public ReportInstallations setInstallations(ArrayList<UUID> value) { this.Installations = value; return this; }
+        private static Object responseType = ReportInstallationsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/users/{Id}/reports", Verbs="POST")
+    public static class UserReportAssign implements IReturn<UserReportAssignResponse>
+    {
+        @ApiMember(Name="Id", Description="User id", ParameterType="path", DataType="string", IsRequired=true)
+        public String Id = null;
+
+        @ApiMember(Name="UserReport", Description="User Report", ParameterType="body", DataType="UserReport", IsRequired=true)
+        public UserReport UserReport = null;
+        
+        public String getId() { return Id; }
+        public UserReportAssign setId(String value) { this.Id = value; return this; }
+        public UserReport getUserReport() { return UserReport; }
+        public UserReportAssign setUserReport(UserReport value) { this.UserReport = value; return this; }
+        private static Object responseType = UserReportAssignResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/reports/{Id}/excel/{Name}", Verbs="GET")
+    public static class ReportsExcel
+    {
+        @ApiMember(Name="Id", Description="Report id", ParameterType="path", DataType="int", IsRequired=true)
+        public Integer Id = null;
+
+        @ApiMember(Name="Name", Description="Report name", ParameterType="path", DataType="string", IsRequired=true)
+        public String Name = null;
+
+        @ApiMember(Name="FromDate", Description="From date", ParameterType="query", DataType="DateTime", IsRequired=true)
+        public String FromDate = null;
+
+        @ApiMember(Name="ToDate", Description="To date", ParameterType="query", DataType="DateTime", IsRequired=true)
+        public String ToDate = null;
+
+        @ApiMember(Name="MinutesOffset", Description="Time zone minutes offset", ParameterType="query", DataType="double", Verb="GET")
+        public Double MinutesOffset = null;
+        
+        public Integer getId() { return Id; }
+        public ReportsExcel setId(Integer value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public ReportsExcel setName(String value) { this.Name = value; return this; }
+        public String getFromDate() { return FromDate; }
+        public ReportsExcel setFromDate(String value) { this.FromDate = value; return this; }
+        public String getToDate() { return ToDate; }
+        public ReportsExcel setToDate(String value) { this.ToDate = value; return this; }
+        public Double getMinutesOffset() { return MinutesOffset; }
+        public ReportsExcel setMinutesOffset(Double value) { this.MinutesOffset = value; return this; }
     }
 
     @Route(Path="/sensors/{Id}/poll", Verbs="GET")
@@ -3289,6 +3981,37 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/sensors/{Id}/updateEditableProperties", Verbs="POST")
+    public static class SensorUpdateEditableProperties implements IReturn<SensorUpdateEditablePropertiesResponse>
+    {
+        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        public HashMap<String,Object> PropertiesToUpdate = null;
+        public String InstallationId = null;
+        
+        public String getId() { return Id; }
+        public SensorUpdateEditableProperties setId(String value) { this.Id = value; return this; }
+        public HashMap<String,Object> getPropertiesToUpdate() { return PropertiesToUpdate; }
+        public SensorUpdateEditableProperties setPropertiesToUpdate(HashMap<String,Object> value) { this.PropertiesToUpdate = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorUpdateEditableProperties setInstallationId(String value) { this.InstallationId = value; return this; }
+        private static Object responseType = SensorUpdateEditablePropertiesResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/sensors/zwaveregistereditables", Verbs="PATCH")
+    public static class SensorZWaveRegisterEditablesBatch implements IReturn<SensorZWaveRegisterEditablesBatchResponse>
+    {
+        @ApiMember(Name="SensorZWaveRegisterEditablesPoints", Description="Collection of SensorZWaveRegisterEditablesPoint to update", ParameterType="body", DataType="List<SensorZWaveRegisterEditablesPoint>", IsRequired=true, Verb="PATCH")
+        public ArrayList<SensorZWaveRegisterEditablesPoint> SensorZWaveRegisterEditablesPoints = null;
+        
+        public ArrayList<SensorZWaveRegisterEditablesPoint> getSensorZWaveRegisterEditablesPoints() { return SensorZWaveRegisterEditablesPoints; }
+        public SensorZWaveRegisterEditablesBatch setSensorZWaveRegisterEditablesPoints(ArrayList<SensorZWaveRegisterEditablesPoint> value) { this.SensorZWaveRegisterEditablesPoints = value; return this; }
+        private static Object responseType = SensorZWaveRegisterEditablesBatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/sensors/{Id}/bypass", Verbs="POST")
     public static class SensorBypass implements IReturn<SensorBypassResponse>
     {
@@ -3346,6 +4069,22 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/sensors/{Id}/togglestatus", Verbs="POST")
+    public static class SensorToggleStatus implements IReturn<SensorToggleStatusResponse>
+    {
+        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        public String InstallationId = null;
+        
+        public String getId() { return Id; }
+        public SensorToggleStatus setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorToggleStatus setInstallationId(String value) { this.InstallationId = value; return this; }
+        private static Object responseType = SensorToggleStatusResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/sensors/{Id}/doorlocktoggle", Verbs="POST")
     public static class SensorDoorLockToggle implements IReturn<SensorDoorLockToggleResponse>
     {
@@ -3362,100 +4101,6 @@ public class dto
         public String getInstallationId() { return InstallationId; }
         public SensorDoorLockToggle setInstallationId(String value) { this.InstallationId = value; return this; }
         private static Object responseType = SensorDoorLockToggleResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/sensors/{Id}/thermostat/setpoint/previous", Verbs="POST")
-    public static class SensorThermostatSetPreviousTemperature implements IReturn<SensorThermostatSetPointResponse>
-    {
-        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
-        public String Id = null;
-
-        @ApiMember(Name="InstallationId", Description="Installation Id", ParameterType="body", DataType="string", IsRequired=true, Verb="POST")
-        public String InstallationId = null;
-        
-        public String getId() { return Id; }
-        public SensorThermostatSetPreviousTemperature setId(String value) { this.Id = value; return this; }
-        public String getInstallationId() { return InstallationId; }
-        public SensorThermostatSetPreviousTemperature setInstallationId(String value) { this.InstallationId = value; return this; }
-        private static Object responseType = SensorThermostatSetPointResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/sensors/{Id}/thermostat/setpoint", Verbs="POST")
-    public static class SensorThermostatSetPoint implements IReturn<SensorThermostatSetPointResponse>
-    {
-        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
-        public String Id = null;
-
-        public Double SetPoint = null;
-        public Boolean IsCelsius = null;
-        public String InstallationId = null;
-        
-        public String getId() { return Id; }
-        public SensorThermostatSetPoint setId(String value) { this.Id = value; return this; }
-        public Double getSetPoint() { return SetPoint; }
-        public SensorThermostatSetPoint setSetPoint(Double value) { this.SetPoint = value; return this; }
-        public Boolean getIsCelsius() { return IsCelsius; }
-        public SensorThermostatSetPoint setIsCelsius(Boolean value) { this.IsCelsius = value; return this; }
-        public String getInstallationId() { return InstallationId; }
-        public SensorThermostatSetPoint setInstallationId(String value) { this.InstallationId = value; return this; }
-        private static Object responseType = SensorThermostatSetPointResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/sensors/{Id}/thermostat/toggle", Verbs="POST")
-    public static class SensorThermostatToggle implements IReturn<SensorThermostatToggleResponse>
-    {
-        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
-        public String Id = null;
-
-        public String InstallationId = null;
-        public Boolean Value = null;
-        
-        public String getId() { return Id; }
-        public SensorThermostatToggle setId(String value) { this.Id = value; return this; }
-        public String getInstallationId() { return InstallationId; }
-        public SensorThermostatToggle setInstallationId(String value) { this.InstallationId = value; return this; }
-        public Boolean isValue() { return Value; }
-        public SensorThermostatToggle setValue(Boolean value) { this.Value = value; return this; }
-        private static Object responseType = SensorThermostatToggleResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/sensors/{Id}/thermostat/main", Verbs="POST")
-    public static class SensorThermostatMain implements IReturn<SensorThermostatMainResponse>
-    {
-        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public String Id = null;
-
-        @ApiMember(Name="InstallationId", Description="Installation Id", ParameterType="body", DataType="string", IsRequired=true)
-        public String InstallationId = null;
-        
-        public String getId() { return Id; }
-        public SensorThermostatMain setId(String value) { this.Id = value; return this; }
-        public String getInstallationId() { return InstallationId; }
-        public SensorThermostatMain setInstallationId(String value) { this.InstallationId = value; return this; }
-        private static Object responseType = SensorThermostatMainResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/sensors/{SensorId}/thermostat/link", Verbs="POST")
-    public static class SensorThermostatLink implements IReturn<SensorThermostatLinkResponse>
-    {
-        @ApiMember(Name="SensorId", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public String SensorId = null;
-
-        public String InstallationId = null;
-        public Boolean Link = null;
-        
-        public String getSensorId() { return SensorId; }
-        public SensorThermostatLink setSensorId(String value) { this.SensorId = value; return this; }
-        public String getInstallationId() { return InstallationId; }
-        public SensorThermostatLink setInstallationId(String value) { this.InstallationId = value; return this; }
-        public Boolean isLink() { return Link; }
-        public SensorThermostatLink setLink(Boolean value) { this.Link = value; return this; }
-        private static Object responseType = SensorThermostatLinkResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -3542,6 +4187,9 @@ public class dto
 
         @ApiMember(Name="Value", Description="Sensor value", ParameterType="body", DataType="double", IsRequired=true, Verb="DELETE")
         public Double Value = null;
+
+        @ApiMember(Name="MinutesOffset", Description="Time zone minutes offset", ParameterType="query", DataType="double", Verb="GET")
+        public Double MinutesOffset = null;
         
         public String getId() { return Id; }
         public SensorValues setId(String value) { this.Id = value; return this; }
@@ -3563,6 +4211,8 @@ public class dto
         public SensorValues setTimeStamp(Date value) { this.TimeStamp = value; return this; }
         public Double getValue() { return Value; }
         public SensorValues setValue(Double value) { this.Value = value; return this; }
+        public Double getMinutesOffset() { return MinutesOffset; }
+        public SensorValues setMinutesOffset(Double value) { this.MinutesOffset = value; return this; }
         private static Object responseType = SensorValuesResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3593,6 +4243,9 @@ public class dto
 
         @ApiMember(Name="AggregationType", Description="Type of aggregation by interval ('avg' or 'sum')", ParameterType="query", DataType="string", Verb="GET")
         public String AggregationType = null;
+
+        @ApiMember(Name="MinutesOffset", Description="Time zone minutes offset", ParameterType="query", DataType="double", Verb="GET")
+        public Double MinutesOffset = null;
         
         public String getId() { return Id; }
         public SensorValuesExcel setId(String value) { this.Id = value; return this; }
@@ -3610,6 +4263,43 @@ public class dto
         public SensorValuesExcel setInterval(Integer value) { this.Interval = value; return this; }
         public String getAggregationType() { return AggregationType; }
         public SensorValuesExcel setAggregationType(String value) { this.AggregationType = value; return this; }
+        public Double getMinutesOffset() { return MinutesOffset; }
+        public SensorValuesExcel setMinutesOffset(Double value) { this.MinutesOffset = value; return this; }
+    }
+
+    @Route(Path="/sensors/values/SensorsValues", Verbs="GET")
+    public static class SensorsValuesExcel
+    {
+        @ApiMember(Name="Ids", Description="", ParameterType="query", DataType="string", IsRequired=true)
+        public String Ids = null;
+
+        @ApiMember(Name="FromDate", Description="FromDate", ParameterType="query", DataType="string", Verb="GET")
+        public String FromDate = null;
+
+        @ApiMember(Name="ToDate", Description="ToDate", ParameterType="query", DataType="string", Verb="GET")
+        public String ToDate = null;
+
+        @ApiMember(Name="Interval", Description="Interval aggregation time in minutes (15 every 15 mins, 30 every half an hour, 60 every hour...)", ParameterType="query", DataType="int", Verb="GET")
+        public Integer Interval = null;
+
+        @ApiMember(Name="AggregationType", Description="Type of aggregation by interval ('avg' or 'sum')", ParameterType="query", DataType="string", Verb="GET")
+        public String AggregationType = null;
+
+        @ApiMember(Name="MinutesOffset", Description="Time zone minutes offset", ParameterType="query", DataType="double", Verb="GET")
+        public Double MinutesOffset = null;
+        
+        public String getIds() { return Ids; }
+        public SensorsValuesExcel setIds(String value) { this.Ids = value; return this; }
+        public String getFromDate() { return FromDate; }
+        public SensorsValuesExcel setFromDate(String value) { this.FromDate = value; return this; }
+        public String getToDate() { return ToDate; }
+        public SensorsValuesExcel setToDate(String value) { this.ToDate = value; return this; }
+        public Integer getInterval() { return Interval; }
+        public SensorsValuesExcel setInterval(Integer value) { this.Interval = value; return this; }
+        public String getAggregationType() { return AggregationType; }
+        public SensorsValuesExcel setAggregationType(String value) { this.AggregationType = value; return this; }
+        public Double getMinutesOffset() { return MinutesOffset; }
+        public SensorsValuesExcel setMinutesOffset(Double value) { this.MinutesOffset = value; return this; }
     }
 
     @Route(Path="/sensors/{Id}/statuses", Verbs="GET")
@@ -3719,8 +4409,8 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
-    @Route(Path="/sensors/{Id}/predictions/values", Verbs="GET")
-    // @Route(Path="/sensors/{Id}/predictions/values", Verbs="POST")
+    @Route(Path="/sensors/{Id}/predictions/oldvalues", Verbs="GET")
+    // @Route(Path="/sensors/{Id}/predictions/oldvalues", Verbs="POST")
     public static class SensorValuesPredictions implements IReturn<SensorValuesPredictionsResponse>
     {
         @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
@@ -3746,6 +4436,9 @@ public class dto
 
         @ApiMember(Name="PredictionPoints", Description="Collection of PredictionPoints to insert", ParameterType="body", DataType="List<PredictionPoint>", IsRequired=true, Verb="POST")
         public ArrayList<PredictionPoint> PredictionPoints = null;
+
+        @ApiMember(Name="MinutesOffset", Description="Time zone minutes offset", ParameterType="query", DataType="double", Verb="GET")
+        public Double MinutesOffset = null;
         
         public String getId() { return Id; }
         public SensorValuesPredictions setId(String value) { this.Id = value; return this; }
@@ -3763,13 +4456,68 @@ public class dto
         public SensorValuesPredictions setAggregationType(String value) { this.AggregationType = value; return this; }
         public ArrayList<PredictionPoint> getPredictionPoints() { return PredictionPoints; }
         public SensorValuesPredictions setPredictionPoints(ArrayList<PredictionPoint> value) { this.PredictionPoints = value; return this; }
+        public Double getMinutesOffset() { return MinutesOffset; }
+        public SensorValuesPredictions setMinutesOffset(Double value) { this.MinutesOffset = value; return this; }
         private static Object responseType = SensorValuesPredictionsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/sensors/{Id}/predictions/values", Verbs="GET")
+    // @Route(Path="/sensors/{Id}/predictions/values", Verbs="POST")
+    public static class SensorValuesPredictionsML implements IReturn<SensorValuesPredictionsResponseML>
+    {
+        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="FromDate", Description="FromDate", ParameterType="query", DataType="string", Verb="GET")
+        public String FromDate = null;
+
+        @ApiMember(Name="ToDate", Description="ToDate", ParameterType="query", DataType="string", Verb="GET")
+        public String ToDate = null;
+
+        @ApiMember(Name="PageNumber", Description="Pagination parameter page number", ParameterType="query", DataType="int", Verb="GET")
+        public Integer PageNumber = null;
+
+        @ApiMember(Name="PageSize", Description="Pagination parameter page size", ParameterType="query", DataType="int", Verb="GET")
+        public Integer PageSize = null;
+
+        @ApiMember(Name="Interval", Description="Interval aggregation time in minutes (15 every 15 mins, 30 every half an hour, 60 every hour...)", ParameterType="query", DataType="int", Verb="GET")
+        public Integer Interval = null;
+
+        @ApiMember(Name="AggregationType", Description="Type of aggregation by interval ('avg' or 'sum')", ParameterType="query", DataType="string", Verb="GET")
+        public String AggregationType = null;
+
+        @ApiMember(Name="PredictionPoints", Description="Collection of PredictionPoints to insert", ParameterType="body", DataType="List<PredictionPoint>", IsRequired=true, Verb="POST")
+        public ArrayList<PredictionPoint> PredictionPoints = null;
+
+        @ApiMember(Name="MinutesOffset", Description="Time zone minutes offset", ParameterType="query", DataType="double", Verb="GET")
+        public Double MinutesOffset = null;
+        
+        public String getId() { return Id; }
+        public SensorValuesPredictionsML setId(String value) { this.Id = value; return this; }
+        public String getFromDate() { return FromDate; }
+        public SensorValuesPredictionsML setFromDate(String value) { this.FromDate = value; return this; }
+        public String getToDate() { return ToDate; }
+        public SensorValuesPredictionsML setToDate(String value) { this.ToDate = value; return this; }
+        public Integer getPageNumber() { return PageNumber; }
+        public SensorValuesPredictionsML setPageNumber(Integer value) { this.PageNumber = value; return this; }
+        public Integer getPageSize() { return PageSize; }
+        public SensorValuesPredictionsML setPageSize(Integer value) { this.PageSize = value; return this; }
+        public Integer getInterval() { return Interval; }
+        public SensorValuesPredictionsML setInterval(Integer value) { this.Interval = value; return this; }
+        public String getAggregationType() { return AggregationType; }
+        public SensorValuesPredictionsML setAggregationType(String value) { this.AggregationType = value; return this; }
+        public ArrayList<PredictionPoint> getPredictionPoints() { return PredictionPoints; }
+        public SensorValuesPredictionsML setPredictionPoints(ArrayList<PredictionPoint> value) { this.PredictionPoints = value; return this; }
+        public Double getMinutesOffset() { return MinutesOffset; }
+        public SensorValuesPredictionsML setMinutesOffset(Double value) { this.MinutesOffset = value; return this; }
+        private static Object responseType = SensorValuesPredictionsResponseML.class;
         public Object getResponseType() { return responseType; }
     }
 
     @Route(Path="/sensors/{Id}/outliers", Verbs="GET")
     // @Route(Path="/sensors/{Id}/outliers", Verbs="POST")
-    public static class SensorOutliers implements IReturn<SensorOutliersResponse>
+    public static class SensorOutliersBatch implements IReturn<SensorOutliersBatchResponse>
     {
         @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
         public String Id = null;
@@ -3790,24 +4538,24 @@ public class dto
         public ArrayList<OutlierPoint> OutlierPoints = null;
         
         public String getId() { return Id; }
-        public SensorOutliers setId(String value) { this.Id = value; return this; }
+        public SensorOutliersBatch setId(String value) { this.Id = value; return this; }
         public String getFromDate() { return FromDate; }
-        public SensorOutliers setFromDate(String value) { this.FromDate = value; return this; }
+        public SensorOutliersBatch setFromDate(String value) { this.FromDate = value; return this; }
         public String getToDate() { return ToDate; }
-        public SensorOutliers setToDate(String value) { this.ToDate = value; return this; }
+        public SensorOutliersBatch setToDate(String value) { this.ToDate = value; return this; }
         public Integer getPageNumber() { return PageNumber; }
-        public SensorOutliers setPageNumber(Integer value) { this.PageNumber = value; return this; }
+        public SensorOutliersBatch setPageNumber(Integer value) { this.PageNumber = value; return this; }
         public Integer getPageSize() { return PageSize; }
-        public SensorOutliers setPageSize(Integer value) { this.PageSize = value; return this; }
+        public SensorOutliersBatch setPageSize(Integer value) { this.PageSize = value; return this; }
         public ArrayList<OutlierPoint> getOutlierPoints() { return OutlierPoints; }
-        public SensorOutliers setOutlierPoints(ArrayList<OutlierPoint> value) { this.OutlierPoints = value; return this; }
-        private static Object responseType = SensorOutliersResponse.class;
+        public SensorOutliersBatch setOutlierPoints(ArrayList<OutlierPoint> value) { this.OutlierPoints = value; return this; }
+        private static Object responseType = SensorOutliersBatchResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
     @Route(Path="/sensors/{Id}/gaps", Verbs="GET")
     // @Route(Path="/sensors/{Id}/gaps", Verbs="POST")
-    public static class SensorGaps implements IReturn<SensorGapsResponse>
+    public static class SensorGapsBatch implements IReturn<SensorGapsBatchResponse>
     {
         @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
         public String Id = null;
@@ -3828,18 +4576,18 @@ public class dto
         public ArrayList<GapPoint> GapPoints = null;
         
         public String getId() { return Id; }
-        public SensorGaps setId(String value) { this.Id = value; return this; }
+        public SensorGapsBatch setId(String value) { this.Id = value; return this; }
         public String getFromDate() { return FromDate; }
-        public SensorGaps setFromDate(String value) { this.FromDate = value; return this; }
+        public SensorGapsBatch setFromDate(String value) { this.FromDate = value; return this; }
         public String getToDate() { return ToDate; }
-        public SensorGaps setToDate(String value) { this.ToDate = value; return this; }
+        public SensorGapsBatch setToDate(String value) { this.ToDate = value; return this; }
         public Integer getPageNumber() { return PageNumber; }
-        public SensorGaps setPageNumber(Integer value) { this.PageNumber = value; return this; }
+        public SensorGapsBatch setPageNumber(Integer value) { this.PageNumber = value; return this; }
         public Integer getPageSize() { return PageSize; }
-        public SensorGaps setPageSize(Integer value) { this.PageSize = value; return this; }
+        public SensorGapsBatch setPageSize(Integer value) { this.PageSize = value; return this; }
         public ArrayList<GapPoint> getGapPoints() { return GapPoints; }
-        public SensorGaps setGapPoints(ArrayList<GapPoint> value) { this.GapPoints = value; return this; }
-        private static Object responseType = SensorGapsResponse.class;
+        public SensorGapsBatch setGapPoints(ArrayList<GapPoint> value) { this.GapPoints = value; return this; }
+        private static Object responseType = SensorGapsBatchResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -3857,6 +4605,29 @@ public class dto
         public BatteryLevelReport getReport() { return Report; }
         public SensorBatteryLevel setReport(BatteryLevelReport value) { this.Report = value; return this; }
         private static Object responseType = SensorBatteryLevelResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/sensors/valuesML", Verbs="POST")
+    // @Route(Path="/sensors/valuesML", Verbs="DELETE")
+    public static class SensorsValuesMLBatch implements IReturn<SensorsValuesMLBatchResponse>
+    {
+        @ApiMember(Name="SensorDataPoints", Description="Collection of datapoints to insert", ParameterType="body", DataType="List<SensorDataPoint>", IsRequired=true, Verb="POST")
+        public ArrayList<SensorDataPointML> SensorDataPointsML = null;
+
+        @ApiMember(Name="FromDate", Description="FromDate", ParameterType="query", DataType="string", Verb="DELETE")
+        public String FromDate = null;
+
+        @ApiMember(Name="ToDate", Description="ToDate", ParameterType="query", DataType="string", Verb="DELETE")
+        public String ToDate = null;
+        
+        public ArrayList<SensorDataPointML> getSensorDataPointsML() { return SensorDataPointsML; }
+        public SensorsValuesMLBatch setSensorDataPointsML(ArrayList<SensorDataPointML> value) { this.SensorDataPointsML = value; return this; }
+        public String getFromDate() { return FromDate; }
+        public SensorsValuesMLBatch setFromDate(String value) { this.FromDate = value; return this; }
+        public String getToDate() { return ToDate; }
+        public SensorsValuesMLBatch setToDate(String value) { this.ToDate = value; return this; }
+        private static Object responseType = SensorsValuesMLBatchResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -3917,6 +4688,48 @@ public class dto
         public ArrayList<PredictionPoint> getPredictionPoints() { return PredictionPoints; }
         public SensorValuesPredictionsBatch setPredictionPoints(ArrayList<PredictionPoint> value) { this.PredictionPoints = value; return this; }
         private static Object responseType = SensorValuesPredictionsBatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/repository/{Id}/file", Verbs="POST")
+    public static class FileUpload
+    {
+        @ApiMember(Name="Id", Description="Repository Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        public String Name = null;
+        
+        public String getId() { return Id; }
+        public FileUpload setId(String value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public FileUpload setName(String value) { this.Name = value; return this; }
+    }
+
+    @Route(Path="/repository/{Id}/file", Verbs="DELETE")
+    public static class FileDelete implements IReturn<FileDeleteResponse>
+    {
+        @ApiMember(Name="Id", Description="Repository Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        public String Name = null;
+        
+        public String getId() { return Id; }
+        public FileDelete setId(String value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public FileDelete setName(String value) { this.Name = value; return this; }
+        private static Object responseType = FileDeleteResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/repository/{Id}/files", Verbs="GET")
+    public static class RepositoryFiles implements IReturn<RepositoryFilesResponse>
+    {
+        @ApiMember(Name="Id", Description="Sensor Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+        
+        public String getId() { return Id; }
+        public RepositoryFiles setId(String value) { this.Id = value; return this; }
+        private static Object responseType = RepositoryFilesResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -4000,6 +4813,246 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/thermostats/{Id}/mode", Verbs="PATCH")
+    public static class SensorMode implements IReturn<SensorModeResponse>
+    {
+        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="ModePoint", Description="Sensor mode", ParameterType="body", DataType="ModePoint", IsRequired=true, Verb="PATCH")
+        public ModePoint ModePoint = null;
+        
+        public String getId() { return Id; }
+        public SensorMode setId(String value) { this.Id = value; return this; }
+        public ModePoint getModePoint() { return ModePoint; }
+        public SensorMode setModePoint(ModePoint value) { this.ModePoint = value; return this; }
+        private static Object responseType = SensorModeResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/{Id}/setpoint", Verbs="PATCH")
+    public static class SensorSetPoint implements IReturn<SensorSetPointResponse>
+    {
+        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="SetPointPoint", Description="Sensor setpoint", ParameterType="body", DataType="SetPointPoint", IsRequired=true, Verb="PATCH")
+        public SetPointPoint SetPointPoint = null;
+        
+        public String getId() { return Id; }
+        public SensorSetPoint setId(String value) { this.Id = value; return this; }
+        public SetPointPoint getSetPointPoint() { return SetPointPoint; }
+        public SensorSetPoint setSetPointPoint(SetPointPoint value) { this.SetPointPoint = value; return this; }
+        private static Object responseType = SensorSetPointResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/modes", Verbs="PATCH")
+    public static class SensorModesBatch implements IReturn<SensorModesBatchResponse>
+    {
+        @ApiMember(Name="SensorModePoints", Description="Collection of ModePoint to insert", ParameterType="body", DataType="List<SensorModePoint>", IsRequired=true, Verb="PATCH")
+        public ArrayList<SensorModePoint> SensorModePoints = null;
+        
+        public ArrayList<SensorModePoint> getSensorModePoints() { return SensorModePoints; }
+        public SensorModesBatch setSensorModePoints(ArrayList<SensorModePoint> value) { this.SensorModePoints = value; return this; }
+        private static Object responseType = SensorModesBatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/supportedmodes", Verbs="PATCH")
+    public static class SensorSupportedModesBatch implements IReturn<SensorSupportedModesBatchResponse>
+    {
+        @ApiMember(Name="SensorSupportedModesPoints", Description="Collection of SupportedModesPoint to insert", ParameterType="body", DataType="List<SensorSupportedModesPoint>", IsRequired=true, Verb="PATCH")
+        public ArrayList<SensorSupportedModesPoint> SensorSupportedModesPoints = null;
+        
+        public ArrayList<SensorSupportedModesPoint> getSensorSupportedModesPoints() { return SensorSupportedModesPoints; }
+        public SensorSupportedModesBatch setSensorSupportedModesPoints(ArrayList<SensorSupportedModesPoint> value) { this.SensorSupportedModesPoints = value; return this; }
+        private static Object responseType = SensorSupportedModesBatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/setpoints", Verbs="PATCH")
+    public static class SensorSetPointsBatch implements IReturn<SensorSetPointsBatchResponse>
+    {
+        @ApiMember(Name="SensorSetPointPoints", Description="Collection of SetPointsPoint to insert", ParameterType="body", DataType="List<SensorSetPointPoint>", IsRequired=true, Verb="PATCH")
+        public ArrayList<SensorSetPointPoint> SensorSetPointPoints = null;
+        
+        public ArrayList<SensorSetPointPoint> getSensorSetPointPoints() { return SensorSetPointPoints; }
+        public SensorSetPointsBatch setSensorSetPointPoints(ArrayList<SensorSetPointPoint> value) { this.SensorSetPointPoints = value; return this; }
+        private static Object responseType = SensorSetPointsBatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/{Id}/fanmode", Verbs="PATCH")
+    public static class SensorFanMode implements IReturn<SensorFanModeResponse>
+    {
+        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="ModePoint", Description="Sensor mode", ParameterType="body", DataType="ModePoint", IsRequired=true, Verb="PATCH")
+        public FanModePoint FanModePoint = null;
+        
+        public String getId() { return Id; }
+        public SensorFanMode setId(String value) { this.Id = value; return this; }
+        public FanModePoint getFanModePoint() { return FanModePoint; }
+        public SensorFanMode setFanModePoint(FanModePoint value) { this.FanModePoint = value; return this; }
+        private static Object responseType = SensorFanModeResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/fanmodes", Verbs="PATCH")
+    public static class SensorFanModesBatch implements IReturn<SensorFanModesBatchResponse>
+    {
+        @ApiMember(Name="SensorFanModePoints", Description="Collection of FanModePoint to insert", ParameterType="body", DataType="List<SensorFanModePoint>", IsRequired=true, Verb="PATCH")
+        public ArrayList<SensorFanModePoint> SensorFanModePoints = null;
+        
+        public ArrayList<SensorFanModePoint> getSensorFanModePoints() { return SensorFanModePoints; }
+        public SensorFanModesBatch setSensorFanModePoints(ArrayList<SensorFanModePoint> value) { this.SensorFanModePoints = value; return this; }
+        private static Object responseType = SensorFanModesBatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/supportedfanmodes", Verbs="PATCH")
+    public static class SensorSupportedFanModesBatch implements IReturn<SensorSupportedFanModesBatchResponse>
+    {
+        @ApiMember(Name="SensorSupportedFanModesPoints", Description="Collection of SupportedFanModesPoint to insert", ParameterType="body", DataType="List<SensorSupportedFanModesPoint>", IsRequired=true, Verb="PATCH")
+        public ArrayList<SensorSupportedFanModesPoint> SensorSupportedFanModesPoints = null;
+        
+        public ArrayList<SensorSupportedFanModesPoint> getSensorSupportedFanModesPoints() { return SensorSupportedFanModesPoints; }
+        public SensorSupportedFanModesBatch setSensorSupportedFanModesPoints(ArrayList<SensorSupportedFanModesPoint> value) { this.SensorSupportedFanModesPoints = value; return this; }
+        private static Object responseType = SensorSupportedFanModesBatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/sensors/{Id}/thermostat/setpoint/previous", Verbs="POST")
+    public static class SensorThermostatSetPreviousTemperature implements IReturn<SensorThermostatSetPointResponse>
+    {
+        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="InstallationId", Description="Installation Id", ParameterType="body", DataType="string", IsRequired=true, Verb="POST")
+        public String InstallationId = null;
+        
+        public String getId() { return Id; }
+        public SensorThermostatSetPreviousTemperature setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorThermostatSetPreviousTemperature setInstallationId(String value) { this.InstallationId = value; return this; }
+        private static Object responseType = SensorThermostatSetPointResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/{Id}/update/setpoint", Verbs="PATCH")
+    public static class SensorThermostatSetPoint implements IReturn<SensorThermostatSetPointResponse>
+    {
+        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
+        public String Id = null;
+
+        public Double SetPoint = null;
+        public Boolean IsCelsius = null;
+        public String InstallationId = null;
+        
+        public String getId() { return Id; }
+        public SensorThermostatSetPoint setId(String value) { this.Id = value; return this; }
+        public Double getSetPoint() { return SetPoint; }
+        public SensorThermostatSetPoint setSetPoint(Double value) { this.SetPoint = value; return this; }
+        public Boolean getIsCelsius() { return IsCelsius; }
+        public SensorThermostatSetPoint setIsCelsius(Boolean value) { this.IsCelsius = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorThermostatSetPoint setInstallationId(String value) { this.InstallationId = value; return this; }
+        private static Object responseType = SensorThermostatSetPointResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/{Id}/update/mode", Verbs="PATCH")
+    public static class SensorThermostatUpdateMode implements IReturn<SensorThermostatUpdateModeResponse>
+    {
+        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
+        public String Id = null;
+
+        public String InstallationId = null;
+        public SensorThermostatMode Mode = null;
+        
+        public String getId() { return Id; }
+        public SensorThermostatUpdateMode setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorThermostatUpdateMode setInstallationId(String value) { this.InstallationId = value; return this; }
+        public SensorThermostatMode getMode() { return Mode; }
+        public SensorThermostatUpdateMode setMode(SensorThermostatMode value) { this.Mode = value; return this; }
+        private static Object responseType = SensorThermostatUpdateModeResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/{Id}/update/mode/previous", Verbs="POST")
+    public static class SensorThermostatSetPreviousMode implements IReturn<SensorThermostatUpdateModeResponse>
+    {
+        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="POST", ExcludeInSchema=true)
+        public String Id = null;
+
+        public String InstallationId = null;
+        
+        public String getId() { return Id; }
+        public SensorThermostatSetPreviousMode setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorThermostatSetPreviousMode setInstallationId(String value) { this.InstallationId = value; return this; }
+        private static Object responseType = SensorThermostatUpdateModeResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/sensors/{Id}/thermostat/main", Verbs="POST")
+    public static class SensorThermostatMain implements IReturn<SensorThermostatMainResponse>
+    {
+        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="InstallationId", Description="Installation Id", ParameterType="body", DataType="string", IsRequired=true)
+        public String InstallationId = null;
+        
+        public String getId() { return Id; }
+        public SensorThermostatMain setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorThermostatMain setInstallationId(String value) { this.InstallationId = value; return this; }
+        private static Object responseType = SensorThermostatMainResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/sensors/{SensorId}/thermostat/link", Verbs="POST")
+    public static class SensorThermostatLink implements IReturn<SensorThermostatLinkResponse>
+    {
+        @ApiMember(Name="SensorId", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String SensorId = null;
+
+        public String InstallationId = null;
+        public Boolean Link = null;
+        
+        public String getSensorId() { return SensorId; }
+        public SensorThermostatLink setSensorId(String value) { this.SensorId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorThermostatLink setInstallationId(String value) { this.InstallationId = value; return this; }
+        public Boolean isLink() { return Link; }
+        public SensorThermostatLink setLink(Boolean value) { this.Link = value; return this; }
+        private static Object responseType = SensorThermostatLinkResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/thermostats/{Id}/update/fanmode", Verbs="PATCH")
+    public static class SensorThermostatUpdateFanMode implements IReturn<SensorThermostatUpdateFanModeResponse>
+    {
+        @ApiMember(Name="Id", Description="SensorId", ParameterType="path", DataType="string", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
+        public String Id = null;
+
+        public String InstallationId = null;
+        public SensorThermostatFanMode FanMode = null;
+        
+        public String getId() { return Id; }
+        public SensorThermostatUpdateFanMode setId(String value) { this.Id = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorThermostatUpdateFanMode setInstallationId(String value) { this.InstallationId = value; return this; }
+        public SensorThermostatFanMode getFanMode() { return FanMode; }
+        public SensorThermostatUpdateFanMode setFanMode(SensorThermostatFanMode value) { this.FanMode = value; return this; }
+        private static Object responseType = SensorThermostatUpdateFanModeResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/sensors", Verbs="GET")
     // @Route(Path="/sensors", Verbs="POST")
     // @Route(Path="/sensors", Verbs="PUT")
@@ -4051,7 +5104,7 @@ public class dto
     }
 
     @Route(Path="/sensors", Verbs="PATCH")
-    public static class SensorsPatch extends QueryBase_1<Sensor> implements IReturn<QueryResponse<Sensor>>
+    public static class SensorsPatch implements IReturn<Sensor>
     {
         @ApiMember(Name="Sensor", Description="Sensor object", ParameterType="body", DataType="Sensor", IsRequired=true, Verb="PATCH")
         public Sensor Sensor = null;
@@ -4063,7 +5116,61 @@ public class dto
         public SensorsPatch setSensor(Sensor value) { this.Sensor = value; return this; }
         public ArrayList<String> getFields() { return Fields; }
         public SensorsPatch setFields(ArrayList<String> value) { this.Fields = value; return this; }
-        private static Object responseType = new TypeToken<QueryResponse<Sensor>>(){}.getType();
+        private static Object responseType = Sensor.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/sensors/{Id}/name", Verbs="PATCH")
+    public static class SensorNamePatch implements IReturn<SensorNamePatchResponse>
+    {
+        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="InstallationId", Description="InstallationId", ParameterType="body", DataType="Guid", IsRequired=true)
+        public UUID InstallationId = null;
+
+        @ApiMember(Name="NewName", Description="NewName", ParameterType="body", DataType="string", IsRequired=true)
+        public String NewName = null;
+
+        @ApiMember(Name="PatchChildren", Description="PatchChildren", ParameterType="body", DataType="bool", IsRequired=true)
+        public Boolean PatchChildren = null;
+        
+        public String getId() { return Id; }
+        public SensorNamePatch setId(String value) { this.Id = value; return this; }
+        public UUID getInstallationId() { return InstallationId; }
+        public SensorNamePatch setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getNewName() { return NewName; }
+        public SensorNamePatch setNewName(String value) { this.NewName = value; return this; }
+        public Boolean isPatchChildren() { return PatchChildren; }
+        public SensorNamePatch setPatchChildren(Boolean value) { this.PatchChildren = value; return this; }
+        private static Object responseType = SensorNamePatchResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/sensors/{Id}/area", Verbs="PATCH")
+    public static class SensorAreaPatch implements IReturn<SensorAreaPatchResponse>
+    {
+        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String Id = null;
+
+        @ApiMember(Name="InstallationId", Description="InstallationId", ParameterType="body", DataType="Guid", IsRequired=true)
+        public UUID InstallationId = null;
+
+        @ApiMember(Name="NewArea", Description="NewArea", ParameterType="body", DataType="int", IsRequired=true)
+        public Integer NewArea = null;
+
+        @ApiMember(Name="PatchChildren", Description="PatchChildren", ParameterType="body", DataType="bool", IsRequired=true)
+        public Boolean PatchChildren = null;
+        
+        public String getId() { return Id; }
+        public SensorAreaPatch setId(String value) { this.Id = value; return this; }
+        public UUID getInstallationId() { return InstallationId; }
+        public SensorAreaPatch setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public Integer getNewArea() { return NewArea; }
+        public SensorAreaPatch setNewArea(Integer value) { this.NewArea = value; return this; }
+        public Boolean isPatchChildren() { return PatchChildren; }
+        public SensorAreaPatch setPatchChildren(Boolean value) { this.PatchChildren = value; return this; }
+        private static Object responseType = SensorAreaPatchResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -4162,61 +5269,25 @@ public class dto
         public SensorValueRange setToDate(String value) { this.ToDate = value; return this; }
     }
 
-    @Route(Path="/thermostats/{Id}/mode", Verbs="PATCH")
-    public static class SensorMode implements IReturn<SensorModeResponse>
+    @Route(Path="/sensors/{Id}/deletevalues", Verbs="DELETE")
+    public static class SensorDeleteValues implements IReturn<SensorDeleteValuesResponse>
     {
-        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
         public String Id = null;
 
-        @ApiMember(Name="ModePoint", Description="Sensor mode", ParameterType="body", DataType="ModePoint", IsRequired=true, Verb="PATCH")
-        public ModePoint ModePoint = null;
+        @ApiMember(Name="FromDate", Description="FromDate", ParameterType="query", DataType="string", Verb="DELETE")
+        public String FromDate = null;
+
+        @ApiMember(Name="ToDate", Description="ToDate", ParameterType="query", DataType="string", Verb="DELETE")
+        public String ToDate = null;
         
         public String getId() { return Id; }
-        public SensorMode setId(String value) { this.Id = value; return this; }
-        public ModePoint getModePoint() { return ModePoint; }
-        public SensorMode setModePoint(ModePoint value) { this.ModePoint = value; return this; }
-        private static Object responseType = SensorModeResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/thermostats/{Id}/setpoint", Verbs="PATCH")
-    public static class SensorSetPoint implements IReturn<SensorSetPointResponse>
-    {
-        @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public String Id = null;
-
-        @ApiMember(Name="SetPointPoint", Description="Sensor setpoint", ParameterType="body", DataType="SetPointPoint", IsRequired=true, Verb="PATCH")
-        public SetPointPoint SetPointPoint = null;
-        
-        public String getId() { return Id; }
-        public SensorSetPoint setId(String value) { this.Id = value; return this; }
-        public SetPointPoint getSetPointPoint() { return SetPointPoint; }
-        public SensorSetPoint setSetPointPoint(SetPointPoint value) { this.SetPointPoint = value; return this; }
-        private static Object responseType = SensorSetPointResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/thermostats/modes", Verbs="PATCH")
-    public static class SensorModesBatch implements IReturn<SensorModesBatchResponse>
-    {
-        @ApiMember(Name="SensorModePoints", Description="Collection of ModePoint to insert", ParameterType="body", DataType="List<SensorModePoint>", IsRequired=true, Verb="PATCH")
-        public ArrayList<SensorModePoint> SensorModePoints = null;
-        
-        public ArrayList<SensorModePoint> getSensorModePoints() { return SensorModePoints; }
-        public SensorModesBatch setSensorModePoints(ArrayList<SensorModePoint> value) { this.SensorModePoints = value; return this; }
-        private static Object responseType = SensorModesBatchResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/thermostats/setpoints", Verbs="PATCH")
-    public static class SensorSetPointsBatch implements IReturn<SensorSetPointsBatchResponse>
-    {
-        @ApiMember(Name="SensorSetPointPoints", Description="Collection of SetPointsPoint to insert", ParameterType="body", DataType="List<SensorSetPointPoint>", IsRequired=true, Verb="PATCH")
-        public ArrayList<SensorSetPointPoint> SensorSetPointPoints = null;
-        
-        public ArrayList<SensorSetPointPoint> getSensorSetPointPoints() { return SensorSetPointPoints; }
-        public SensorSetPointsBatch setSensorSetPointPoints(ArrayList<SensorSetPointPoint> value) { this.SensorSetPointPoints = value; return this; }
-        private static Object responseType = SensorSetPointsBatchResponse.class;
+        public SensorDeleteValues setId(String value) { this.Id = value; return this; }
+        public String getFromDate() { return FromDate; }
+        public SensorDeleteValues setFromDate(String value) { this.FromDate = value; return this; }
+        public String getToDate() { return ToDate; }
+        public SensorDeleteValues setToDate(String value) { this.ToDate = value; return this; }
+        private static Object responseType = SensorDeleteValuesResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -4237,6 +5308,30 @@ public class dto
         public TipSection getSection() { return Section; }
         public TipsBySection setSection(TipSection value) { this.Section = value; return this; }
         private static Object responseType = TipsBySectionResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/update/{GwType}/lastimage", Verbs="GET")
+    public static class UpdateGatewayImage implements IReturn<UpdateGatewayImageResponse>
+    {
+        @ApiMember(Name="GwType", Description="Gateway Type", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String GwType = null;
+        
+        public String getGwType() { return GwType; }
+        public UpdateGatewayImage setGwType(String value) { this.GwType = value; return this; }
+        private static Object responseType = UpdateGatewayImageResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/update/{GwType}/lastimage/version", Verbs="GET")
+    public static class UpdateGatewayImageVersion implements IReturn<UpdateGatewayImageVersionResponse>
+    {
+        @ApiMember(Name="GwType", Description="Gateway Type", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
+        public String GwType = null;
+        
+        public String getGwType() { return GwType; }
+        public UpdateGatewayImageVersion setGwType(String value) { this.GwType = value; return this; }
+        private static Object responseType = UpdateGatewayImageVersionResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -4350,6 +5445,23 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/users/{Id}/sensors/ids", Verbs="GET")
+    public static class UserSensorsIds implements IReturn<UserSensorsIdsResponse>
+    {
+        @ApiMember(Name="Id", Description="User id", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
+        public String Id = null;
+
+        @ApiMember(Name="Type", Description="Type (empty or 'Error')", ParameterType="query", DataType="string", Verb="GET")
+        public String Type = null;
+        
+        public String getId() { return Id; }
+        public UserSensorsIds setId(String value) { this.Id = value; return this; }
+        public String getType() { return Type; }
+        public UserSensorsIds setType(String value) { this.Type = value; return this; }
+        private static Object responseType = UserSensorsIdsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/users/{Id}/cameras", Verbs="GET")
     public static class UserCameras implements IReturn<UserCamerasResponse>
     {
@@ -4405,6 +5517,18 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/users/{Id}/events/admin", Verbs="GET")
+    public static class UserAdminSentNotifications implements IReturn<UserAdminSentNotificationsResponse>
+    {
+        @ApiMember(Name="Id", Description="User Id", ParameterType="path", DataType="int", IsRequired=true, Verb="GET", ExcludeInSchema=true)
+        public Integer Id = null;
+        
+        public Integer getId() { return Id; }
+        public UserAdminSentNotifications setId(Integer value) { this.Id = value; return this; }
+        private static Object responseType = UserAdminSentNotificationsResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/users/{Id}/installations", Verbs="GET")
     public static class UserInstallations implements IReturn<UserInstallationsResponse>
     {
@@ -4451,6 +5575,18 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
+    @Route(Path="/users/{Id}/installations/summary", Verbs="GET")
+    public static class UserInstallationsSummary implements IReturn<UserInstallationsSummaryResponse>
+    {
+        @ApiMember(Name="Id", Description="User id", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
+        public String Id = null;
+        
+        public String getId() { return Id; }
+        public UserInstallationsSummary setId(String value) { this.Id = value; return this; }
+        private static Object responseType = UserInstallationsSummaryResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
     @Route(Path="/users/{Id}/installations", Verbs="PUT")
     public static class UsersInstallationsBatch implements IReturn<UsersInstallationsBatchResponse>
     {
@@ -4465,40 +5601,6 @@ public class dto
         public ArrayList<AssignableInstallation> getInstallations() { return Installations; }
         public UsersInstallationsBatch setInstallations(ArrayList<AssignableInstallation> value) { this.Installations = value; return this; }
         private static Object responseType = UsersInstallationsBatchResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/users/{Id}/customers", Verbs="GET")
-    public static class UserCustomers implements IReturn<UserCustomersResponse>
-    {
-        @ApiMember(Name="Id", Description="User id", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
-        public String Id = null;
-
-        @ApiMember(Name="Type", Description="Type (empty or 'Error')", ParameterType="query", DataType="string", Verb="GET")
-        public String Type = null;
-        
-        public String getId() { return Id; }
-        public UserCustomers setId(String value) { this.Id = value; return this; }
-        public String getType() { return Type; }
-        public UserCustomers setType(String value) { this.Type = value; return this; }
-        private static Object responseType = UserCustomersResponse.class;
-        public Object getResponseType() { return responseType; }
-    }
-
-    @Route(Path="/users/{Id}/customers/count", Verbs="GET")
-    public static class UserCustomersCount implements IReturn<UserCustomersCountResponse>
-    {
-        @ApiMember(Name="Id", Description="User id", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
-        public String Id = null;
-
-        @ApiMember(Name="Type", Description="Type (empty or 'Error')", ParameterType="query", DataType="string", Verb="GET")
-        public String Type = null;
-        
-        public String getId() { return Id; }
-        public UserCustomersCount setId(String value) { this.Id = value; return this; }
-        public String getType() { return Type; }
-        public UserCustomersCount setType(String value) { this.Type = value; return this; }
-        private static Object responseType = UserCustomersCountResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -4570,7 +5672,7 @@ public class dto
     }
 
     @Route(Path="/users", Verbs="PATCH")
-    public static class UsersPatchGeneric extends QueryBase_1<UserAuth> implements IReturn<QueryResponse<UserAuth>>
+    public static class UsersPatchGeneric implements IReturn<UserAuth>
     {
         @ApiMember(Name="User", Description="User object", ParameterType="body", DataType="UserAuth", IsRequired=true, Verb="PATCH")
         public UserAuth User = null;
@@ -4582,7 +5684,7 @@ public class dto
         public UsersPatchGeneric setUser(UserAuth value) { this.User = value; return this; }
         public ArrayList<String> getFields() { return Fields; }
         public UsersPatchGeneric setFields(ArrayList<String> value) { this.Fields = value; return this; }
-        private static Object responseType = new TypeToken<QueryResponse<UserAuth>>(){}.getType();
+        private static Object responseType = UserAuth.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -4750,7 +5852,7 @@ public class dto
     }
 
     @Route(Path="/warnings", Verbs="PATCH")
-    public static class WarningsPatch extends QueryBase_1<Warning> implements IReturn<QueryResponse<Warning>>
+    public static class WarningsPatch implements IReturn<Warning>
     {
         @ApiMember(Name="warning", Description="Warning definition", ParameterType="body", DataType="Warning", IsRequired=true, Verb="PATCH")
         public Warning Warning = null;
@@ -4762,7 +5864,7 @@ public class dto
         public WarningsPatch setWarning(Warning value) { this.Warning = value; return this; }
         public ArrayList<String> getFields() { return Fields; }
         public WarningsPatch setFields(ArrayList<String> value) { this.Fields = value; return this; }
-        private static Object responseType = new TypeToken<QueryResponse<Warning>>(){}.getType();
+        private static Object responseType = Warning.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -4893,6 +5995,85 @@ public class dto
         public Integer getId() { return Id; }
         public WarningImmediate setId(Integer value) { this.Id = value; return this; }
         private static Object responseType = WarningActivateResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/twitter/user", Verbs="POST")
+    // @Route(Path="/twitter/user/{Twitter}", Verbs="DELETE")
+    // @Route(Path="/twitter/user/{Twitter}", Verbs="GET")
+    public static class TwitterUser implements IReturn<TwitterUserResponse>
+    {
+        @ApiMember(Name="TwitterAccount", Description="TwitterAccount", ParameterType="query", DataType="TwitterAccount", IsRequired=true, Verb="POST")
+        public TwitterAccount TwitterAccount = null;
+
+        @ApiMember(Name="Twitter", Description="Twitter", ParameterType="path", DataType="string", IsRequired=true, Verb="DELETE")
+        // @ApiMember(Name="Twitter", Description="Twitter", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
+        public String Twitter = null;
+        
+        public TwitterAccount getTwitterAccount() { return TwitterAccount; }
+        public TwitterUser setTwitterAccount(TwitterAccount value) { this.TwitterAccount = value; return this; }
+        public String getTwitter() { return Twitter; }
+        public TwitterUser setTwitter(String value) { this.Twitter = value; return this; }
+        private static Object responseType = TwitterUserResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/twitter/group", Verbs="POST")
+    // @Route(Path="/twitter/group/{GroupName}", Verbs="DELETE")
+    // @Route(Path="/twitter/group/{GroupName}", Verbs="GET")
+    public static class TwitterGroup implements IReturn<TwitterGroupResponse>
+    {
+        @ApiMember(Name="TwitterAccountGroup", Description="TwitterAccountGroup", ParameterType="query", DataType="List<TwitterAccountGroup>", IsRequired=true, Verb="POST")
+        public ArrayList<TwitterAccountGroup> TwitterAccountGroup = null;
+
+        @ApiMember(Name="GroupName", Description="GroupName", ParameterType="path", DataType="string", IsRequired=true, Verb="DELETE")
+        // @ApiMember(Name="GroupName", Description="GroupName", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
+        public String GroupName = null;
+        
+        public ArrayList<TwitterAccountGroup> getTwitterAccountGroup() { return TwitterAccountGroup; }
+        public TwitterGroup setTwitterAccountGroup(ArrayList<TwitterAccountGroup> value) { this.TwitterAccountGroup = value; return this; }
+        public String getGroupName() { return GroupName; }
+        public TwitterGroup setGroupName(String value) { this.GroupName = value; return this; }
+        private static Object responseType = TwitterGroupResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/twitter/{Twitter}/messagetogroup/{GroupName}", Verbs="POST")
+    public static class TwitterMessageGroup implements IReturn<TwitterMessageGroupResponse>
+    {
+        @ApiMember(Name="Twitter", Description="Twitter", ParameterType="path", DataType="string", IsRequired=true, Verb="POST")
+        public String Twitter = null;
+
+        @ApiMember(Name="GroupName", Description="GroupName", ParameterType="path", DataType="string", IsRequired=true, Verb="POST")
+        public String GroupName = null;
+
+        @ApiMember(Name="Message", Description="Message", ParameterType="query", DataType="string", IsRequired=true, Verb="POST")
+        public String Message = null;
+        
+        public String getTwitter() { return Twitter; }
+        public TwitterMessageGroup setTwitter(String value) { this.Twitter = value; return this; }
+        public String getGroupName() { return GroupName; }
+        public TwitterMessageGroup setGroupName(String value) { this.GroupName = value; return this; }
+        public String getMessage() { return Message; }
+        public TwitterMessageGroup setMessage(String value) { this.Message = value; return this; }
+        private static Object responseType = TwitterMessageGroupResponse.class;
+        public Object getResponseType() { return responseType; }
+    }
+
+    @Route(Path="/twitter/{Twitter}/broadcastmessage", Verbs="POST")
+    public static class TwitterBroadcastMessage implements IReturn<TwitterBroadcastMessageResponse>
+    {
+        @ApiMember(Name="Twitter", Description="Twitter", ParameterType="path", DataType="string", IsRequired=true, Verb="POST")
+        public String Twitter = null;
+
+        @ApiMember(Name="Message", Description="Message", ParameterType="query", DataType="string", IsRequired=true, Verb="POST")
+        public String Message = null;
+        
+        public String getTwitter() { return Twitter; }
+        public TwitterBroadcastMessage setTwitter(String value) { this.Twitter = value; return this; }
+        public String getMessage() { return Message; }
+        public TwitterBroadcastMessage setMessage(String value) { this.Message = value; return this; }
+        private static Object responseType = TwitterBroadcastMessageResponse.class;
         public Object getResponseType() { return responseType; }
     }
 
@@ -5030,34 +6211,54 @@ public class dto
         public Object getResponseType() { return responseType; }
     }
 
-    @DataContract
-    public static class QueryResponse<T>
+    public static class Camera
     {
-        @DataMember(Order=1)
-        public Integer Offset = null;
-
-        @DataMember(Order=2)
-        public Integer Total = null;
-
-        @DataMember(Order=3)
-        public ArrayList<T> Results = null;
-
-        @DataMember(Order=4)
-        public HashMap<String,String> Meta = null;
-
-        @DataMember(Order=5)
-        public ResponseStatus ResponseStatus = null;
+        public String Id = null;
+        public String IpAddress = null;
+        public Integer Port = null;
+        public String Name = null;
+        public String Description = null;
+        public String Type = null;
+        public String Manufacturer = null;
+        public String Model = null;
+        public Date LastDateImage = null;
+        public String LastImageName = null;
+        public Date CreationDate = null;
+        public String LastSensorId = null;
+        public String Status = null;
+        public Date LastDateStatus = null;
+        public String Configuration = null;
         
-        public Integer getOffset() { return Offset; }
-        public QueryResponse<T> setOffset(Integer value) { this.Offset = value; return this; }
-        public Integer getTotal() { return Total; }
-        public QueryResponse<T> setTotal(Integer value) { this.Total = value; return this; }
-        public ArrayList<T> getResults() { return Results; }
-        public QueryResponse<T> setResults(ArrayList<T> value) { this.Results = value; return this; }
-        public HashMap<String,String> getMeta() { return Meta; }
-        public QueryResponse<T> setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public QueryResponse<T> setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+        public String getId() { return Id; }
+        public Camera setId(String value) { this.Id = value; return this; }
+        public String getIpAddress() { return IpAddress; }
+        public Camera setIpAddress(String value) { this.IpAddress = value; return this; }
+        public Integer getPort() { return Port; }
+        public Camera setPort(Integer value) { this.Port = value; return this; }
+        public String getName() { return Name; }
+        public Camera setName(String value) { this.Name = value; return this; }
+        public String getDescription() { return Description; }
+        public Camera setDescription(String value) { this.Description = value; return this; }
+        public String getType() { return Type; }
+        public Camera setType(String value) { this.Type = value; return this; }
+        public String getManufacturer() { return Manufacturer; }
+        public Camera setManufacturer(String value) { this.Manufacturer = value; return this; }
+        public String getModel() { return Model; }
+        public Camera setModel(String value) { this.Model = value; return this; }
+        public Date getLastDateImage() { return LastDateImage; }
+        public Camera setLastDateImage(Date value) { this.LastDateImage = value; return this; }
+        public String getLastImageName() { return LastImageName; }
+        public Camera setLastImageName(String value) { this.LastImageName = value; return this; }
+        public Date getCreationDate() { return CreationDate; }
+        public Camera setCreationDate(Date value) { this.CreationDate = value; return this; }
+        public String getLastSensorId() { return LastSensorId; }
+        public Camera setLastSensorId(String value) { this.LastSensorId = value; return this; }
+        public String getStatus() { return Status; }
+        public Camera setStatus(String value) { this.Status = value; return this; }
+        public Date getLastDateStatus() { return LastDateStatus; }
+        public Camera setLastDateStatus(Date value) { this.LastDateStatus = value; return this; }
+        public String getConfiguration() { return Configuration; }
+        public Camera setConfiguration(String value) { this.Configuration = value; return this; }
     }
 
     public static class CamerasResponse extends ResponseBase
@@ -5079,19 +6280,35 @@ public class dto
         public CameraDetailsResponse setCamera(Camera value) { this.Camera = value; return this; }
     }
 
+    public static class CameraStatusesResponse extends ResponseBase
+    {
+        public ArrayList<StatusPoint> Statuses = null;
+        
+        public ArrayList<StatusPoint> getStatuses() { return Statuses; }
+        public CameraStatusesResponse setStatuses(ArrayList<StatusPoint> value) { this.Statuses = value; return this; }
+    }
+
+    public static class CameraStatusesBatchResponse extends ResponseBase
+    {
+        public ArrayList<SensorStatusPoint> SensorsStatuses = null;
+        
+        public ArrayList<SensorStatusPoint> getSensorsStatuses() { return SensorsStatuses; }
+        public CameraStatusesBatchResponse setSensorsStatuses(ArrayList<SensorStatusPoint> value) { this.SensorsStatuses = value; return this; }
+    }
+
     public static class CameraPhotoResponse extends ResponseBase
     {
         public ArrayList<Photo> Photos = null;
-        public String CameraId = null;
         public String CameraName = null;
+        public String CameraId = null;
         public Integer NumPages = null;
         
         public ArrayList<Photo> getPhotos() { return Photos; }
         public CameraPhotoResponse setPhotos(ArrayList<Photo> value) { this.Photos = value; return this; }
-        public String getCameraId() { return CameraId; }
-        public CameraPhotoResponse setCameraId(String value) { this.CameraId = value; return this; }
         public String getCameraName() { return CameraName; }
         public CameraPhotoResponse setCameraName(String value) { this.CameraName = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public CameraPhotoResponse setCameraId(String value) { this.CameraId = value; return this; }
         public Integer getNumPages() { return NumPages; }
         public CameraPhotoResponse setNumPages(Integer value) { this.NumPages = value; return this; }
     }
@@ -5123,6 +6340,23 @@ public class dto
         public CameraPhotoBlobResponse setPhotoNameWithSAS(String value) { this.PhotoNameWithSAS = value; return this; }
     }
 
+    public static class CameraPhotoAndVideoResponse extends ResponseBase
+    {
+        public ArrayList<PhotoVideo> PhotoVideos = null;
+        public String CameraName = null;
+        public String CameraId = null;
+        public Integer NumPages = null;
+        
+        public ArrayList<PhotoVideo> getPhotoVideos() { return PhotoVideos; }
+        public CameraPhotoAndVideoResponse setPhotoVideos(ArrayList<PhotoVideo> value) { this.PhotoVideos = value; return this; }
+        public String getCameraName() { return CameraName; }
+        public CameraPhotoAndVideoResponse setCameraName(String value) { this.CameraName = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public CameraPhotoAndVideoResponse setCameraId(String value) { this.CameraId = value; return this; }
+        public Integer getNumPages() { return NumPages; }
+        public CameraPhotoAndVideoResponse setNumPages(Integer value) { this.NumPages = value; return this; }
+    }
+
     public static class CameraVideoStreamingEndpointResponse extends ResponseBase
     {
         public String Endpoint = null;
@@ -5144,12 +6378,50 @@ public class dto
         
     }
 
+    public static class CameraVideoDeleteResponse extends ResponseBase
+    {
+        public Boolean VideoDeleteSuccess = null;
+        public Boolean CommunicationSuccess = null;
+        
+        public Boolean isVideoDeleteSuccess() { return VideoDeleteSuccess; }
+        public CameraVideoDeleteResponse setVideoDeleteSuccess(Boolean value) { this.VideoDeleteSuccess = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public CameraVideoDeleteResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+    }
+
+    public static class CameraRecordVideoResponse extends ResponseBase
+    {
+        public Boolean VideoRecordSuccess = null;
+        public Boolean CommunicationSuccess = null;
+        
+        public Boolean isVideoRecordSuccess() { return VideoRecordSuccess; }
+        public CameraRecordVideoResponse setVideoRecordSuccess(Boolean value) { this.VideoRecordSuccess = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public CameraRecordVideoResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+    }
+
     public static class CameraNodesResponse extends ResponseBase
     {
         public ArrayList<CameraNode> CameraNodes = null;
         
         public ArrayList<CameraNode> getCameraNodes() { return CameraNodes; }
         public CameraNodesResponse setCameraNodes(ArrayList<CameraNode> value) { this.CameraNodes = value; return this; }
+    }
+
+    public static class CameraAreasResponse extends ResponseBase
+    {
+        public Boolean IsAssigned = null;
+        
+        public Boolean getIsAssigned() { return IsAssigned; }
+        public CameraAreasResponse setIsAssigned(Boolean value) { this.IsAssigned = value; return this; }
+    }
+
+    public static class CameraAreaResponse extends ResponseBase
+    {
+        public Area Area = null;
+        
+        public Area getArea() { return Area; }
+        public CameraAreaResponse setArea(Area value) { this.Area = value; return this; }
     }
 
     public static class AssignableInstallationsResponse extends ResponseBase
@@ -5203,13 +6475,15 @@ public class dto
 
     public static class EventsResponse extends ResponseBase
     {
-        public AzureEvent Event = null;
         
-        public AzureEvent getEvent() { return Event; }
-        public EventsResponse setEvent(AzureEvent value) { this.Event = value; return this; }
     }
 
     public static class EventsPendingResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class EventsAdminSentNotificationResponse extends ResponseBase
     {
         
     }
@@ -5226,6 +6500,11 @@ public class dto
     }
 
     public static class EventsOldResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class EventsPendingCountNotifyResponse extends ResponseBase
     {
         
     }
@@ -5318,6 +6597,14 @@ public class dto
         
         public Boolean isSetCloudStorageStringSuccess() { return SetCloudStorageStringSuccess; }
         public GatewayCloudStorageStringResponse setSetCloudStorageStringSuccess(Boolean value) { this.SetCloudStorageStringSuccess = value; return this; }
+    }
+
+    public static class GatewayIoTHubStringResponse extends ResponseBase
+    {
+        public Boolean SetIoTHubStringSuccess = null;
+        
+        public Boolean isSetIoTHubStringSuccess() { return SetIoTHubStringSuccess; }
+        public GatewayIoTHubStringResponse setSetIoTHubStringSuccess(Boolean value) { this.SetIoTHubStringSuccess = value; return this; }
     }
 
     public static class GatewayLoggingToggleResponse extends ResponseBase
@@ -5431,6 +6718,14 @@ public class dto
         public GatewayAddWMBusSensorResponse setAddWMBusSensorSuccess(Boolean value) { this.AddWMBusSensorSuccess = value; return this; }
     }
 
+    public static class GatewayAddWibeeeSensorResponse extends ResponseBase
+    {
+        public CommandResponseWrapper<AddWibeeeSensorResult> AddWibeeeResult = null;
+        
+        public CommandResponseWrapper<AddWibeeeSensorResult> getAddWibeeeResult() { return AddWibeeeResult; }
+        public GatewayAddWibeeeSensorResponse setAddWibeeeResult(CommandResponseWrapper<AddWibeeeSensorResult> value) { this.AddWibeeeResult = value; return this; }
+    }
+
     public static class GatewayThermostatSetPointResponse extends ResponseBase
     {
         public Boolean SetPointSuccess = null;
@@ -5447,12 +6742,12 @@ public class dto
         public GatewayThermostatMainResponse setMainSuccess(Boolean value) { this.MainSuccess = value; return this; }
     }
 
-    public static class GatewayThermostatToggleResponse extends ResponseBase
+    public static class GatewayThermostatModeResponse extends ResponseBase
     {
-        public Boolean ToggleSuccess = null;
+        public Boolean ModeSuccess = null;
         
-        public Boolean isToggleSuccess() { return ToggleSuccess; }
-        public GatewayThermostatToggleResponse setToggleSuccess(Boolean value) { this.ToggleSuccess = value; return this; }
+        public Boolean isModeSuccess() { return ModeSuccess; }
+        public GatewayThermostatModeResponse setModeSuccess(Boolean value) { this.ModeSuccess = value; return this; }
     }
 
     public static class GatewayThermostatLinkResponse extends ResponseBase
@@ -5503,20 +6798,70 @@ public class dto
         public GatewayCameraRemoveResponse setRemoveSuccess(Boolean value) { this.RemoveSuccess = value; return this; }
     }
 
+    public static class GatewayUploadVideoResponse extends ResponseBase
+    {
+        public Boolean UploadRequestSuccess = null;
+        public Boolean CommunicationSuccess = null;
+        
+        public Boolean isUploadRequestSuccess() { return UploadRequestSuccess; }
+        public GatewayUploadVideoResponse setUploadRequestSuccess(Boolean value) { this.UploadRequestSuccess = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewayUploadVideoResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+    }
+
+    public static class GatewayCameraFileStreamingResponse extends ResponseBase
+    {
+        public String StreamingEndpoint = null;
+        public Boolean CommunicationSuccess = null;
+        
+        public String getStreamingEndpoint() { return StreamingEndpoint; }
+        public GatewayCameraFileStreamingResponse setStreamingEndpoint(String value) { this.StreamingEndpoint = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewayCameraFileStreamingResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+    }
+
+    public static class GatewayCameraVideoDeleteResponse extends ResponseBase
+    {
+        public Boolean VideoDeleteSuccess = null;
+        public Boolean CommunicationSuccess = null;
+        
+        public Boolean isVideoDeleteSuccess() { return VideoDeleteSuccess; }
+        public GatewayCameraVideoDeleteResponse setVideoDeleteSuccess(Boolean value) { this.VideoDeleteSuccess = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewayCameraVideoDeleteResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+    }
+
+    public static class GatewayCameraRecordVideoResponse extends ResponseBase
+    {
+        public Boolean VideoRecordSuccess = null;
+        public Boolean CommunicationSuccess = null;
+        
+        public Boolean isVideoRecordSuccess() { return VideoRecordSuccess; }
+        public GatewayCameraRecordVideoResponse setVideoRecordSuccess(Boolean value) { this.VideoRecordSuccess = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewayCameraRecordVideoResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+    }
+
     public static class GatewayAddScheduleResponse extends ResponseBase
     {
         public Boolean AddSuccess = null;
+        public Boolean CommunicationSuccess = null;
         
         public Boolean isAddSuccess() { return AddSuccess; }
         public GatewayAddScheduleResponse setAddSuccess(Boolean value) { this.AddSuccess = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewayAddScheduleResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
     }
 
     public static class GatewayRemoveScheduleResponse extends ResponseBase
     {
         public Boolean RemoveSuccess = null;
+        public Boolean CommunicationSuccess = null;
         
         public Boolean isRemoveSuccess() { return RemoveSuccess; }
         public GatewayRemoveScheduleResponse setRemoveSuccess(Boolean value) { this.RemoveSuccess = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewayRemoveScheduleResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
     }
 
     public static class GatewayPauseScheduleResponse extends ResponseBase
@@ -5565,6 +6910,17 @@ public class dto
         public GatewayDimmerToggleResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
     }
 
+    public static class GatewayActuatorToggleStatusResponse extends ResponseBase
+    {
+        public Boolean ToggleSuccess = null;
+        public Boolean CommunicationSuccess = null;
+        
+        public Boolean isToggleSuccess() { return ToggleSuccess; }
+        public GatewayActuatorToggleStatusResponse setToggleSuccess(Boolean value) { this.ToggleSuccess = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewayActuatorToggleStatusResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+    }
+
     public static class GatewayBypassSensorResponse extends ResponseBase
     {
         public CommandResponseWrapper<Boolean> SensorBypassSuccess = null;
@@ -5575,8 +6931,11 @@ public class dto
 
     public static class GatewayRemoveSensorForceResponse extends ResponseBase
     {
+        public Boolean CommunicationSuccess = null;
         public Boolean RemoveSuccess = null;
         
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewayRemoveSensorForceResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
         public Boolean isRemoveSuccess() { return RemoveSuccess; }
         public GatewayRemoveSensorForceResponse setRemoveSuccess(Boolean value) { this.RemoveSuccess = value; return this; }
     }
@@ -5606,6 +6965,47 @@ public class dto
         
         public Boolean isSetPasswordSuccess() { return SetPasswordSuccess; }
         public GatewayDoorLockSetPasswordResponse setSetPasswordSuccess(Boolean value) { this.SetPasswordSuccess = value; return this; }
+    }
+
+    public static class GatewaySetSensorsMetadataResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class GatewayAddOrUpdateUsersResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class GatewayRemoveUsersResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class GatewayClearUsersResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class GatewaySyncUsersResponse extends ResponseBase
+    {
+        public Boolean SyncSuccess = null;
+        
+        public Boolean isSyncSuccess() { return SyncSuccess; }
+        public GatewaySyncUsersResponse setSyncSuccess(Boolean value) { this.SyncSuccess = value; return this; }
+    }
+
+    public static class GatewaySyncSensorsMetadataResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class GatewayThermostatFanModeResponse extends ResponseBase
+    {
+        public Boolean FanModeSuccess = null;
+        
+        public Boolean isFanModeSuccess() { return FanModeSuccess; }
+        public GatewayThermostatFanModeResponse setFanModeSuccess(Boolean value) { this.FanModeSuccess = value; return this; }
     }
 
     public static class GatewayPingResponse extends ResponseBase
@@ -5723,12 +7123,23 @@ public class dto
         public GatewayIPScanResponse setScanInfo(ArrayList<IPScanInfo> value) { this.ScanInfo = value; return this; }
     }
 
+    public static class GatewayAvailableVideosResponse extends ResponseBase
+    {
+        public ArrayList<String> AvailableVideos = null;
+        
+        public ArrayList<String> getAvailableVideos() { return AvailableVideos; }
+        public GatewayAvailableVideosResponse setAvailableVideos(ArrayList<String> value) { this.AvailableVideos = value; return this; }
+    }
+
     public static class GatewaySchedulerPollResponse extends ResponseBase
     {
         public ArrayList<SchedulerInstance> SchedulerInstances = null;
+        public Boolean CommunicationSuccess = null;
         
         public ArrayList<SchedulerInstance> getSchedulerInstances() { return SchedulerInstances; }
         public GatewaySchedulerPollResponse setSchedulerInstances(ArrayList<SchedulerInstance> value) { this.SchedulerInstances = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public GatewaySchedulerPollResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
     }
 
     public static class GatewayLoggingStateResponse extends ResponseBase
@@ -5737,6 +7148,11 @@ public class dto
         
         public Boolean getIsLoggingActive() { return IsLoggingActive; }
         public GatewayLoggingStateResponse setIsLoggingActive(Boolean value) { this.IsLoggingActive = value; return this; }
+    }
+
+    public static class GatewayNotifyLifecycleStatusResponse extends ResponseBase
+    {
+        
     }
 
     public static class GatewayNotifyAddOrRemoveSensorResponse extends ResponseBase
@@ -5755,6 +7171,11 @@ public class dto
     }
 
     public static class GatewayNotifyNetworkStatusResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class GatewayNotifyVideoUploadedResponse extends ResponseBase
     {
         
     }
@@ -5844,6 +7265,14 @@ public class dto
         
         public Boolean isActivated() { return Activated; }
         public InstallationActivateResponse setActivated(Boolean value) { this.Activated = value; return this; }
+    }
+
+    public static class InstallationActivateAndAssignResponse extends ResponseBase
+    {
+        public Boolean ActivatedAndAssigned = null;
+        
+        public Boolean isActivatedAndAssigned() { return ActivatedAndAssigned; }
+        public InstallationActivateAndAssignResponse setActivatedAndAssigned(Boolean value) { this.ActivatedAndAssigned = value; return this; }
     }
 
     public static class InstallationRequestLiveSensorValuesResponse extends ResponseBase
@@ -6109,6 +7538,7 @@ public class dto
         public Double MonthProductionPrediction = null;
         public Double MonthConsumptionPrediction = null;
         public Double PricekWh = null;
+        public Double PricekWhProduction = null;
         public Double PriceGaskWh = null;
         public Double PriceHeatingkWh = null;
         public Double PriceWaterM3 = null;
@@ -6142,6 +7572,8 @@ public class dto
         public InstallationConsumptionSummaryResponse setMonthConsumptionPrediction(Double value) { this.MonthConsumptionPrediction = value; return this; }
         public Double getPricekWh() { return PricekWh; }
         public InstallationConsumptionSummaryResponse setPricekWh(Double value) { this.PricekWh = value; return this; }
+        public Double getPricekWhProduction() { return PricekWhProduction; }
+        public InstallationConsumptionSummaryResponse setPricekWhProduction(Double value) { this.PricekWhProduction = value; return this; }
         public Double getPriceGaskWh() { return PriceGaskWh; }
         public InstallationConsumptionSummaryResponse setPriceGaskWh(Double value) { this.PriceGaskWh = value; return this; }
         public Double getPriceHeatingkWh() { return PriceHeatingkWh; }
@@ -6254,7 +7686,7 @@ public class dto
         
     }
 
-    public static class InstallationCityResponse extends ResponseBase
+    public static class InstallationGeolocationResponse extends ResponseBase
     {
         
     }
@@ -6274,6 +7706,25 @@ public class dto
         
     }
 
+    public static class InstallationAddWibeeeSensorResponse extends ResponseBase
+    {
+        public Boolean CommunicationSuccess = null;
+        public AddWibeeeSensorResult AddResult = null;
+        public SensorWithAreaIdAndName Sensor = null;
+        
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public InstallationAddWibeeeSensorResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+        public AddWibeeeSensorResult getAddResult() { return AddResult; }
+        public InstallationAddWibeeeSensorResponse setAddResult(AddWibeeeSensorResult value) { this.AddResult = value; return this; }
+        public SensorWithAreaIdAndName getSensor() { return Sensor; }
+        public InstallationAddWibeeeSensorResponse setSensor(SensorWithAreaIdAndName value) { this.Sensor = value; return this; }
+    }
+
+    public static class InstallationAddDeviceResponse extends ResponseBase
+    {
+        
+    }
+
     public static class InstallationAddCameraResponse extends ResponseBase
     {
         public Camera NewCamera = null;
@@ -6285,6 +7736,20 @@ public class dto
     public static class InstallationsUsersBatchResponse extends ResponseBase
     {
         
+    }
+
+    public static class InstallationGatewayCredentialsResponse extends ResponseBase
+    {
+        public String ServiceBusCredentials = null;
+        public String CloudStorageCredentials = null;
+        public String IoTHubCredentials = null;
+        
+        public String getServiceBusCredentials() { return ServiceBusCredentials; }
+        public InstallationGatewayCredentialsResponse setServiceBusCredentials(String value) { this.ServiceBusCredentials = value; return this; }
+        public String getCloudStorageCredentials() { return CloudStorageCredentials; }
+        public InstallationGatewayCredentialsResponse setCloudStorageCredentials(String value) { this.CloudStorageCredentials = value; return this; }
+        public String getIoTHubCredentials() { return IoTHubCredentials; }
+        public InstallationGatewayCredentialsResponse setIoTHubCredentials(String value) { this.IoTHubCredentials = value; return this; }
     }
 
     public static class InstallationDemandResponseResponse extends ResponseBase
@@ -6456,6 +7921,143 @@ public class dto
         public InstallationNodesResponse setNodes(ArrayList<Node> value) { this.Nodes = value; return this; }
     }
 
+    public static class Installation extends InstallationBase
+    {
+        public String Status = null;
+        public String SecurityStatus = null;
+        public Date LastDateStatus = null;
+        public Date LastModificationDate = null;
+        public Date LastDateAverageCalculations = null;
+        public Date LastAliveDate = null;
+        public Double AverageTemperature = null;
+        public Double AverageHumidity = null;
+        public Double AverageAirQuality = null;
+        public String DayEnergyTrendCode = null;
+        public String WeekEnergyTrendCode = null;
+        public String MonthEnergyTrendCode = null;
+        public String DayGasTrendCode = null;
+        public String WeekGasTrendCode = null;
+        public String MonthGasTrendCode = null;
+        public String DayHeatingTrendCode = null;
+        public String WeekHeatingTrendCode = null;
+        public String MonthHeatingTrendCode = null;
+        public String DayWaterTrendCode = null;
+        public String WeekWaterTrendCode = null;
+        public String MonthWaterTrendCode = null;
+        public Double DayEnergyTrendValue = null;
+        public Double WeekEnergyTrendValue = null;
+        public Double MonthEnergyTrendValue = null;
+        public Double DayGasTrendValue = null;
+        public Double WeekGasTrendValue = null;
+        public Double MonthGasTrendValue = null;
+        public Double DayHeatingTrendValue = null;
+        public Double WeekHeatingTrendValue = null;
+        public Double MonthHeatingTrendValue = null;
+        public Double DayWaterTrendValue = null;
+        public Double WeekWaterTrendValue = null;
+        public Double MonthWaterTrendValue = null;
+        public Date LastDateEnergyTrend = null;
+        public Date LastDateGasTrend = null;
+        public Date LastDateHeatingTrend = null;
+        public Date LastDateWaterTrend = null;
+        public String ComfortStatus = null;
+        public Double Uptime = null;
+        public Integer ActiveSchedulesComfort = null;
+        public Integer ActiveSchedulesSecurity = null;
+        public Integer ActiveSchedulesControl = null;
+        public Date LastLogUploadDate = null;
+        public String LastLogName = null;
+        
+        public String getStatus() { return Status; }
+        public Installation setStatus(String value) { this.Status = value; return this; }
+        public String getSecurityStatus() { return SecurityStatus; }
+        public Installation setSecurityStatus(String value) { this.SecurityStatus = value; return this; }
+        public Date getLastDateStatus() { return LastDateStatus; }
+        public Installation setLastDateStatus(Date value) { this.LastDateStatus = value; return this; }
+        public Date getLastModificationDate() { return LastModificationDate; }
+        public Installation setLastModificationDate(Date value) { this.LastModificationDate = value; return this; }
+        public Date getLastDateAverageCalculations() { return LastDateAverageCalculations; }
+        public Installation setLastDateAverageCalculations(Date value) { this.LastDateAverageCalculations = value; return this; }
+        public Date getLastAliveDate() { return LastAliveDate; }
+        public Installation setLastAliveDate(Date value) { this.LastAliveDate = value; return this; }
+        public Double getAverageTemperature() { return AverageTemperature; }
+        public Installation setAverageTemperature(Double value) { this.AverageTemperature = value; return this; }
+        public Double getAverageHumidity() { return AverageHumidity; }
+        public Installation setAverageHumidity(Double value) { this.AverageHumidity = value; return this; }
+        public Double getAverageAirQuality() { return AverageAirQuality; }
+        public Installation setAverageAirQuality(Double value) { this.AverageAirQuality = value; return this; }
+        public String getDayEnergyTrendCode() { return DayEnergyTrendCode; }
+        public Installation setDayEnergyTrendCode(String value) { this.DayEnergyTrendCode = value; return this; }
+        public String getWeekEnergyTrendCode() { return WeekEnergyTrendCode; }
+        public Installation setWeekEnergyTrendCode(String value) { this.WeekEnergyTrendCode = value; return this; }
+        public String getMonthEnergyTrendCode() { return MonthEnergyTrendCode; }
+        public Installation setMonthEnergyTrendCode(String value) { this.MonthEnergyTrendCode = value; return this; }
+        public String getDayGasTrendCode() { return DayGasTrendCode; }
+        public Installation setDayGasTrendCode(String value) { this.DayGasTrendCode = value; return this; }
+        public String getWeekGasTrendCode() { return WeekGasTrendCode; }
+        public Installation setWeekGasTrendCode(String value) { this.WeekGasTrendCode = value; return this; }
+        public String getMonthGasTrendCode() { return MonthGasTrendCode; }
+        public Installation setMonthGasTrendCode(String value) { this.MonthGasTrendCode = value; return this; }
+        public String getDayHeatingTrendCode() { return DayHeatingTrendCode; }
+        public Installation setDayHeatingTrendCode(String value) { this.DayHeatingTrendCode = value; return this; }
+        public String getWeekHeatingTrendCode() { return WeekHeatingTrendCode; }
+        public Installation setWeekHeatingTrendCode(String value) { this.WeekHeatingTrendCode = value; return this; }
+        public String getMonthHeatingTrendCode() { return MonthHeatingTrendCode; }
+        public Installation setMonthHeatingTrendCode(String value) { this.MonthHeatingTrendCode = value; return this; }
+        public String getDayWaterTrendCode() { return DayWaterTrendCode; }
+        public Installation setDayWaterTrendCode(String value) { this.DayWaterTrendCode = value; return this; }
+        public String getWeekWaterTrendCode() { return WeekWaterTrendCode; }
+        public Installation setWeekWaterTrendCode(String value) { this.WeekWaterTrendCode = value; return this; }
+        public String getMonthWaterTrendCode() { return MonthWaterTrendCode; }
+        public Installation setMonthWaterTrendCode(String value) { this.MonthWaterTrendCode = value; return this; }
+        public Double getDayEnergyTrendValue() { return DayEnergyTrendValue; }
+        public Installation setDayEnergyTrendValue(Double value) { this.DayEnergyTrendValue = value; return this; }
+        public Double getWeekEnergyTrendValue() { return WeekEnergyTrendValue; }
+        public Installation setWeekEnergyTrendValue(Double value) { this.WeekEnergyTrendValue = value; return this; }
+        public Double getMonthEnergyTrendValue() { return MonthEnergyTrendValue; }
+        public Installation setMonthEnergyTrendValue(Double value) { this.MonthEnergyTrendValue = value; return this; }
+        public Double getDayGasTrendValue() { return DayGasTrendValue; }
+        public Installation setDayGasTrendValue(Double value) { this.DayGasTrendValue = value; return this; }
+        public Double getWeekGasTrendValue() { return WeekGasTrendValue; }
+        public Installation setWeekGasTrendValue(Double value) { this.WeekGasTrendValue = value; return this; }
+        public Double getMonthGasTrendValue() { return MonthGasTrendValue; }
+        public Installation setMonthGasTrendValue(Double value) { this.MonthGasTrendValue = value; return this; }
+        public Double getDayHeatingTrendValue() { return DayHeatingTrendValue; }
+        public Installation setDayHeatingTrendValue(Double value) { this.DayHeatingTrendValue = value; return this; }
+        public Double getWeekHeatingTrendValue() { return WeekHeatingTrendValue; }
+        public Installation setWeekHeatingTrendValue(Double value) { this.WeekHeatingTrendValue = value; return this; }
+        public Double getMonthHeatingTrendValue() { return MonthHeatingTrendValue; }
+        public Installation setMonthHeatingTrendValue(Double value) { this.MonthHeatingTrendValue = value; return this; }
+        public Double getDayWaterTrendValue() { return DayWaterTrendValue; }
+        public Installation setDayWaterTrendValue(Double value) { this.DayWaterTrendValue = value; return this; }
+        public Double getWeekWaterTrendValue() { return WeekWaterTrendValue; }
+        public Installation setWeekWaterTrendValue(Double value) { this.WeekWaterTrendValue = value; return this; }
+        public Double getMonthWaterTrendValue() { return MonthWaterTrendValue; }
+        public Installation setMonthWaterTrendValue(Double value) { this.MonthWaterTrendValue = value; return this; }
+        public Date getLastDateEnergyTrend() { return LastDateEnergyTrend; }
+        public Installation setLastDateEnergyTrend(Date value) { this.LastDateEnergyTrend = value; return this; }
+        public Date getLastDateGasTrend() { return LastDateGasTrend; }
+        public Installation setLastDateGasTrend(Date value) { this.LastDateGasTrend = value; return this; }
+        public Date getLastDateHeatingTrend() { return LastDateHeatingTrend; }
+        public Installation setLastDateHeatingTrend(Date value) { this.LastDateHeatingTrend = value; return this; }
+        public Date getLastDateWaterTrend() { return LastDateWaterTrend; }
+        public Installation setLastDateWaterTrend(Date value) { this.LastDateWaterTrend = value; return this; }
+        public String getComfortStatus() { return ComfortStatus; }
+        public Installation setComfortStatus(String value) { this.ComfortStatus = value; return this; }
+        public Double getUptime() { return Uptime; }
+        public Installation setUptime(Double value) { this.Uptime = value; return this; }
+        public Integer getActiveSchedulesComfort() { return ActiveSchedulesComfort; }
+        public Installation setActiveSchedulesComfort(Integer value) { this.ActiveSchedulesComfort = value; return this; }
+        public Integer getActiveSchedulesSecurity() { return ActiveSchedulesSecurity; }
+        public Installation setActiveSchedulesSecurity(Integer value) { this.ActiveSchedulesSecurity = value; return this; }
+        public Integer getActiveSchedulesControl() { return ActiveSchedulesControl; }
+        public Installation setActiveSchedulesControl(Integer value) { this.ActiveSchedulesControl = value; return this; }
+        public Date getLastLogUploadDate() { return LastLogUploadDate; }
+        public Installation setLastLogUploadDate(Date value) { this.LastLogUploadDate = value; return this; }
+        public String getLastLogName() { return LastLogName; }
+        public Installation setLastLogName(String value) { this.LastLogName = value; return this; }
+    }
+
     public static class InstallationsBatchResponse extends ResponseBase
     {
         public ArrayList<Installation> Installations = null;
@@ -6478,6 +8080,49 @@ public class dto
         
         public ArrayList<Installation> getUnassignedInstallations() { return UnassignedInstallations; }
         public UnassignedInstallationsResponse setUnassignedInstallations(ArrayList<Installation> value) { this.UnassignedInstallations = value; return this; }
+    }
+
+    public static class ReportsListResponse extends ResponseBase
+    {
+        public ArrayList<Report> Reports = null;
+        
+        public ArrayList<Report> getReports() { return Reports; }
+        public ReportsListResponse setReports(ArrayList<Report> value) { this.Reports = value; return this; }
+    }
+
+    public static class UserReportsResponse extends ResponseBase
+    {
+        public ArrayList<Report> Reports = null;
+        
+        public ArrayList<Report> getReports() { return Reports; }
+        public UserReportsResponse setReports(ArrayList<Report> value) { this.Reports = value; return this; }
+    }
+
+    public static class ReportDetailsResponse extends ResponseBase
+    {
+        public Report Report = null;
+        public ArrayList<UUID> InstallationsId = null;
+        
+        public Report getReport() { return Report; }
+        public ReportDetailsResponse setReport(Report value) { this.Report = value; return this; }
+        public ArrayList<UUID> getInstallationsId() { return InstallationsId; }
+        public ReportDetailsResponse setInstallationsId(ArrayList<UUID> value) { this.InstallationsId = value; return this; }
+    }
+
+    public static class ReportInstallationsResponse extends ResponseBase
+    {
+        public ArrayList<ReportInstallation> ReportInstallations = null;
+        
+        public ArrayList<ReportInstallation> getReportInstallations() { return ReportInstallations; }
+        public ReportInstallationsResponse setReportInstallations(ArrayList<ReportInstallation> value) { this.ReportInstallations = value; return this; }
+    }
+
+    public static class UserReportAssignResponse extends ResponseBase
+    {
+        public UserReport UserReport = null;
+        
+        public UserReport getUserReport() { return UserReport; }
+        public UserReportAssignResponse setUserReport(UserReport value) { this.UserReport = value; return this; }
     }
 
     public static class SensorPollResponse extends ResponseBase
@@ -6522,6 +8167,16 @@ public class dto
         public SensorConfigurationUpdateResponse setConfigurationSuccess(Boolean value) { this.ConfigurationSuccess = value; return this; }
     }
 
+    public static class SensorUpdateEditablePropertiesResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorZWaveRegisterEditablesBatchResponse extends ResponseBase
+    {
+        
+    }
+
     public static class SensorBypassResponse extends ResponseBase
     {
         public CommandResponseWrapper<Boolean> BypassResponse = null;
@@ -6552,6 +8207,17 @@ public class dto
         public SensorDimmableResponse setDimmerSuccess(Boolean value) { this.DimmerSuccess = value; return this; }
     }
 
+    public static class SensorToggleStatusResponse extends ResponseBase
+    {
+        public Boolean CommunicationSuccess = null;
+        public Boolean ToggleSuccess = null;
+        
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public SensorToggleStatusResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+        public Boolean isToggleSuccess() { return ToggleSuccess; }
+        public SensorToggleStatusResponse setToggleSuccess(Boolean value) { this.ToggleSuccess = value; return this; }
+    }
+
     public static class SensorDoorLockToggleResponse extends ResponseBase
     {
         public Boolean CommunicationSuccess = null;
@@ -6561,38 +8227,6 @@ public class dto
         public SensorDoorLockToggleResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
         public Boolean isToggleSuccess() { return ToggleSuccess; }
         public SensorDoorLockToggleResponse setToggleSuccess(Boolean value) { this.ToggleSuccess = value; return this; }
-    }
-
-    public static class SensorThermostatSetPointResponse extends ResponseBase
-    {
-        public Boolean SetPointSuccess = null;
-        
-        public Boolean isSetPointSuccess() { return SetPointSuccess; }
-        public SensorThermostatSetPointResponse setSetPointSuccess(Boolean value) { this.SetPointSuccess = value; return this; }
-    }
-
-    public static class SensorThermostatToggleResponse extends ResponseBase
-    {
-        public Boolean ToggleSuccess = null;
-        
-        public Boolean isToggleSuccess() { return ToggleSuccess; }
-        public SensorThermostatToggleResponse setToggleSuccess(Boolean value) { this.ToggleSuccess = value; return this; }
-    }
-
-    public static class SensorThermostatMainResponse extends ResponseBase
-    {
-        public Boolean IsMain = null;
-        
-        public Boolean getIsMain() { return IsMain; }
-        public SensorThermostatMainResponse setIsMain(Boolean value) { this.IsMain = value; return this; }
-    }
-
-    public static class SensorThermostatLinkResponse extends ResponseBase
-    {
-        public Boolean LinkSuccess = null;
-        
-        public Boolean isLinkSuccess() { return LinkSuccess; }
-        public SensorThermostatLinkResponse setLinkSuccess(Boolean value) { this.LinkSuccess = value; return this; }
     }
 
     public static class SensorLastValueResponse extends ResponseBase
@@ -6676,23 +8310,36 @@ public class dto
         public SensorValuesPredictionsResponse setSensorValuePredictions(ArrayList<PredictionPoint> value) { this.SensorValuePredictions = value; return this; }
     }
 
-    public static class SensorOutliersResponse extends ResponseBase
+    public static class SensorValuesPredictionsResponseML extends ResponseBase
+    {
+        public ArrayList<PredictionPoint> SensorValuePredictions = null;
+        
+        public ArrayList<PredictionPoint> getSensorValuePredictions() { return SensorValuePredictions; }
+        public SensorValuesPredictionsResponseML setSensorValuePredictions(ArrayList<PredictionPoint> value) { this.SensorValuePredictions = value; return this; }
+    }
+
+    public static class SensorOutliersBatchResponse extends ResponseBase
     {
         public ArrayList<OutlierPoint> SensorOutliers = null;
         
         public ArrayList<OutlierPoint> getSensorOutliers() { return SensorOutliers; }
-        public SensorOutliersResponse setSensorOutliers(ArrayList<OutlierPoint> value) { this.SensorOutliers = value; return this; }
+        public SensorOutliersBatchResponse setSensorOutliers(ArrayList<OutlierPoint> value) { this.SensorOutliers = value; return this; }
     }
 
-    public static class SensorGapsResponse extends ResponseBase
+    public static class SensorGapsBatchResponse extends ResponseBase
     {
         public ArrayList<GapPoint> SensorGaps = null;
         
         public ArrayList<GapPoint> getSensorGaps() { return SensorGaps; }
-        public SensorGapsResponse setSensorGaps(ArrayList<GapPoint> value) { this.SensorGaps = value; return this; }
+        public SensorGapsBatchResponse setSensorGaps(ArrayList<GapPoint> value) { this.SensorGaps = value; return this; }
     }
 
     public static class SensorBatteryLevelResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorsValuesMLBatchResponse extends ResponseBase
     {
         
     }
@@ -6713,6 +8360,25 @@ public class dto
     public static class SensorValuesPredictionsBatchResponse extends ResponseBase
     {
         
+    }
+
+    public static class FileDeleteResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class RepositoryFilesResponse extends ResponseBase
+    {
+        public ArrayList<Photo> Files = null;
+        public String Id = null;
+        public String Name = null;
+        
+        public ArrayList<Photo> getFiles() { return Files; }
+        public RepositoryFilesResponse setFiles(ArrayList<Photo> value) { this.Files = value; return this; }
+        public String getId() { return Id; }
+        public RepositoryFilesResponse setId(String value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public RepositoryFilesResponse setName(String value) { this.Name = value; return this; }
     }
 
     public static class SensorChildrenResponse extends ResponseBase
@@ -6769,6 +8435,86 @@ public class dto
         public SensorAreaNameResponse setAreaName(String value) { this.AreaName = value; return this; }
     }
 
+    public static class SensorModeResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorSetPointResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorModesBatchResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorSupportedModesBatchResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorSetPointsBatchResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorFanModeResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorFanModesBatchResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorSupportedFanModesBatchResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorThermostatSetPointResponse extends ResponseBase
+    {
+        public Boolean SetPointSuccess = null;
+        
+        public Boolean isSetPointSuccess() { return SetPointSuccess; }
+        public SensorThermostatSetPointResponse setSetPointSuccess(Boolean value) { this.SetPointSuccess = value; return this; }
+    }
+
+    public static class SensorThermostatUpdateModeResponse extends ResponseBase
+    {
+        public Boolean ModeSuccess = null;
+        
+        public Boolean isModeSuccess() { return ModeSuccess; }
+        public SensorThermostatUpdateModeResponse setModeSuccess(Boolean value) { this.ModeSuccess = value; return this; }
+    }
+
+    public static class SensorThermostatMainResponse extends ResponseBase
+    {
+        public Boolean IsMain = null;
+        
+        public Boolean getIsMain() { return IsMain; }
+        public SensorThermostatMainResponse setIsMain(Boolean value) { this.IsMain = value; return this; }
+    }
+
+    public static class SensorThermostatLinkResponse extends ResponseBase
+    {
+        public Boolean LinkSuccess = null;
+        
+        public Boolean isLinkSuccess() { return LinkSuccess; }
+        public SensorThermostatLinkResponse setLinkSuccess(Boolean value) { this.LinkSuccess = value; return this; }
+    }
+
+    public static class SensorThermostatUpdateFanModeResponse extends ResponseBase
+    {
+        public Boolean FanModeSuccess = null;
+        
+        public Boolean isFanModeSuccess() { return FanModeSuccess; }
+        public SensorThermostatUpdateFanModeResponse setFanModeSuccess(Boolean value) { this.FanModeSuccess = value; return this; }
+    }
+
     public static class SensorsResponse extends ResponseBase
     {
         public ArrayList<Sensor> Sensors = null;
@@ -6787,10 +8533,79 @@ public class dto
 
     public static class SensorRemoveForceResponse extends ResponseBase
     {
+        public Boolean CommunicationSuccess = null;
         public Boolean RemoveSuccess = null;
         
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public SensorRemoveForceResponse setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
         public Boolean isRemoveSuccess() { return RemoveSuccess; }
         public SensorRemoveForceResponse setRemoveSuccess(Boolean value) { this.RemoveSuccess = value; return this; }
+    }
+
+    public static class Sensor extends SensorBase
+    {
+        public Double Value = null;
+        public String Status = null;
+        public String PreviousStatus = null;
+        public String Mode = null;
+        public String PreviousMode = null;
+        public Double SetPoint = null;
+        public Double PreviousSetPoint = null;
+        public Double BatteryLevel = null;
+        public Date LastDateValue = null;
+        public Date LastDateStatus = null;
+        public Date LastDateMode = null;
+        public Date LastDateSetPoint = null;
+        public Date LastDateBattery = null;
+        public Date LastModificationDate = null;
+        public Boolean IsVirtual = null;
+        public Boolean IsLocked = null;
+        public String Configuration = null;
+        
+        public Double getValue() { return Value; }
+        public Sensor setValue(Double value) { this.Value = value; return this; }
+        public String getStatus() { return Status; }
+        public Sensor setStatus(String value) { this.Status = value; return this; }
+        public String getPreviousStatus() { return PreviousStatus; }
+        public Sensor setPreviousStatus(String value) { this.PreviousStatus = value; return this; }
+        public String getMode() { return Mode; }
+        public Sensor setMode(String value) { this.Mode = value; return this; }
+        public String getPreviousMode() { return PreviousMode; }
+        public Sensor setPreviousMode(String value) { this.PreviousMode = value; return this; }
+        public Double getSetPoint() { return SetPoint; }
+        public Sensor setSetPoint(Double value) { this.SetPoint = value; return this; }
+        public Double getPreviousSetPoint() { return PreviousSetPoint; }
+        public Sensor setPreviousSetPoint(Double value) { this.PreviousSetPoint = value; return this; }
+        public Double getBatteryLevel() { return BatteryLevel; }
+        public Sensor setBatteryLevel(Double value) { this.BatteryLevel = value; return this; }
+        public Date getLastDateValue() { return LastDateValue; }
+        public Sensor setLastDateValue(Date value) { this.LastDateValue = value; return this; }
+        public Date getLastDateStatus() { return LastDateStatus; }
+        public Sensor setLastDateStatus(Date value) { this.LastDateStatus = value; return this; }
+        public Date getLastDateMode() { return LastDateMode; }
+        public Sensor setLastDateMode(Date value) { this.LastDateMode = value; return this; }
+        public Date getLastDateSetPoint() { return LastDateSetPoint; }
+        public Sensor setLastDateSetPoint(Date value) { this.LastDateSetPoint = value; return this; }
+        public Date getLastDateBattery() { return LastDateBattery; }
+        public Sensor setLastDateBattery(Date value) { this.LastDateBattery = value; return this; }
+        public Date getLastModificationDate() { return LastModificationDate; }
+        public Sensor setLastModificationDate(Date value) { this.LastModificationDate = value; return this; }
+        public Boolean getIsVirtual() { return IsVirtual; }
+        public Sensor setIsVirtual(Boolean value) { this.IsVirtual = value; return this; }
+        public Boolean getIsLocked() { return IsLocked; }
+        public Sensor setIsLocked(Boolean value) { this.IsLocked = value; return this; }
+        public String getConfiguration() { return Configuration; }
+        public Sensor setConfiguration(String value) { this.Configuration = value; return this; }
+    }
+
+    public static class SensorNamePatchResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class SensorAreaPatchResponse extends ResponseBase
+    {
+        
     }
 
     public static class SensorCopyValuesBatchResponse extends ResponseBase
@@ -6816,22 +8631,7 @@ public class dto
         
     }
 
-    public static class SensorModeResponse extends ResponseBase
-    {
-        
-    }
-
-    public static class SensorSetPointResponse extends ResponseBase
-    {
-        
-    }
-
-    public static class SensorModesBatchResponse extends ResponseBase
-    {
-        
-    }
-
-    public static class SensorSetPointsBatchResponse extends ResponseBase
+    public static class SensorDeleteValuesResponse extends ResponseBase
     {
         
     }
@@ -6850,6 +8650,31 @@ public class dto
         
         public ArrayList<Tip> getTips() { return Tips; }
         public TipsBySectionResponse setTips(ArrayList<Tip> value) { this.Tips = value; return this; }
+    }
+
+    public static class UpdateGatewayImageResponse extends ResponseBase
+    {
+        public String ImageName = null;
+        public String ImageVersion = null;
+        public String DownloadURL = null;
+        public String MD5 = null;
+        
+        public String getImageName() { return ImageName; }
+        public UpdateGatewayImageResponse setImageName(String value) { this.ImageName = value; return this; }
+        public String getImageVersion() { return ImageVersion; }
+        public UpdateGatewayImageResponse setImageVersion(String value) { this.ImageVersion = value; return this; }
+        public String getDownloadURL() { return DownloadURL; }
+        public UpdateGatewayImageResponse setDownloadURL(String value) { this.DownloadURL = value; return this; }
+        public String getMD5() { return MD5; }
+        public UpdateGatewayImageResponse setMD5(String value) { this.MD5 = value; return this; }
+    }
+
+    public static class UpdateGatewayImageVersionResponse extends ResponseBase
+    {
+        public String ImageVersion = null;
+        
+        public String getImageVersion() { return ImageVersion; }
+        public UpdateGatewayImageVersionResponse setImageVersion(String value) { this.ImageVersion = value; return this; }
     }
 
     public static class UserUsersResponse extends ResponseBase
@@ -6900,6 +8725,14 @@ public class dto
         public UserSensorsCountResponse setCount(Integer value) { this.Count = value; return this; }
     }
 
+    public static class UserSensorsIdsResponse extends ResponseBase
+    {
+        public ArrayList<String> Sensors = null;
+        
+        public ArrayList<String> getSensors() { return Sensors; }
+        public UserSensorsIdsResponse setSensors(ArrayList<String> value) { this.Sensors = value; return this; }
+    }
+
     public static class UserCamerasResponse extends ResponseBase
     {
         public ArrayList<Camera> Cameras = null;
@@ -6924,6 +8757,14 @@ public class dto
         public UserNumNotificationsResponse setUserBreakdown(UserWithNumNotifications value) { this.UserBreakdown = value; return this; }
     }
 
+    public static class UserAdminSentNotificationsResponse extends ResponseBase
+    {
+        public ArrayList<AdminSentNotification> Notifications = null;
+        
+        public ArrayList<AdminSentNotification> getNotifications() { return Notifications; }
+        public UserAdminSentNotificationsResponse setNotifications(ArrayList<AdminSentNotification> value) { this.Notifications = value; return this; }
+    }
+
     public static class UserInstallationsResponse extends ResponseBase
     {
         public ArrayList<Installation> Installations = null;
@@ -6940,28 +8781,20 @@ public class dto
         public UserInstallationsCountResponse setCount(Integer value) { this.Count = value; return this; }
     }
 
+    public static class UserInstallationsSummaryResponse extends ResponseBase
+    {
+        public ArrayList<InstallationBase> Installations = null;
+        
+        public ArrayList<InstallationBase> getInstallations() { return Installations; }
+        public UserInstallationsSummaryResponse setInstallations(ArrayList<InstallationBase> value) { this.Installations = value; return this; }
+    }
+
     public static class UsersInstallationsBatchResponse extends ResponseBase
     {
         public Boolean Success = null;
         
         public Boolean isSuccess() { return Success; }
         public UsersInstallationsBatchResponse setSuccess(Boolean value) { this.Success = value; return this; }
-    }
-
-    public static class UserCustomersResponse extends ResponseBase
-    {
-        public ArrayList<UserAuth> Customers = null;
-        
-        public ArrayList<UserAuth> getCustomers() { return Customers; }
-        public UserCustomersResponse setCustomers(ArrayList<UserAuth> value) { this.Customers = value; return this; }
-    }
-
-    public static class UserCustomersCountResponse extends ResponseBase
-    {
-        public Integer Count = null;
-        
-        public Integer getCount() { return Count; }
-        public UserCustomersCountResponse setCount(Integer value) { this.Count = value; return this; }
     }
 
     public static class UserDetailsResponse extends ResponseBase
@@ -6986,264 +8819,6 @@ public class dto
         
         public ArrayList<UserNotificationSettings> getNotificationSettings() { return NotificationSettings; }
         public UserNotificationSettingsResponse setNotificationSettings(ArrayList<UserNotificationSettings> value) { this.NotificationSettings = value; return this; }
-    }
-
-    public static class UsersResponse extends ResponseBase
-    {
-        public ArrayList<UserAuth> Users = null;
-        
-        public ArrayList<UserAuth> getUsers() { return Users; }
-        public UsersResponse setUsers(ArrayList<UserAuth> value) { this.Users = value; return this; }
-    }
-
-    public static class UsersDeleteResponse extends ResponseBase
-    {
-        public Boolean Success = null;
-        
-        public Boolean isSuccess() { return Success; }
-        public UsersDeleteResponse setSuccess(Boolean value) { this.Success = value; return this; }
-    }
-
-    public static class UserRolesResponse extends ResponseBase
-    {
-        public ArrayList<UserAuth> Users = null;
-        
-        public ArrayList<UserAuth> getUsers() { return Users; }
-        public UserRolesResponse setUsers(ArrayList<UserAuth> value) { this.Users = value; return this; }
-    }
-
-    public static class UserBlockResponse extends ResponseBase
-    {
-        public Date LockedDate = null;
-        
-        public Date getLockedDate() { return LockedDate; }
-        public UserBlockResponse setLockedDate(Date value) { this.LockedDate = value; return this; }
-    }
-
-    public static class UserGatewayAccessResponse extends ResponseBase
-    {
-        public Boolean HasAccess = null;
-        
-        public Boolean isHasAccess() { return HasAccess; }
-        public UserGatewayAccessResponse setHasAccess(Boolean value) { this.HasAccess = value; return this; }
-    }
-
-    public static class WarningsResponse extends ResponseBase
-    {
-        public ArrayList<Warning> Warnings = null;
-        
-        public ArrayList<Warning> getWarnings() { return Warnings; }
-        public WarningsResponse setWarnings(ArrayList<Warning> value) { this.Warnings = value; return this; }
-    }
-
-    public static class WarningDetailsResponse extends ResponseBase
-    {
-        public Warning Warning = null;
-        
-        public Warning getWarning() { return Warning; }
-        public WarningDetailsResponse setWarning(Warning value) { this.Warning = value; return this; }
-    }
-
-    public static class UserWarningsResponse extends ResponseBase
-    {
-        public ArrayList<UserWarning> UserWarnings = null;
-        
-        public ArrayList<UserWarning> getUserWarnings() { return UserWarnings; }
-        public UserWarningsResponse setUserWarnings(ArrayList<UserWarning> value) { this.UserWarnings = value; return this; }
-    }
-
-    public static class WarningUsersResponse extends ResponseBase
-    {
-        public ArrayList<UserAuth> WarningUsers = null;
-        
-        public ArrayList<UserAuth> getWarningUsers() { return WarningUsers; }
-        public WarningUsersResponse setWarningUsers(ArrayList<UserAuth> value) { this.WarningUsers = value; return this; }
-    }
-
-    public static class WarningAssignableUsersResponse extends ResponseBase
-    {
-        public ArrayList<AssignableUser> Users = null;
-        
-        public ArrayList<AssignableUser> getUsers() { return Users; }
-        public WarningAssignableUsersResponse setUsers(ArrayList<AssignableUser> value) { this.Users = value; return this; }
-    }
-
-    public static class WarningActivateResponse extends ResponseBase
-    {
-        
-    }
-
-    @DataContract
-    public static class AuthenticateResponse
-    {
-        @DataMember(Order=1)
-        public String UserId = null;
-
-        @DataMember(Order=2)
-        public String SessionId = null;
-
-        @DataMember(Order=3)
-        public String UserName = null;
-
-        @DataMember(Order=4)
-        public String DisplayName = null;
-
-        @DataMember(Order=5)
-        public String ReferrerUrl = null;
-
-        @DataMember(Order=6)
-        public ResponseStatus ResponseStatus = null;
-
-        @DataMember(Order=7)
-        public HashMap<String,String> Meta = null;
-        
-        public String getUserId() { return UserId; }
-        public AuthenticateResponse setUserId(String value) { this.UserId = value; return this; }
-        public String getSessionId() { return SessionId; }
-        public AuthenticateResponse setSessionId(String value) { this.SessionId = value; return this; }
-        public String getUserName() { return UserName; }
-        public AuthenticateResponse setUserName(String value) { this.UserName = value; return this; }
-        public String getDisplayName() { return DisplayName; }
-        public AuthenticateResponse setDisplayName(String value) { this.DisplayName = value; return this; }
-        public String getReferrerUrl() { return ReferrerUrl; }
-        public AuthenticateResponse setReferrerUrl(String value) { this.ReferrerUrl = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public AuthenticateResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-        public HashMap<String,String> getMeta() { return Meta; }
-        public AuthenticateResponse setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
-    }
-
-    @DataContract
-    public static class RegisterResponse
-    {
-        @DataMember(Order=1)
-        public String UserId = null;
-
-        @DataMember(Order=2)
-        public String SessionId = null;
-
-        @DataMember(Order=3)
-        public String UserName = null;
-
-        @DataMember(Order=4)
-        public String ReferrerUrl = null;
-
-        @DataMember(Order=5)
-        public ResponseStatus ResponseStatus = null;
-
-        @DataMember(Order=6)
-        public HashMap<String,String> Meta = null;
-        
-        public String getUserId() { return UserId; }
-        public RegisterResponse setUserId(String value) { this.UserId = value; return this; }
-        public String getSessionId() { return SessionId; }
-        public RegisterResponse setSessionId(String value) { this.SessionId = value; return this; }
-        public String getUserName() { return UserName; }
-        public RegisterResponse setUserName(String value) { this.UserName = value; return this; }
-        public String getReferrerUrl() { return ReferrerUrl; }
-        public RegisterResponse setReferrerUrl(String value) { this.ReferrerUrl = value; return this; }
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public RegisterResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-        public HashMap<String,String> getMeta() { return Meta; }
-        public RegisterResponse setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
-    }
-
-    public static class Camera
-    {
-        public String Id = null;
-        public String IpAddress = null;
-        public Integer Port = null;
-        public String Name = null;
-        public String Description = null;
-        public String Type = null;
-        public String Manufacturer = null;
-        public String Model = null;
-        public Date LastDateImage = null;
-        public String LastImageName = null;
-        public Date CreationDate = null;
-        public String LastSensorId = null;
-        public String Configuration = null;
-        
-        public String getId() { return Id; }
-        public Camera setId(String value) { this.Id = value; return this; }
-        public String getIpAddress() { return IpAddress; }
-        public Camera setIpAddress(String value) { this.IpAddress = value; return this; }
-        public Integer getPort() { return Port; }
-        public Camera setPort(Integer value) { this.Port = value; return this; }
-        public String getName() { return Name; }
-        public Camera setName(String value) { this.Name = value; return this; }
-        public String getDescription() { return Description; }
-        public Camera setDescription(String value) { this.Description = value; return this; }
-        public String getType() { return Type; }
-        public Camera setType(String value) { this.Type = value; return this; }
-        public String getManufacturer() { return Manufacturer; }
-        public Camera setManufacturer(String value) { this.Manufacturer = value; return this; }
-        public String getModel() { return Model; }
-        public Camera setModel(String value) { this.Model = value; return this; }
-        public Date getLastDateImage() { return LastDateImage; }
-        public Camera setLastDateImage(Date value) { this.LastDateImage = value; return this; }
-        public String getLastImageName() { return LastImageName; }
-        public Camera setLastImageName(String value) { this.LastImageName = value; return this; }
-        public Date getCreationDate() { return CreationDate; }
-        public Camera setCreationDate(Date value) { this.CreationDate = value; return this; }
-        public String getLastSensorId() { return LastSensorId; }
-        public Camera setLastSensorId(String value) { this.LastSensorId = value; return this; }
-        public String getConfiguration() { return Configuration; }
-        public Camera setConfiguration(String value) { this.Configuration = value; return this; }
-    }
-
-    public static class QueryBase_1<T> extends QueryBase
-    {
-        
-    }
-
-    public static class ResponseBase
-    {
-        public ResponseStatus ResponseStatus = null;
-        
-        public ResponseStatus getResponseStatus() { return ResponseStatus; }
-        public ResponseBase setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
-    }
-
-    public static class Photo
-    {
-        public String Url = null;
-        public String TriggerId = null;
-        public Date Date = null;
-        
-        public String getUrl() { return Url; }
-        public Photo setUrl(String value) { this.Url = value; return this; }
-        public String getTriggerId() { return TriggerId; }
-        public Photo setTriggerId(String value) { this.TriggerId = value; return this; }
-        public Date getDate() { return Date; }
-        public Photo setDate(Date value) { this.Date = value; return this; }
-    }
-
-    public static class AzureCameraConsumption extends TableEntity
-    {
-        public Long Bytes = null;
-        
-        public Long getBytes() { return Bytes; }
-        public AzureCameraConsumption setBytes(Long value) { this.Bytes = value; return this; }
-    }
-
-    public static class CameraNode
-    {
-        public Integer NodeId = null;
-        public String CameraId = null;
-        
-        public Integer getNodeId() { return NodeId; }
-        public CameraNode setNodeId(Integer value) { this.NodeId = value; return this; }
-        public String getCameraId() { return CameraId; }
-        public CameraNode setCameraId(String value) { this.CameraId = value; return this; }
-    }
-
-    public static class AssignableInstallation extends Installation
-    {
-        public Boolean IsAssigned = null;
-        
-        public Boolean getIsAssigned() { return IsAssigned; }
-        public AssignableInstallation setIsAssigned(Boolean value) { this.IsAssigned = value; return this; }
     }
 
     public static class UserAuth
@@ -7350,6 +8925,349 @@ public class dto
         public UserAuth setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
     }
 
+    public static class UsersResponse extends ResponseBase
+    {
+        public ArrayList<UserAuth> Users = null;
+        
+        public ArrayList<UserAuth> getUsers() { return Users; }
+        public UsersResponse setUsers(ArrayList<UserAuth> value) { this.Users = value; return this; }
+    }
+
+    public static class UsersDeleteResponse extends ResponseBase
+    {
+        public Boolean Success = null;
+        
+        public Boolean isSuccess() { return Success; }
+        public UsersDeleteResponse setSuccess(Boolean value) { this.Success = value; return this; }
+    }
+
+    public static class UserRolesResponse extends ResponseBase
+    {
+        public ArrayList<UserAuth> Users = null;
+        
+        public ArrayList<UserAuth> getUsers() { return Users; }
+        public UserRolesResponse setUsers(ArrayList<UserAuth> value) { this.Users = value; return this; }
+    }
+
+    public static class UserBlockResponse extends ResponseBase
+    {
+        public Date LockedDate = null;
+        
+        public Date getLockedDate() { return LockedDate; }
+        public UserBlockResponse setLockedDate(Date value) { this.LockedDate = value; return this; }
+    }
+
+    public static class UserGatewayAccessResponse extends ResponseBase
+    {
+        public Boolean HasAccess = null;
+        
+        public Boolean isHasAccess() { return HasAccess; }
+        public UserGatewayAccessResponse setHasAccess(Boolean value) { this.HasAccess = value; return this; }
+    }
+
+    public static class Warning
+    {
+        public Integer Id = null;
+        public String Name = null;
+        public Integer CreatedBy = null;
+        public String Message = null;
+        public String Type = null;
+        public Date FromDate = null;
+        public Date ToDate = null;
+        public Boolean IsActivated = null;
+        public Boolean IsPersistent = null;
+        public Boolean IsImmediate = null;
+        public String I18N = null;
+        
+        public Integer getId() { return Id; }
+        public Warning setId(Integer value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public Warning setName(String value) { this.Name = value; return this; }
+        public Integer getCreatedBy() { return CreatedBy; }
+        public Warning setCreatedBy(Integer value) { this.CreatedBy = value; return this; }
+        public String getMessage() { return Message; }
+        public Warning setMessage(String value) { this.Message = value; return this; }
+        public String getType() { return Type; }
+        public Warning setType(String value) { this.Type = value; return this; }
+        public Date getFromDate() { return FromDate; }
+        public Warning setFromDate(Date value) { this.FromDate = value; return this; }
+        public Date getToDate() { return ToDate; }
+        public Warning setToDate(Date value) { this.ToDate = value; return this; }
+        public Boolean getIsActivated() { return IsActivated; }
+        public Warning setIsActivated(Boolean value) { this.IsActivated = value; return this; }
+        public Boolean getIsPersistent() { return IsPersistent; }
+        public Warning setIsPersistent(Boolean value) { this.IsPersistent = value; return this; }
+        public Boolean getIsImmediate() { return IsImmediate; }
+        public Warning setIsImmediate(Boolean value) { this.IsImmediate = value; return this; }
+        public String getI18N() { return I18N; }
+        public Warning setI18N(String value) { this.I18N = value; return this; }
+    }
+
+    public static class WarningsResponse extends ResponseBase
+    {
+        public ArrayList<Warning> Warnings = null;
+        
+        public ArrayList<Warning> getWarnings() { return Warnings; }
+        public WarningsResponse setWarnings(ArrayList<Warning> value) { this.Warnings = value; return this; }
+    }
+
+    public static class WarningDetailsResponse extends ResponseBase
+    {
+        public Warning Warning = null;
+        
+        public Warning getWarning() { return Warning; }
+        public WarningDetailsResponse setWarning(Warning value) { this.Warning = value; return this; }
+    }
+
+    public static class UserWarningsResponse extends ResponseBase
+    {
+        public ArrayList<UserWarning> UserWarnings = null;
+        
+        public ArrayList<UserWarning> getUserWarnings() { return UserWarnings; }
+        public UserWarningsResponse setUserWarnings(ArrayList<UserWarning> value) { this.UserWarnings = value; return this; }
+    }
+
+    public static class WarningUsersResponse extends ResponseBase
+    {
+        public ArrayList<UserAuth> WarningUsers = null;
+        
+        public ArrayList<UserAuth> getWarningUsers() { return WarningUsers; }
+        public WarningUsersResponse setWarningUsers(ArrayList<UserAuth> value) { this.WarningUsers = value; return this; }
+    }
+
+    public static class WarningAssignableUsersResponse extends ResponseBase
+    {
+        public ArrayList<AssignableUser> Users = null;
+        
+        public ArrayList<AssignableUser> getUsers() { return Users; }
+        public WarningAssignableUsersResponse setUsers(ArrayList<AssignableUser> value) { this.Users = value; return this; }
+    }
+
+    public static class WarningActivateResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class TwitterUserResponse extends ResponseBase
+    {
+        public TwitterAccount TwitterAccount = null;
+        
+        public TwitterAccount getTwitterAccount() { return TwitterAccount; }
+        public TwitterUserResponse setTwitterAccount(TwitterAccount value) { this.TwitterAccount = value; return this; }
+    }
+
+    public static class TwitterGroupResponse extends ResponseBase
+    {
+        public ArrayList<TwitterAccountGroup> TwitterAccountGroup = null;
+        
+        public ArrayList<TwitterAccountGroup> getTwitterAccountGroup() { return TwitterAccountGroup; }
+        public TwitterGroupResponse setTwitterAccountGroup(ArrayList<TwitterAccountGroup> value) { this.TwitterAccountGroup = value; return this; }
+    }
+
+    public static class TwitterMessageGroupResponse extends ResponseBase
+    {
+        
+    }
+
+    public static class TwitterBroadcastMessageResponse extends ResponseBase
+    {
+        
+    }
+
+    @DataContract
+    public static class AuthenticateResponse
+    {
+        @DataMember(Order=1)
+        public String UserId = null;
+
+        @DataMember(Order=2)
+        public String SessionId = null;
+
+        @DataMember(Order=3)
+        public String UserName = null;
+
+        @DataMember(Order=4)
+        public String DisplayName = null;
+
+        @DataMember(Order=5)
+        public String ReferrerUrl = null;
+
+        @DataMember(Order=6)
+        public ResponseStatus ResponseStatus = null;
+
+        @DataMember(Order=7)
+        public HashMap<String,String> Meta = null;
+        
+        public String getUserId() { return UserId; }
+        public AuthenticateResponse setUserId(String value) { this.UserId = value; return this; }
+        public String getSessionId() { return SessionId; }
+        public AuthenticateResponse setSessionId(String value) { this.SessionId = value; return this; }
+        public String getUserName() { return UserName; }
+        public AuthenticateResponse setUserName(String value) { this.UserName = value; return this; }
+        public String getDisplayName() { return DisplayName; }
+        public AuthenticateResponse setDisplayName(String value) { this.DisplayName = value; return this; }
+        public String getReferrerUrl() { return ReferrerUrl; }
+        public AuthenticateResponse setReferrerUrl(String value) { this.ReferrerUrl = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public AuthenticateResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+        public HashMap<String,String> getMeta() { return Meta; }
+        public AuthenticateResponse setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
+    }
+
+    @DataContract
+    public static class RegisterResponse
+    {
+        @DataMember(Order=1)
+        public String UserId = null;
+
+        @DataMember(Order=2)
+        public String SessionId = null;
+
+        @DataMember(Order=3)
+        public String UserName = null;
+
+        @DataMember(Order=4)
+        public String ReferrerUrl = null;
+
+        @DataMember(Order=5)
+        public ResponseStatus ResponseStatus = null;
+
+        @DataMember(Order=6)
+        public HashMap<String,String> Meta = null;
+        
+        public String getUserId() { return UserId; }
+        public RegisterResponse setUserId(String value) { this.UserId = value; return this; }
+        public String getSessionId() { return SessionId; }
+        public RegisterResponse setSessionId(String value) { this.SessionId = value; return this; }
+        public String getUserName() { return UserName; }
+        public RegisterResponse setUserName(String value) { this.UserName = value; return this; }
+        public String getReferrerUrl() { return ReferrerUrl; }
+        public RegisterResponse setReferrerUrl(String value) { this.ReferrerUrl = value; return this; }
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public RegisterResponse setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+        public HashMap<String,String> getMeta() { return Meta; }
+        public RegisterResponse setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
+    }
+
+    public static class ResponseBase
+    {
+        public ResponseStatus ResponseStatus = null;
+        
+        public ResponseStatus getResponseStatus() { return ResponseStatus; }
+        public ResponseBase setResponseStatus(ResponseStatus value) { this.ResponseStatus = value; return this; }
+    }
+
+    public static class StatusPoint
+    {
+        public String Status = null;
+        public Date Date = null;
+        public String Trigger = null;
+        public String TriggerName = null;
+        
+        public String getStatus() { return Status; }
+        public StatusPoint setStatus(String value) { this.Status = value; return this; }
+        public Date getDate() { return Date; }
+        public StatusPoint setDate(Date value) { this.Date = value; return this; }
+        public String getTrigger() { return Trigger; }
+        public StatusPoint setTrigger(String value) { this.Trigger = value; return this; }
+        public String getTriggerName() { return TriggerName; }
+        public StatusPoint setTriggerName(String value) { this.TriggerName = value; return this; }
+    }
+
+    public static class SensorStatusPoint
+    {
+        public String SensorId = null;
+        public StatusPoint StatusPoint = null;
+        
+        public String getSensorId() { return SensorId; }
+        public SensorStatusPoint setSensorId(String value) { this.SensorId = value; return this; }
+        public StatusPoint getStatusPoint() { return StatusPoint; }
+        public SensorStatusPoint setStatusPoint(StatusPoint value) { this.StatusPoint = value; return this; }
+    }
+
+    public static class Photo
+    {
+        public String Url = null;
+        public String TriggerId = null;
+        public Date Date = null;
+        
+        public String getUrl() { return Url; }
+        public Photo setUrl(String value) { this.Url = value; return this; }
+        public String getTriggerId() { return TriggerId; }
+        public Photo setTriggerId(String value) { this.TriggerId = value; return this; }
+        public Date getDate() { return Date; }
+        public Photo setDate(Date value) { this.Date = value; return this; }
+    }
+
+    public static class PhotoVideo extends Photo
+    {
+        public Boolean IsVideo = null;
+        public String VideoUrl = null;
+        
+        public Boolean getIsVideo() { return IsVideo; }
+        public PhotoVideo setIsVideo(Boolean value) { this.IsVideo = value; return this; }
+        public String getVideoUrl() { return VideoUrl; }
+        public PhotoVideo setVideoUrl(String value) { this.VideoUrl = value; return this; }
+    }
+
+    public static class AzureCameraConsumption extends TableEntity
+    {
+        public Long Bytes = null;
+        
+        public Long getBytes() { return Bytes; }
+        public AzureCameraConsumption setBytes(Long value) { this.Bytes = value; return this; }
+    }
+
+    public static class CameraNode
+    {
+        public Integer NodeId = null;
+        public String CameraId = null;
+        
+        public Integer getNodeId() { return NodeId; }
+        public CameraNode setNodeId(Integer value) { this.NodeId = value; return this; }
+        public String getCameraId() { return CameraId; }
+        public CameraNode setCameraId(String value) { this.CameraId = value; return this; }
+    }
+
+    public static class AssignableArea extends Area
+    {
+        public Boolean IsAssigned = null;
+        
+        public Boolean getIsAssigned() { return IsAssigned; }
+        public AssignableArea setIsAssigned(Boolean value) { this.IsAssigned = value; return this; }
+    }
+
+    public static class Area
+    {
+        public Integer Id = null;
+        public Integer FloorplanId = null;
+        public String Name = null;
+        public String Description = null;
+        public Date CreationDate = null;
+        public Date LastModificationDate = null;
+        
+        public Integer getId() { return Id; }
+        public Area setId(Integer value) { this.Id = value; return this; }
+        public Integer getFloorplanId() { return FloorplanId; }
+        public Area setFloorplanId(Integer value) { this.FloorplanId = value; return this; }
+        public String getName() { return Name; }
+        public Area setName(String value) { this.Name = value; return this; }
+        public String getDescription() { return Description; }
+        public Area setDescription(String value) { this.Description = value; return this; }
+        public Date getCreationDate() { return CreationDate; }
+        public Area setCreationDate(Date value) { this.CreationDate = value; return this; }
+        public Date getLastModificationDate() { return LastModificationDate; }
+        public Area setLastModificationDate(Date value) { this.LastModificationDate = value; return this; }
+    }
+
+    public static class AssignableInstallation extends Installation
+    {
+        public Boolean IsAssigned = null;
+        
+        public Boolean getIsAssigned() { return IsAssigned; }
+        public AssignableInstallation setIsAssigned(Boolean value) { this.IsAssigned = value; return this; }
+    }
+
     public static class AzureEvent extends TableEntity
     {
         public String Type = null;
@@ -7367,6 +9285,8 @@ public class dto
         public String TriggerName = null;
         public String LastImageName = null;
         public String CameraTrigger = null;
+        public String DemandResponseId = null;
+        public String Environment = null;
         public String TranslatedDescription = null;
         
         public String getType() { return Type; }
@@ -7399,6 +9319,10 @@ public class dto
         public AzureEvent setLastImageName(String value) { this.LastImageName = value; return this; }
         public String getCameraTrigger() { return CameraTrigger; }
         public AzureEvent setCameraTrigger(String value) { this.CameraTrigger = value; return this; }
+        public String getDemandResponseId() { return DemandResponseId; }
+        public AzureEvent setDemandResponseId(String value) { this.DemandResponseId = value; return this; }
+        public String getEnvironment() { return Environment; }
+        public AzureEvent setEnvironment(String value) { this.Environment = value; return this; }
         public String getTranslatedDescription() { return TranslatedDescription; }
         public AzureEvent setTranslatedDescription(String value) { this.TranslatedDescription = value; return this; }
     }
@@ -7417,6 +9341,42 @@ public class dto
         public ZWaveRegister setValue(Integer value) { this.Value = value; return this; }
     }
 
+    public static class CommandResponseWrapper<Q>
+    {
+        public Q Response = null;
+        public Boolean CommunicationSuccess = null;
+        
+        public Q getResponse() { return Response; }
+        public CommandResponseWrapper<Q> setResponse(Q value) { this.Response = value; return this; }
+        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
+        public CommandResponseWrapper<Q> setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+    }
+
+    public static class AddWibeeeSensorResult
+    {
+        public WibeeeDeviceMetadata Metadata = null;
+        public String Error = null;
+        
+        public WibeeeDeviceMetadata getMetadata() { return Metadata; }
+        public AddWibeeeSensorResult setMetadata(WibeeeDeviceMetadata value) { this.Metadata = value; return this; }
+        public String getError() { return Error; }
+        public AddWibeeeSensorResult setError(String value) { this.Error = value; return this; }
+    }
+
+    public static enum SensorThermostatMode
+    {
+        Off(0),
+        Heat(1),
+        Cool(2),
+        Fan(6),
+        Dry(8),
+        Auto(10);
+
+        private final int value;
+        SensorThermostatMode(final int intValue) { value = intValue; }
+        public int getValue() { return value; }
+    }
+
     public static class SchedulerPoint
     {
         public String Day = null;
@@ -7424,6 +9384,8 @@ public class dto
         public Integer Minutes = null;
         public String Security = null;
         public Integer Temperature = null;
+        public SensorThermostatMode Mode = null;
+        public SensorThermostatFanMode FanMode = null;
         public String Automation = null;
         public String SensorId = null;
         
@@ -7437,6 +9399,10 @@ public class dto
         public SchedulerPoint setSecurity(String value) { this.Security = value; return this; }
         public Integer getTemperature() { return Temperature; }
         public SchedulerPoint setTemperature(Integer value) { this.Temperature = value; return this; }
+        public SensorThermostatMode getMode() { return Mode; }
+        public SchedulerPoint setMode(SensorThermostatMode value) { this.Mode = value; return this; }
+        public SensorThermostatFanMode getFanMode() { return FanMode; }
+        public SchedulerPoint setFanMode(SensorThermostatFanMode value) { this.FanMode = value; return this; }
         public String getAutomation() { return Automation; }
         public SchedulerPoint setAutomation(String value) { this.Automation = value; return this; }
         public String getSensorId() { return SensorId; }
@@ -7454,15 +9420,32 @@ public class dto
         public SensorConfiguration setEditableProperties(HashMap<String,Object> value) { this.EditableProperties = value; return this; }
     }
 
-    public static class CommandResponseWrapper<Q>
+    public static class UserAuthWithCredentials extends UserAuth
     {
-        public Q Response = null;
-        public Boolean CommunicationSuccess = null;
+        public String PasswordHash = null;
+        public String Salt = null;
         
-        public Q getResponse() { return Response; }
-        public CommandResponseWrapper<Q> setResponse(Q value) { this.Response = value; return this; }
-        public Boolean isCommunicationSuccess() { return CommunicationSuccess; }
-        public CommandResponseWrapper<Q> setCommunicationSuccess(Boolean value) { this.CommunicationSuccess = value; return this; }
+        public String getPasswordHash() { return PasswordHash; }
+        public UserAuthWithCredentials setPasswordHash(String value) { this.PasswordHash = value; return this; }
+        public String getSalt() { return Salt; }
+        public UserAuthWithCredentials setSalt(String value) { this.Salt = value; return this; }
+    }
+
+    public static enum SensorThermostatFanMode
+    {
+        Auto,
+        On,
+        Autohigh,
+        Onhigh,
+        Automedium,
+        Onmedium;
+    }
+
+    public static enum SensorProtocolType
+    {
+        WmBus,
+        ZWave,
+        Wibeee;
     }
 
     public static class Device
@@ -7551,211 +9534,6 @@ public class dto
         public SchedulerInstance setStatus(Boolean value) { this.Status = value; return this; }
         public ArrayList<SchedulerPoint> getSchedulerPoints() { return SchedulerPoints; }
         public SchedulerInstance setSchedulerPoints(ArrayList<SchedulerPoint> value) { this.SchedulerPoints = value; return this; }
-    }
-
-    public static class StatusPoint
-    {
-        public String Status = null;
-        public Date Date = null;
-        public String Trigger = null;
-        public String TriggerName = null;
-        
-        public String getStatus() { return Status; }
-        public StatusPoint setStatus(String value) { this.Status = value; return this; }
-        public Date getDate() { return Date; }
-        public StatusPoint setDate(Date value) { this.Date = value; return this; }
-        public String getTrigger() { return Trigger; }
-        public StatusPoint setTrigger(String value) { this.Trigger = value; return this; }
-        public String getTriggerName() { return TriggerName; }
-        public StatusPoint setTriggerName(String value) { this.TriggerName = value; return this; }
-    }
-
-    public static class Installation
-    {
-        public UUID Id = null;
-        public String Type = null;
-        public Integer OwnerId = null;
-        public String Name = null;
-        public String Status = null;
-        public String SecurityStatus = null;
-        public Date LastDateStatus = null;
-        public Double Latitude = null;
-        public Double Longitude = null;
-        public Integer City = null;
-        public Date CreationDate = null;
-        public Date LastModificationDate = null;
-        public Date LastDateAverageCalculations = null;
-        public Date LastAliveDate = null;
-        public Double AverageTemperature = null;
-        public Double AverageHumidity = null;
-        public Double AverageAirQuality = null;
-        public String DayEnergyTrendCode = null;
-        public String WeekEnergyTrendCode = null;
-        public String MonthEnergyTrendCode = null;
-        public String DayGasTrendCode = null;
-        public String WeekGasTrendCode = null;
-        public String MonthGasTrendCode = null;
-        public String DayHeatingTrendCode = null;
-        public String WeekHeatingTrendCode = null;
-        public String MonthHeatingTrendCode = null;
-        public String DayWaterTrendCode = null;
-        public String WeekWaterTrendCode = null;
-        public String MonthWaterTrendCode = null;
-        public Double DayEnergyTrendValue = null;
-        public Double WeekEnergyTrendValue = null;
-        public Double MonthEnergyTrendValue = null;
-        public Double DayGasTrendValue = null;
-        public Double WeekGasTrendValue = null;
-        public Double MonthGasTrendValue = null;
-        public Double DayHeatingTrendValue = null;
-        public Double WeekHeatingTrendValue = null;
-        public Double MonthHeatingTrendValue = null;
-        public Double DayWaterTrendValue = null;
-        public Double WeekWaterTrendValue = null;
-        public Double MonthWaterTrendValue = null;
-        public Date LastDateEnergyTrend = null;
-        public Date LastDateGasTrend = null;
-        public Date LastDateHeatingTrend = null;
-        public Date LastDateWaterTrend = null;
-        public String ComfortStatus = null;
-        public Double Uptime = null;
-        public Integer ActiveSchedulesComfort = null;
-        public Integer ActiveSchedulesSecurity = null;
-        public Integer ActiveSchedulesControl = null;
-        public Double PricekWh = null;
-        public Double PriceGaskWh = null;
-        public Double PriceHeatingkWh = null;
-        public Double PriceWaterM3 = null;
-        public Double GasMeterTokWh = null;
-        public String DashboardView = null;
-        public Date ActivationDate = null;
-        public Boolean Blocked = null;
-        public Date LastLogUploadDate = null;
-        public String LastLogName = null;
-        public String GWVersion = null;
-        
-        public UUID getId() { return Id; }
-        public Installation setId(UUID value) { this.Id = value; return this; }
-        public String getType() { return Type; }
-        public Installation setType(String value) { this.Type = value; return this; }
-        public Integer getOwnerId() { return OwnerId; }
-        public Installation setOwnerId(Integer value) { this.OwnerId = value; return this; }
-        public String getName() { return Name; }
-        public Installation setName(String value) { this.Name = value; return this; }
-        public String getStatus() { return Status; }
-        public Installation setStatus(String value) { this.Status = value; return this; }
-        public String getSecurityStatus() { return SecurityStatus; }
-        public Installation setSecurityStatus(String value) { this.SecurityStatus = value; return this; }
-        public Date getLastDateStatus() { return LastDateStatus; }
-        public Installation setLastDateStatus(Date value) { this.LastDateStatus = value; return this; }
-        public Double getLatitude() { return Latitude; }
-        public Installation setLatitude(Double value) { this.Latitude = value; return this; }
-        public Double getLongitude() { return Longitude; }
-        public Installation setLongitude(Double value) { this.Longitude = value; return this; }
-        public Integer getCity() { return City; }
-        public Installation setCity(Integer value) { this.City = value; return this; }
-        public Date getCreationDate() { return CreationDate; }
-        public Installation setCreationDate(Date value) { this.CreationDate = value; return this; }
-        public Date getLastModificationDate() { return LastModificationDate; }
-        public Installation setLastModificationDate(Date value) { this.LastModificationDate = value; return this; }
-        public Date getLastDateAverageCalculations() { return LastDateAverageCalculations; }
-        public Installation setLastDateAverageCalculations(Date value) { this.LastDateAverageCalculations = value; return this; }
-        public Date getLastAliveDate() { return LastAliveDate; }
-        public Installation setLastAliveDate(Date value) { this.LastAliveDate = value; return this; }
-        public Double getAverageTemperature() { return AverageTemperature; }
-        public Installation setAverageTemperature(Double value) { this.AverageTemperature = value; return this; }
-        public Double getAverageHumidity() { return AverageHumidity; }
-        public Installation setAverageHumidity(Double value) { this.AverageHumidity = value; return this; }
-        public Double getAverageAirQuality() { return AverageAirQuality; }
-        public Installation setAverageAirQuality(Double value) { this.AverageAirQuality = value; return this; }
-        public String getDayEnergyTrendCode() { return DayEnergyTrendCode; }
-        public Installation setDayEnergyTrendCode(String value) { this.DayEnergyTrendCode = value; return this; }
-        public String getWeekEnergyTrendCode() { return WeekEnergyTrendCode; }
-        public Installation setWeekEnergyTrendCode(String value) { this.WeekEnergyTrendCode = value; return this; }
-        public String getMonthEnergyTrendCode() { return MonthEnergyTrendCode; }
-        public Installation setMonthEnergyTrendCode(String value) { this.MonthEnergyTrendCode = value; return this; }
-        public String getDayGasTrendCode() { return DayGasTrendCode; }
-        public Installation setDayGasTrendCode(String value) { this.DayGasTrendCode = value; return this; }
-        public String getWeekGasTrendCode() { return WeekGasTrendCode; }
-        public Installation setWeekGasTrendCode(String value) { this.WeekGasTrendCode = value; return this; }
-        public String getMonthGasTrendCode() { return MonthGasTrendCode; }
-        public Installation setMonthGasTrendCode(String value) { this.MonthGasTrendCode = value; return this; }
-        public String getDayHeatingTrendCode() { return DayHeatingTrendCode; }
-        public Installation setDayHeatingTrendCode(String value) { this.DayHeatingTrendCode = value; return this; }
-        public String getWeekHeatingTrendCode() { return WeekHeatingTrendCode; }
-        public Installation setWeekHeatingTrendCode(String value) { this.WeekHeatingTrendCode = value; return this; }
-        public String getMonthHeatingTrendCode() { return MonthHeatingTrendCode; }
-        public Installation setMonthHeatingTrendCode(String value) { this.MonthHeatingTrendCode = value; return this; }
-        public String getDayWaterTrendCode() { return DayWaterTrendCode; }
-        public Installation setDayWaterTrendCode(String value) { this.DayWaterTrendCode = value; return this; }
-        public String getWeekWaterTrendCode() { return WeekWaterTrendCode; }
-        public Installation setWeekWaterTrendCode(String value) { this.WeekWaterTrendCode = value; return this; }
-        public String getMonthWaterTrendCode() { return MonthWaterTrendCode; }
-        public Installation setMonthWaterTrendCode(String value) { this.MonthWaterTrendCode = value; return this; }
-        public Double getDayEnergyTrendValue() { return DayEnergyTrendValue; }
-        public Installation setDayEnergyTrendValue(Double value) { this.DayEnergyTrendValue = value; return this; }
-        public Double getWeekEnergyTrendValue() { return WeekEnergyTrendValue; }
-        public Installation setWeekEnergyTrendValue(Double value) { this.WeekEnergyTrendValue = value; return this; }
-        public Double getMonthEnergyTrendValue() { return MonthEnergyTrendValue; }
-        public Installation setMonthEnergyTrendValue(Double value) { this.MonthEnergyTrendValue = value; return this; }
-        public Double getDayGasTrendValue() { return DayGasTrendValue; }
-        public Installation setDayGasTrendValue(Double value) { this.DayGasTrendValue = value; return this; }
-        public Double getWeekGasTrendValue() { return WeekGasTrendValue; }
-        public Installation setWeekGasTrendValue(Double value) { this.WeekGasTrendValue = value; return this; }
-        public Double getMonthGasTrendValue() { return MonthGasTrendValue; }
-        public Installation setMonthGasTrendValue(Double value) { this.MonthGasTrendValue = value; return this; }
-        public Double getDayHeatingTrendValue() { return DayHeatingTrendValue; }
-        public Installation setDayHeatingTrendValue(Double value) { this.DayHeatingTrendValue = value; return this; }
-        public Double getWeekHeatingTrendValue() { return WeekHeatingTrendValue; }
-        public Installation setWeekHeatingTrendValue(Double value) { this.WeekHeatingTrendValue = value; return this; }
-        public Double getMonthHeatingTrendValue() { return MonthHeatingTrendValue; }
-        public Installation setMonthHeatingTrendValue(Double value) { this.MonthHeatingTrendValue = value; return this; }
-        public Double getDayWaterTrendValue() { return DayWaterTrendValue; }
-        public Installation setDayWaterTrendValue(Double value) { this.DayWaterTrendValue = value; return this; }
-        public Double getWeekWaterTrendValue() { return WeekWaterTrendValue; }
-        public Installation setWeekWaterTrendValue(Double value) { this.WeekWaterTrendValue = value; return this; }
-        public Double getMonthWaterTrendValue() { return MonthWaterTrendValue; }
-        public Installation setMonthWaterTrendValue(Double value) { this.MonthWaterTrendValue = value; return this; }
-        public Date getLastDateEnergyTrend() { return LastDateEnergyTrend; }
-        public Installation setLastDateEnergyTrend(Date value) { this.LastDateEnergyTrend = value; return this; }
-        public Date getLastDateGasTrend() { return LastDateGasTrend; }
-        public Installation setLastDateGasTrend(Date value) { this.LastDateGasTrend = value; return this; }
-        public Date getLastDateHeatingTrend() { return LastDateHeatingTrend; }
-        public Installation setLastDateHeatingTrend(Date value) { this.LastDateHeatingTrend = value; return this; }
-        public Date getLastDateWaterTrend() { return LastDateWaterTrend; }
-        public Installation setLastDateWaterTrend(Date value) { this.LastDateWaterTrend = value; return this; }
-        public String getComfortStatus() { return ComfortStatus; }
-        public Installation setComfortStatus(String value) { this.ComfortStatus = value; return this; }
-        public Double getUptime() { return Uptime; }
-        public Installation setUptime(Double value) { this.Uptime = value; return this; }
-        public Integer getActiveSchedulesComfort() { return ActiveSchedulesComfort; }
-        public Installation setActiveSchedulesComfort(Integer value) { this.ActiveSchedulesComfort = value; return this; }
-        public Integer getActiveSchedulesSecurity() { return ActiveSchedulesSecurity; }
-        public Installation setActiveSchedulesSecurity(Integer value) { this.ActiveSchedulesSecurity = value; return this; }
-        public Integer getActiveSchedulesControl() { return ActiveSchedulesControl; }
-        public Installation setActiveSchedulesControl(Integer value) { this.ActiveSchedulesControl = value; return this; }
-        public Double getPricekWh() { return PricekWh; }
-        public Installation setPricekWh(Double value) { this.PricekWh = value; return this; }
-        public Double getPriceGaskWh() { return PriceGaskWh; }
-        public Installation setPriceGaskWh(Double value) { this.PriceGaskWh = value; return this; }
-        public Double getPriceHeatingkWh() { return PriceHeatingkWh; }
-        public Installation setPriceHeatingkWh(Double value) { this.PriceHeatingkWh = value; return this; }
-        public Double getPriceWaterM3() { return PriceWaterM3; }
-        public Installation setPriceWaterM3(Double value) { this.PriceWaterM3 = value; return this; }
-        public Double getGasMeterTokWh() { return GasMeterTokWh; }
-        public Installation setGasMeterTokWh(Double value) { this.GasMeterTokWh = value; return this; }
-        public String getDashboardView() { return DashboardView; }
-        public Installation setDashboardView(String value) { this.DashboardView = value; return this; }
-        public Date getActivationDate() { return ActivationDate; }
-        public Installation setActivationDate(Date value) { this.ActivationDate = value; return this; }
-        public Boolean isBlocked() { return Blocked; }
-        public Installation setBlocked(Boolean value) { this.Blocked = value; return this; }
-        public Date getLastLogUploadDate() { return LastLogUploadDate; }
-        public Installation setLastLogUploadDate(Date value) { this.LastLogUploadDate = value; return this; }
-        public String getLastLogName() { return LastLogName; }
-        public Installation setLastLogName(String value) { this.LastLogName = value; return this; }
-        public String getGwVersion() { return GWVersion; }
-        public Installation setGwVersion(String value) { this.GWVersion = value; return this; }
     }
 
     public static class ComfortValues
@@ -7969,72 +9747,23 @@ public class dto
         public SensorArea setArea(String value) { this.Area = value; return this; }
     }
 
+    public static class SensorWithAreaIdAndName extends Sensor
+    {
+        public Integer AreaId = null;
+        public String AreaName = null;
+        
+        public Integer getAreaId() { return AreaId; }
+        public SensorWithAreaIdAndName setAreaId(Integer value) { this.AreaId = value; return this; }
+        public String getAreaName() { return AreaName; }
+        public SensorWithAreaIdAndName setAreaName(String value) { this.AreaName = value; return this; }
+    }
+
     public static class AssignableUser extends UserAuth
     {
         public Boolean IsAssigned = null;
         
         public Boolean getIsAssigned() { return IsAssigned; }
         public AssignableUser setIsAssigned(Boolean value) { this.IsAssigned = value; return this; }
-    }
-
-    public static class Sensor extends SensorBase
-    {
-        public Double Value = null;
-        public String Status = null;
-        public String PreviousStatus = null;
-        public String Mode = null;
-        public String PreviousMode = null;
-        public Double SetPoint = null;
-        public Double PreviousSetPoint = null;
-        public Double BatteryLevel = null;
-        public Date LastDateValue = null;
-        public Date LastDateStatus = null;
-        public Date LastDateMode = null;
-        public Date LastDateSetPoint = null;
-        public Date LastDateBattery = null;
-        public Date LastModificationDate = null;
-        public Boolean IsVirtual = null;
-        public Boolean IsLocked = null;
-        public String Configuration = null;
-        @Ignore()
-        public SensorConfiguration Config = null;
-        
-        public Double getValue() { return Value; }
-        public Sensor setValue(Double value) { this.Value = value; return this; }
-        public String getStatus() { return Status; }
-        public Sensor setStatus(String value) { this.Status = value; return this; }
-        public String getPreviousStatus() { return PreviousStatus; }
-        public Sensor setPreviousStatus(String value) { this.PreviousStatus = value; return this; }
-        public String getMode() { return Mode; }
-        public Sensor setMode(String value) { this.Mode = value; return this; }
-        public String getPreviousMode() { return PreviousMode; }
-        public Sensor setPreviousMode(String value) { this.PreviousMode = value; return this; }
-        public Double getSetPoint() { return SetPoint; }
-        public Sensor setSetPoint(Double value) { this.SetPoint = value; return this; }
-        public Double getPreviousSetPoint() { return PreviousSetPoint; }
-        public Sensor setPreviousSetPoint(Double value) { this.PreviousSetPoint = value; return this; }
-        public Double getBatteryLevel() { return BatteryLevel; }
-        public Sensor setBatteryLevel(Double value) { this.BatteryLevel = value; return this; }
-        public Date getLastDateValue() { return LastDateValue; }
-        public Sensor setLastDateValue(Date value) { this.LastDateValue = value; return this; }
-        public Date getLastDateStatus() { return LastDateStatus; }
-        public Sensor setLastDateStatus(Date value) { this.LastDateStatus = value; return this; }
-        public Date getLastDateMode() { return LastDateMode; }
-        public Sensor setLastDateMode(Date value) { this.LastDateMode = value; return this; }
-        public Date getLastDateSetPoint() { return LastDateSetPoint; }
-        public Sensor setLastDateSetPoint(Date value) { this.LastDateSetPoint = value; return this; }
-        public Date getLastDateBattery() { return LastDateBattery; }
-        public Sensor setLastDateBattery(Date value) { this.LastDateBattery = value; return this; }
-        public Date getLastModificationDate() { return LastModificationDate; }
-        public Sensor setLastModificationDate(Date value) { this.LastModificationDate = value; return this; }
-        public Boolean getIsVirtual() { return IsVirtual; }
-        public Sensor setIsVirtual(Boolean value) { this.IsVirtual = value; return this; }
-        public Boolean getIsLocked() { return IsLocked; }
-        public Sensor setIsLocked(Boolean value) { this.IsLocked = value; return this; }
-        public String getConfiguration() { return Configuration; }
-        public Sensor setConfiguration(String value) { this.Configuration = value; return this; }
-        public SensorConfiguration getConfig() { return Config; }
-        public Sensor setConfig(SensorConfiguration value) { this.Config = value; return this; }
     }
 
     public static class SensorBaseWithAreaIDandName extends SensorBase
@@ -8046,23 +9775,6 @@ public class dto
         public SensorBaseWithAreaIDandName setAreaId(Integer value) { this.AreaId = value; return this; }
         public String getAreaName() { return AreaName; }
         public SensorBaseWithAreaIDandName setAreaName(String value) { this.AreaName = value; return this; }
-    }
-
-    public static enum SensorProtocolType
-    {
-        WmBus,
-        ZWave;
-    }
-
-    public static class SensorWithAreaIdAndName extends Sensor
-    {
-        public Integer AreaId = null;
-        public String AreaName = null;
-        
-        public Integer getAreaId() { return AreaId; }
-        public SensorWithAreaIdAndName setAreaId(Integer value) { this.AreaId = value; return this; }
-        public String getAreaName() { return AreaName; }
-        public SensorWithAreaIdAndName setAreaName(String value) { this.AreaName = value; return this; }
     }
 
     public static class InstallationWithSensorAndCategory
@@ -8149,29 +9861,6 @@ public class dto
         public FloorPlanWithAreas setAreas(ArrayList<AssignableArea> value) { this.Areas = value; return this; }
     }
 
-    public static class Area
-    {
-        public Integer Id = null;
-        public Integer FloorplanId = null;
-        public String Name = null;
-        public String Description = null;
-        public Date CreationDate = null;
-        public Date LastModificationDate = null;
-        
-        public Integer getId() { return Id; }
-        public Area setId(Integer value) { this.Id = value; return this; }
-        public Integer getFloorplanId() { return FloorplanId; }
-        public Area setFloorplanId(Integer value) { this.FloorplanId = value; return this; }
-        public String getName() { return Name; }
-        public Area setName(String value) { this.Name = value; return this; }
-        public String getDescription() { return Description; }
-        public Area setDescription(String value) { this.Description = value; return this; }
-        public Date getCreationDate() { return CreationDate; }
-        public Area setCreationDate(Date value) { this.CreationDate = value; return this; }
-        public Date getLastModificationDate() { return LastModificationDate; }
-        public Area setLastModificationDate(Date value) { this.LastModificationDate = value; return this; }
-    }
-
     public static class ComfortArea
     {
         public Integer Id = null;
@@ -8248,12 +9937,108 @@ public class dto
         public Node setLastModificationDate(Date value) { this.LastModificationDate = value; return this; }
     }
 
-    public static class AssignableArea extends Area
+    public static class InstallationBase
     {
-        public Boolean IsAssigned = null;
+        public UUID Id = null;
+        public String Type = null;
+        public Integer OwnerId = null;
+        public String Name = null;
+        public Double Latitude = null;
+        public Double Longitude = null;
+        public String City = null;
+        public Date CreationDate = null;
+        public Double PricekWh = null;
+        public Double PricekWhProduction = null;
+        public Double PriceGaskWh = null;
+        public Double PriceHeatingkWh = null;
+        public Double PriceWaterM3 = null;
+        public Double GasMeterTokWh = null;
+        public String DashboardView = null;
+        public Date ActivationDate = null;
+        public Boolean Blocked = null;
+        public String GWVersion = null;
+        public String Environment = null;
         
-        public Boolean getIsAssigned() { return IsAssigned; }
-        public AssignableArea setIsAssigned(Boolean value) { this.IsAssigned = value; return this; }
+        public UUID getId() { return Id; }
+        public InstallationBase setId(UUID value) { this.Id = value; return this; }
+        public String getType() { return Type; }
+        public InstallationBase setType(String value) { this.Type = value; return this; }
+        public Integer getOwnerId() { return OwnerId; }
+        public InstallationBase setOwnerId(Integer value) { this.OwnerId = value; return this; }
+        public String getName() { return Name; }
+        public InstallationBase setName(String value) { this.Name = value; return this; }
+        public Double getLatitude() { return Latitude; }
+        public InstallationBase setLatitude(Double value) { this.Latitude = value; return this; }
+        public Double getLongitude() { return Longitude; }
+        public InstallationBase setLongitude(Double value) { this.Longitude = value; return this; }
+        public String getCity() { return City; }
+        public InstallationBase setCity(String value) { this.City = value; return this; }
+        public Date getCreationDate() { return CreationDate; }
+        public InstallationBase setCreationDate(Date value) { this.CreationDate = value; return this; }
+        public Double getPricekWh() { return PricekWh; }
+        public InstallationBase setPricekWh(Double value) { this.PricekWh = value; return this; }
+        public Double getPricekWhProduction() { return PricekWhProduction; }
+        public InstallationBase setPricekWhProduction(Double value) { this.PricekWhProduction = value; return this; }
+        public Double getPriceGaskWh() { return PriceGaskWh; }
+        public InstallationBase setPriceGaskWh(Double value) { this.PriceGaskWh = value; return this; }
+        public Double getPriceHeatingkWh() { return PriceHeatingkWh; }
+        public InstallationBase setPriceHeatingkWh(Double value) { this.PriceHeatingkWh = value; return this; }
+        public Double getPriceWaterM3() { return PriceWaterM3; }
+        public InstallationBase setPriceWaterM3(Double value) { this.PriceWaterM3 = value; return this; }
+        public Double getGasMeterTokWh() { return GasMeterTokWh; }
+        public InstallationBase setGasMeterTokWh(Double value) { this.GasMeterTokWh = value; return this; }
+        public String getDashboardView() { return DashboardView; }
+        public InstallationBase setDashboardView(String value) { this.DashboardView = value; return this; }
+        public Date getActivationDate() { return ActivationDate; }
+        public InstallationBase setActivationDate(Date value) { this.ActivationDate = value; return this; }
+        public Boolean isBlocked() { return Blocked; }
+        public InstallationBase setBlocked(Boolean value) { this.Blocked = value; return this; }
+        public String getGwVersion() { return GWVersion; }
+        public InstallationBase setGwVersion(String value) { this.GWVersion = value; return this; }
+        public String getEnvironment() { return Environment; }
+        public InstallationBase setEnvironment(String value) { this.Environment = value; return this; }
+    }
+
+    public static class Report
+    {
+        public Integer Id = null;
+        public String Name = null;
+        public Date CreationDate = null;
+        
+        public Integer getId() { return Id; }
+        public Report setId(Integer value) { this.Id = value; return this; }
+        public String getName() { return Name; }
+        public Report setName(String value) { this.Name = value; return this; }
+        public Date getCreationDate() { return CreationDate; }
+        public Report setCreationDate(Date value) { this.CreationDate = value; return this; }
+    }
+
+    public static class ReportInstallation
+    {
+        public Integer Id = null;
+        public Integer ReportId = null;
+        public UUID InstallationId = null;
+        
+        public Integer getId() { return Id; }
+        public ReportInstallation setId(Integer value) { this.Id = value; return this; }
+        public Integer getReportId() { return ReportId; }
+        public ReportInstallation setReportId(Integer value) { this.ReportId = value; return this; }
+        public UUID getInstallationId() { return InstallationId; }
+        public ReportInstallation setInstallationId(UUID value) { this.InstallationId = value; return this; }
+    }
+
+    public static class UserReport
+    {
+        public Integer Id = null;
+        public Integer UserId = null;
+        public Integer ReportId = null;
+        
+        public Integer getId() { return Id; }
+        public UserReport setId(Integer value) { this.Id = value; return this; }
+        public Integer getUserId() { return UserId; }
+        public UserReport setUserId(Integer value) { this.UserId = value; return this; }
+        public Integer getReportId() { return ReportId; }
+        public UserReport setReportId(Integer value) { this.ReportId = value; return this; }
     }
 
     public static class DefaultSensorConfiguration
@@ -8272,8 +10057,6 @@ public class dto
         public Date LastModificationDate = null;
         public String MinGWVersion = null;
         public String SensorConfiguration = null;
-        @Ignore()
-        public SensorConfiguration Configuration = null;
         
         public Integer getId() { return Id; }
         public DefaultSensorConfiguration setId(Integer value) { this.Id = value; return this; }
@@ -8303,19 +10086,17 @@ public class dto
         public DefaultSensorConfiguration setMinGWVersion(String value) { this.MinGWVersion = value; return this; }
         public String getSensorConfiguration() { return SensorConfiguration; }
         public DefaultSensorConfiguration setSensorConfiguration(String value) { this.SensorConfiguration = value; return this; }
-        public SensorConfiguration getConfiguration() { return Configuration; }
-        public DefaultSensorConfiguration setConfiguration(SensorConfiguration value) { this.Configuration = value; return this; }
     }
 
-    public static class SensorStatusPoint
+    public static class SensorZWaveRegisterEditablesPoint
     {
         public String SensorId = null;
-        public StatusPoint StatusPoint = null;
+        public HashMap<Integer,Integer> Registers = null;
         
         public String getSensorId() { return SensorId; }
-        public SensorStatusPoint setSensorId(String value) { this.SensorId = value; return this; }
-        public StatusPoint getStatusPoint() { return StatusPoint; }
-        public SensorStatusPoint setStatusPoint(StatusPoint value) { this.StatusPoint = value; return this; }
+        public SensorZWaveRegisterEditablesPoint setSensorId(String value) { this.SensorId = value; return this; }
+        public HashMap<Integer,Integer> getRegisters() { return Registers; }
+        public SensorZWaveRegisterEditablesPoint setRegisters(HashMap<Integer,Integer> value) { this.Registers = value; return this; }
     }
 
     public static class SensorStats
@@ -8337,8 +10118,6 @@ public class dto
         public String Id = null;
         public Date Date = null;
         public Double Value = null;
-        public Double CorrectedValue = null;
-        public Boolean Processed = null;
         
         public String getId() { return Id; }
         public OutlierPoint setId(String value) { this.Id = value; return this; }
@@ -8346,24 +10125,26 @@ public class dto
         public OutlierPoint setDate(Date value) { this.Date = value; return this; }
         public Double getValue() { return Value; }
         public OutlierPoint setValue(Double value) { this.Value = value; return this; }
-        public Double getCorrectedValue() { return CorrectedValue; }
-        public OutlierPoint setCorrectedValue(Double value) { this.CorrectedValue = value; return this; }
-        public Boolean isProcessed() { return Processed; }
-        public OutlierPoint setProcessed(Boolean value) { this.Processed = value; return this; }
     }
 
     public static class GapPoint
     {
         public String Id = null;
-        public Date Date = null;
-        public Double Value = null;
+        public Date DateFrom = null;
+        public Date DateTo = null;
+        public TimeSpan Gap = null;
+        public Integer MissedPoints = null;
         
         public String getId() { return Id; }
         public GapPoint setId(String value) { this.Id = value; return this; }
-        public Date getDate() { return Date; }
-        public GapPoint setDate(Date value) { this.Date = value; return this; }
-        public Double getValue() { return Value; }
-        public GapPoint setValue(Double value) { this.Value = value; return this; }
+        public Date getDateFrom() { return DateFrom; }
+        public GapPoint setDateFrom(Date value) { this.DateFrom = value; return this; }
+        public Date getDateTo() { return DateTo; }
+        public GapPoint setDateTo(Date value) { this.DateTo = value; return this; }
+        public TimeSpan getGap() { return Gap; }
+        public GapPoint setGap(TimeSpan value) { this.Gap = value; return this; }
+        public Integer getMissedPoints() { return MissedPoints; }
+        public GapPoint setMissedPoints(Integer value) { this.MissedPoints = value; return this; }
     }
 
     public static class BatteryLevelReport
@@ -8381,6 +10162,38 @@ public class dto
         public BatteryLevelReport setDate(Date value) { this.Date = value; return this; }
         public Boolean isNotify() { return Notify; }
         public BatteryLevelReport setNotify(Boolean value) { this.Notify = value; return this; }
+    }
+
+    public static class SensorDataPointML
+    {
+        public String Id = null;
+        public Date Date = null;
+        public Double Value = null;
+        public Double TemperatureOutside = null;
+        public Integer WeekDay = null;
+        public Integer Hour = null;
+        public Integer Month = null;
+        public Double PreviousValue = null;
+        public String MasterType = null;
+        
+        public String getId() { return Id; }
+        public SensorDataPointML setId(String value) { this.Id = value; return this; }
+        public Date getDate() { return Date; }
+        public SensorDataPointML setDate(Date value) { this.Date = value; return this; }
+        public Double getValue() { return Value; }
+        public SensorDataPointML setValue(Double value) { this.Value = value; return this; }
+        public Double getTemperatureOutside() { return TemperatureOutside; }
+        public SensorDataPointML setTemperatureOutside(Double value) { this.TemperatureOutside = value; return this; }
+        public Integer getWeekDay() { return WeekDay; }
+        public SensorDataPointML setWeekDay(Integer value) { this.WeekDay = value; return this; }
+        public Integer getHour() { return Hour; }
+        public SensorDataPointML setHour(Integer value) { this.Hour = value; return this; }
+        public Integer getMonth() { return Month; }
+        public SensorDataPointML setMonth(Integer value) { this.Month = value; return this; }
+        public Double getPreviousValue() { return PreviousValue; }
+        public SensorDataPointML setPreviousValue(Double value) { this.PreviousValue = value; return this; }
+        public String getMasterType() { return MasterType; }
+        public SensorDataPointML setMasterType(String value) { this.MasterType = value; return this; }
     }
 
     public static class ModePoint
@@ -8428,6 +10241,17 @@ public class dto
         public SensorModePoint setModePoint(ModePoint value) { this.ModePoint = value; return this; }
     }
 
+    public static class SensorSupportedModesPoint
+    {
+        public String SensorId = null;
+        public ArrayList<String> SupportedModes = null;
+        
+        public String getSensorId() { return SensorId; }
+        public SensorSupportedModesPoint setSensorId(String value) { this.SensorId = value; return this; }
+        public ArrayList<String> getSupportedModes() { return SupportedModes; }
+        public SensorSupportedModesPoint setSupportedModes(ArrayList<String> value) { this.SupportedModes = value; return this; }
+    }
+
     public static class SensorSetPointPoint
     {
         public String SensorId = null;
@@ -8439,214 +10263,43 @@ public class dto
         public SensorSetPointPoint setSetPointPoint(SetPointPoint value) { this.SetPointPoint = value; return this; }
     }
 
-    public static class Tip
+    public static class FanModePoint
     {
-        public Integer Id = null;
-        public String Title = null;
-        public String Text = null;
-        public String Description = null;
-        public String Icon = null;
-        public String Section = null;
+        public String FanMode = null;
+        public Date Date = null;
+        public String Trigger = null;
+        public String TriggerName = null;
         
-        public Integer getId() { return Id; }
-        public Tip setId(Integer value) { this.Id = value; return this; }
-        public String getTitle() { return Title; }
-        public Tip setTitle(String value) { this.Title = value; return this; }
-        public String getText() { return Text; }
-        public Tip setText(String value) { this.Text = value; return this; }
-        public String getDescription() { return Description; }
-        public Tip setDescription(String value) { this.Description = value; return this; }
-        public String getIcon() { return Icon; }
-        public Tip setIcon(String value) { this.Icon = value; return this; }
-        public String getSection() { return Section; }
-        public Tip setSection(String value) { this.Section = value; return this; }
+        public String getFanMode() { return FanMode; }
+        public FanModePoint setFanMode(String value) { this.FanMode = value; return this; }
+        public Date getDate() { return Date; }
+        public FanModePoint setDate(Date value) { this.Date = value; return this; }
+        public String getTrigger() { return Trigger; }
+        public FanModePoint setTrigger(String value) { this.Trigger = value; return this; }
+        public String getTriggerName() { return TriggerName; }
+        public FanModePoint setTriggerName(String value) { this.TriggerName = value; return this; }
     }
 
-    public static enum TipSection
+    public static class SensorFanModePoint
     {
-        Electricity,
-        Gas,
-        Heating,
-        Water;
-    }
-
-    public static class UserWithNumNotifications
-    {
-        public UserAuth User = null;
-        public Integer MailNotifications = null;
-        public Integer PushNotifications = null;
-        public Integer SMSNotifications = null;
+        public String SensorId = null;
+        public FanModePoint FanModePoint = null;
         
-        public UserAuth getUser() { return User; }
-        public UserWithNumNotifications setUser(UserAuth value) { this.User = value; return this; }
-        public Integer getMailNotifications() { return MailNotifications; }
-        public UserWithNumNotifications setMailNotifications(Integer value) { this.MailNotifications = value; return this; }
-        public Integer getPushNotifications() { return PushNotifications; }
-        public UserWithNumNotifications setPushNotifications(Integer value) { this.PushNotifications = value; return this; }
-        public Integer getSmsNotifications() { return SMSNotifications; }
-        public UserWithNumNotifications setSmsNotifications(Integer value) { this.SMSNotifications = value; return this; }
+        public String getSensorId() { return SensorId; }
+        public SensorFanModePoint setSensorId(String value) { this.SensorId = value; return this; }
+        public FanModePoint getFanModePoint() { return FanModePoint; }
+        public SensorFanModePoint setFanModePoint(FanModePoint value) { this.FanModePoint = value; return this; }
     }
 
-    public static class UserSettings
+    public static class SensorSupportedFanModesPoint
     {
-        public Integer Id = null;
-        public String PhoneNumber = null;
-        public Boolean CelsiusUnits = null;
-        public String Currency = null;
-        public String DefaultInstallation = null;
-        public Boolean DREnabled = null;
-        public String DefaultPage = null;
+        public String SensorId = null;
+        public ArrayList<String> SupportedFanModes = null;
         
-        public Integer getId() { return Id; }
-        public UserSettings setId(Integer value) { this.Id = value; return this; }
-        public String getPhoneNumber() { return PhoneNumber; }
-        public UserSettings setPhoneNumber(String value) { this.PhoneNumber = value; return this; }
-        public Boolean isCelsiusUnits() { return CelsiusUnits; }
-        public UserSettings setCelsiusUnits(Boolean value) { this.CelsiusUnits = value; return this; }
-        public String getCurrency() { return Currency; }
-        public UserSettings setCurrency(String value) { this.Currency = value; return this; }
-        public String getDefaultInstallation() { return DefaultInstallation; }
-        public UserSettings setDefaultInstallation(String value) { this.DefaultInstallation = value; return this; }
-        public Boolean isDrEnabled() { return DREnabled; }
-        public UserSettings setDrEnabled(Boolean value) { this.DREnabled = value; return this; }
-        public String getDefaultPage() { return DefaultPage; }
-        public UserSettings setDefaultPage(String value) { this.DefaultPage = value; return this; }
-    }
-
-    public static class UserNotificationSettings
-    {
-        public Integer Id = null;
-        public Integer UserId = null;
-        public String SubType = null;
-        public Boolean SMS = null;
-        public Boolean Mail = null;
-        public Boolean Push = null;
-        public Boolean IsEnabled = null;
-        
-        public Integer getId() { return Id; }
-        public UserNotificationSettings setId(Integer value) { this.Id = value; return this; }
-        public Integer getUserId() { return UserId; }
-        public UserNotificationSettings setUserId(Integer value) { this.UserId = value; return this; }
-        public String getSubType() { return SubType; }
-        public UserNotificationSettings setSubType(String value) { this.SubType = value; return this; }
-        public Boolean isSms() { return SMS; }
-        public UserNotificationSettings setSms(Boolean value) { this.SMS = value; return this; }
-        public Boolean isMail() { return Mail; }
-        public UserNotificationSettings setMail(Boolean value) { this.Mail = value; return this; }
-        public Boolean isPush() { return Push; }
-        public UserNotificationSettings setPush(Boolean value) { this.Push = value; return this; }
-        public Boolean getIsEnabled() { return IsEnabled; }
-        public UserNotificationSettings setIsEnabled(Boolean value) { this.IsEnabled = value; return this; }
-    }
-
-    public static class Warning
-    {
-        public Integer Id = null;
-        public String Name = null;
-        public Integer CreatedBy = null;
-        public String Message = null;
-        public String Type = null;
-        public Date FromDate = null;
-        public Date ToDate = null;
-        public Boolean IsActivated = null;
-        public Boolean IsPersistent = null;
-        public Boolean IsImmediate = null;
-        public String I18N = null;
-        
-        public Integer getId() { return Id; }
-        public Warning setId(Integer value) { this.Id = value; return this; }
-        public String getName() { return Name; }
-        public Warning setName(String value) { this.Name = value; return this; }
-        public Integer getCreatedBy() { return CreatedBy; }
-        public Warning setCreatedBy(Integer value) { this.CreatedBy = value; return this; }
-        public String getMessage() { return Message; }
-        public Warning setMessage(String value) { this.Message = value; return this; }
-        public String getType() { return Type; }
-        public Warning setType(String value) { this.Type = value; return this; }
-        public Date getFromDate() { return FromDate; }
-        public Warning setFromDate(Date value) { this.FromDate = value; return this; }
-        public Date getToDate() { return ToDate; }
-        public Warning setToDate(Date value) { this.ToDate = value; return this; }
-        public Boolean getIsActivated() { return IsActivated; }
-        public Warning setIsActivated(Boolean value) { this.IsActivated = value; return this; }
-        public Boolean getIsPersistent() { return IsPersistent; }
-        public Warning setIsPersistent(Boolean value) { this.IsPersistent = value; return this; }
-        public Boolean getIsImmediate() { return IsImmediate; }
-        public Warning setIsImmediate(Boolean value) { this.IsImmediate = value; return this; }
-        public String getI18N() { return I18N; }
-        public Warning setI18N(String value) { this.I18N = value; return this; }
-    }
-
-    public static class UserWarning
-    {
-        public Long Id = null;
-        public Integer UserId = null;
-        public Integer WarningId = null;
-        
-        public Long getId() { return Id; }
-        public UserWarning setId(Long value) { this.Id = value; return this; }
-        public Integer getUserId() { return UserId; }
-        public UserWarning setUserId(Integer value) { this.UserId = value; return this; }
-        public Integer getWarningId() { return WarningId; }
-        public UserWarning setWarningId(Integer value) { this.WarningId = value; return this; }
-    }
-
-    public static class QueryBase
-    {
-        @DataMember(Order=1)
-        public Integer Skip = null;
-
-        @DataMember(Order=2)
-        public Integer Take = null;
-
-        @DataMember(Order=3)
-        public String OrderBy = null;
-
-        @DataMember(Order=4)
-        public String OrderByDesc = null;
-
-        @DataMember(Order=5)
-        public String Include = null;
-
-        @DataMember(Order=6)
-        public HashMap<String,String> Meta = null;
-        
-        public Integer getSkip() { return Skip; }
-        public QueryBase setSkip(Integer value) { this.Skip = value; return this; }
-        public Integer getTake() { return Take; }
-        public QueryBase setTake(Integer value) { this.Take = value; return this; }
-        public String getOrderBy() { return OrderBy; }
-        public QueryBase setOrderBy(String value) { this.OrderBy = value; return this; }
-        public String getOrderByDesc() { return OrderByDesc; }
-        public QueryBase setOrderByDesc(String value) { this.OrderByDesc = value; return this; }
-        public String getInclude() { return Include; }
-        public QueryBase setInclude(String value) { this.Include = value; return this; }
-        public HashMap<String,String> getMeta() { return Meta; }
-        public QueryBase setMeta(HashMap<String,String> value) { this.Meta = value; return this; }
-    }
-
-    public static class TableEntity
-    {
-        public String PartitionKey = null;
-        public String RowKey = null;
-        public Date Timestamp = null;
-        public String ETag = null;
-        
-        public String getPartitionKey() { return PartitionKey; }
-        public TableEntity setPartitionKey(String value) { this.PartitionKey = value; return this; }
-        public String getRowKey() { return RowKey; }
-        public TableEntity setRowKey(String value) { this.RowKey = value; return this; }
-        public Date getTimestamp() { return Timestamp; }
-        public TableEntity setTimestamp(Date value) { this.Timestamp = value; return this; }
-        public String getETag() { return ETag; }
-        public TableEntity setETag(String value) { this.ETag = value; return this; }
-    }
-
-    public static enum SchedulerType
-    {
-        Comfort,
-        Security,
-        Control;
+        public String getSensorId() { return SensorId; }
+        public SensorSupportedFanModesPoint setSensorId(String value) { this.SensorId = value; return this; }
+        public ArrayList<String> getSupportedFanModes() { return SupportedFanModes; }
+        public SensorSupportedFanModesPoint setSupportedFanModes(ArrayList<String> value) { this.SupportedFanModes = value; return this; }
     }
 
     public static class SensorBase
@@ -8700,6 +10353,218 @@ public class dto
         public SensorBase setConsumptionCategory(String value) { this.ConsumptionCategory = value; return this; }
         public Date getCreationDate() { return CreationDate; }
         public SensorBase setCreationDate(Date value) { this.CreationDate = value; return this; }
+    }
+
+    public static class Tip
+    {
+        public Integer Id = null;
+        public String Title = null;
+        public String Text = null;
+        public String Description = null;
+        public String Icon = null;
+        public String Section = null;
+        
+        public Integer getId() { return Id; }
+        public Tip setId(Integer value) { this.Id = value; return this; }
+        public String getTitle() { return Title; }
+        public Tip setTitle(String value) { this.Title = value; return this; }
+        public String getText() { return Text; }
+        public Tip setText(String value) { this.Text = value; return this; }
+        public String getDescription() { return Description; }
+        public Tip setDescription(String value) { this.Description = value; return this; }
+        public String getIcon() { return Icon; }
+        public Tip setIcon(String value) { this.Icon = value; return this; }
+        public String getSection() { return Section; }
+        public Tip setSection(String value) { this.Section = value; return this; }
+    }
+
+    public static enum TipSection
+    {
+        Electricity,
+        Gas,
+        Heating,
+        Water;
+    }
+
+    public static class UserWithNumNotifications
+    {
+        public UserAuth User = null;
+        public Integer MailNotifications = null;
+        public Integer PushNotifications = null;
+        public Integer SMSNotifications = null;
+        
+        public UserAuth getUser() { return User; }
+        public UserWithNumNotifications setUser(UserAuth value) { this.User = value; return this; }
+        public Integer getMailNotifications() { return MailNotifications; }
+        public UserWithNumNotifications setMailNotifications(Integer value) { this.MailNotifications = value; return this; }
+        public Integer getPushNotifications() { return PushNotifications; }
+        public UserWithNumNotifications setPushNotifications(Integer value) { this.PushNotifications = value; return this; }
+        public Integer getSmsNotifications() { return SMSNotifications; }
+        public UserWithNumNotifications setSmsNotifications(Integer value) { this.SMSNotifications = value; return this; }
+    }
+
+    public static class AdminSentNotification
+    {
+        public Long Id = null;
+        public Integer UserId = null;
+        public String Type = null;
+        public String Subtype = null;
+        public String Description = null;
+        public UUID TargetInstallation = null;
+        public Date Date = null;
+        
+        public Long getId() { return Id; }
+        public AdminSentNotification setId(Long value) { this.Id = value; return this; }
+        public Integer getUserId() { return UserId; }
+        public AdminSentNotification setUserId(Integer value) { this.UserId = value; return this; }
+        public String getType() { return Type; }
+        public AdminSentNotification setType(String value) { this.Type = value; return this; }
+        public String getSubtype() { return Subtype; }
+        public AdminSentNotification setSubtype(String value) { this.Subtype = value; return this; }
+        public String getDescription() { return Description; }
+        public AdminSentNotification setDescription(String value) { this.Description = value; return this; }
+        public UUID getTargetInstallation() { return TargetInstallation; }
+        public AdminSentNotification setTargetInstallation(UUID value) { this.TargetInstallation = value; return this; }
+        public Date getDate() { return Date; }
+        public AdminSentNotification setDate(Date value) { this.Date = value; return this; }
+    }
+
+    public static class UserSettings
+    {
+        public Integer Id = null;
+        public String PhoneNumber = null;
+        public Boolean CelsiusUnits = null;
+        public String Currency = null;
+        public String DefaultInstallation = null;
+        public Boolean DREnabled = null;
+        public String DefaultPage = null;
+        public Boolean NeedsChangePassword = null;
+        
+        public Integer getId() { return Id; }
+        public UserSettings setId(Integer value) { this.Id = value; return this; }
+        public String getPhoneNumber() { return PhoneNumber; }
+        public UserSettings setPhoneNumber(String value) { this.PhoneNumber = value; return this; }
+        public Boolean isCelsiusUnits() { return CelsiusUnits; }
+        public UserSettings setCelsiusUnits(Boolean value) { this.CelsiusUnits = value; return this; }
+        public String getCurrency() { return Currency; }
+        public UserSettings setCurrency(String value) { this.Currency = value; return this; }
+        public String getDefaultInstallation() { return DefaultInstallation; }
+        public UserSettings setDefaultInstallation(String value) { this.DefaultInstallation = value; return this; }
+        public Boolean isDrEnabled() { return DREnabled; }
+        public UserSettings setDrEnabled(Boolean value) { this.DREnabled = value; return this; }
+        public String getDefaultPage() { return DefaultPage; }
+        public UserSettings setDefaultPage(String value) { this.DefaultPage = value; return this; }
+        public Boolean isNeedsChangePassword() { return NeedsChangePassword; }
+        public UserSettings setNeedsChangePassword(Boolean value) { this.NeedsChangePassword = value; return this; }
+    }
+
+    public static class UserNotificationSettings
+    {
+        public Integer Id = null;
+        public Integer UserId = null;
+        public String SubType = null;
+        public Boolean SMS = null;
+        public Boolean Mail = null;
+        public Boolean Push = null;
+        public Boolean IsEnabled = null;
+        
+        public Integer getId() { return Id; }
+        public UserNotificationSettings setId(Integer value) { this.Id = value; return this; }
+        public Integer getUserId() { return UserId; }
+        public UserNotificationSettings setUserId(Integer value) { this.UserId = value; return this; }
+        public String getSubType() { return SubType; }
+        public UserNotificationSettings setSubType(String value) { this.SubType = value; return this; }
+        public Boolean isSms() { return SMS; }
+        public UserNotificationSettings setSms(Boolean value) { this.SMS = value; return this; }
+        public Boolean isMail() { return Mail; }
+        public UserNotificationSettings setMail(Boolean value) { this.Mail = value; return this; }
+        public Boolean isPush() { return Push; }
+        public UserNotificationSettings setPush(Boolean value) { this.Push = value; return this; }
+        public Boolean getIsEnabled() { return IsEnabled; }
+        public UserNotificationSettings setIsEnabled(Boolean value) { this.IsEnabled = value; return this; }
+    }
+
+    public static class UserWarning
+    {
+        public Long Id = null;
+        public Integer UserId = null;
+        public Integer WarningId = null;
+        
+        public Long getId() { return Id; }
+        public UserWarning setId(Long value) { this.Id = value; return this; }
+        public Integer getUserId() { return UserId; }
+        public UserWarning setUserId(Integer value) { this.UserId = value; return this; }
+        public Integer getWarningId() { return WarningId; }
+        public UserWarning setWarningId(Integer value) { this.WarningId = value; return this; }
+    }
+
+    public static class TwitterAccount
+    {
+        public String Twitter = null;
+        public String ConsumerKey = null;
+        public String ConsumerSecret = null;
+        public String AccessToken = null;
+        public String AccessTokenSecret = null;
+        
+        public String getTwitter() { return Twitter; }
+        public TwitterAccount setTwitter(String value) { this.Twitter = value; return this; }
+        public String getConsumerKey() { return ConsumerKey; }
+        public TwitterAccount setConsumerKey(String value) { this.ConsumerKey = value; return this; }
+        public String getConsumerSecret() { return ConsumerSecret; }
+        public TwitterAccount setConsumerSecret(String value) { this.ConsumerSecret = value; return this; }
+        public String getAccessToken() { return AccessToken; }
+        public TwitterAccount setAccessToken(String value) { this.AccessToken = value; return this; }
+        public String getAccessTokenSecret() { return AccessTokenSecret; }
+        public TwitterAccount setAccessTokenSecret(String value) { this.AccessTokenSecret = value; return this; }
+    }
+
+    public static class TwitterAccountGroup
+    {
+        public String Twitter = null;
+        public String GroupName = null;
+        
+        public String getTwitter() { return Twitter; }
+        public TwitterAccountGroup setTwitter(String value) { this.Twitter = value; return this; }
+        public String getGroupName() { return GroupName; }
+        public TwitterAccountGroup setGroupName(String value) { this.GroupName = value; return this; }
+    }
+
+    public static class TableEntity
+    {
+        public String PartitionKey = null;
+        public String RowKey = null;
+        public Date Timestamp = null;
+        public String ETag = null;
+        
+        public String getPartitionKey() { return PartitionKey; }
+        public TableEntity setPartitionKey(String value) { this.PartitionKey = value; return this; }
+        public String getRowKey() { return RowKey; }
+        public TableEntity setRowKey(String value) { this.RowKey = value; return this; }
+        public Date getTimestamp() { return Timestamp; }
+        public TableEntity setTimestamp(Date value) { this.Timestamp = value; return this; }
+        public String getETag() { return ETag; }
+        public TableEntity setETag(String value) { this.ETag = value; return this; }
+    }
+
+    public static class WibeeeDeviceMetadata
+    {
+        public String MAC = null;
+        public String Model = null;
+        public String Version = null;
+        
+        public String getMac() { return MAC; }
+        public WibeeeDeviceMetadata setMac(String value) { this.MAC = value; return this; }
+        public String getModel() { return Model; }
+        public WibeeeDeviceMetadata setModel(String value) { this.Model = value; return this; }
+        public String getVersion() { return Version; }
+        public WibeeeDeviceMetadata setVersion(String value) { this.Version = value; return this; }
+    }
+
+    public static enum SchedulerType
+    {
+        Comfort,
+        Security,
+        Control;
     }
 
 }

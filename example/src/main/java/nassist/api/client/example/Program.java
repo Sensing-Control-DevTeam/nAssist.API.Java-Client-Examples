@@ -44,11 +44,11 @@ public class Program {
 	private static String USERNAME = "demo";
 	private static String PASSWORD = "demo";
 
-	private static String BASE_URL = "http://dev.nassist-test.com/api";
+	private static String BASE_URL = "https://dev.encontrol.io/api";
 
 	private static String INSTALLATION_ID = "00000000-0000-0000-0000-b827eb3761f7";
 	private static String SENSOR_ID = "127126ef-a96a-4177-9a7f-cd28f0e79326";
-	private static String CAMERA_ID = "4c03631b-c62b-4ce4-ad0c-998cdbffbfc7";
+	private static String CAMERA_ID = "c007ca97-9960-4a6e-9dd2-dfd61e39ad8d";
 
 	private static JsonServiceClient client;
 	private static AuthenticateResponse authDetails;
@@ -85,7 +85,7 @@ public class Program {
 		
 		createCustomNotification();
 	}
-
+	
 	public static void getInstallationDetails(){
 		InstallationDetails request = new InstallationDetails();
 		request.setId(INSTALLATION_ID);
