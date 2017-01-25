@@ -380,13 +380,13 @@ public class dto
         @ApiMember(Name="Id", Description="Camera id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
         public String Id = null;
 
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         public ArrayList<AssignableArea> Areas = null;
         
         public String getId() { return Id; }
         public CameraAreas setId(String value) { this.Id = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public CameraAreas setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public CameraAreas setInstallationId(String value) { this.InstallationId = value; return this; }
         public ArrayList<AssignableArea> getAreas() { return Areas; }
         public CameraAreas setAreas(ArrayList<AssignableArea> value) { this.Areas = value; return this; }
         private static Object responseType = CameraAreasResponse.class;
@@ -708,12 +708,12 @@ public class dto
     @Route(Path="/users/passwordreset", Verbs="PATCH")
     public static class UserPasswordReset implements IReturn<UserPasswordResetResponse>
     {
-        public UUID Token = null;
+        public String Token = null;
         public String Password = null;
         public String PasswordValidation = null;
         
-        public UUID getToken() { return Token; }
-        public UserPasswordReset setToken(UUID value) { this.Token = value; return this; }
+        public String getToken() { return Token; }
+        public UserPasswordReset setToken(String value) { this.Token = value; return this; }
         public String getPassword() { return Password; }
         public UserPasswordReset setPassword(String value) { this.Password = value; return this; }
         public String getPasswordValidation() { return PasswordValidation; }
@@ -726,10 +726,10 @@ public class dto
     public static class UserPasswordResetTokenValidation implements IReturn<UserPasswordResetTokenValidationResponse>
     {
         @ApiMember(Name="Token", Description="Password reset token", ParameterType="query", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Token = null;
+        public String Token = null;
         
-        public UUID getToken() { return Token; }
-        public UserPasswordResetTokenValidation setToken(UUID value) { this.Token = value; return this; }
+        public String getToken() { return Token; }
+        public UserPasswordResetTokenValidation setToken(String value) { this.Token = value; return this; }
         private static Object responseType = UserPasswordResetTokenValidationResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -739,10 +739,10 @@ public class dto
     public static class GatewayActivate implements IReturn<GatewayActivateResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayActivate setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayActivate setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayActivateResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -752,10 +752,10 @@ public class dto
     public static class GatewayToggleBlockedStatus implements IReturn<GatewayToggleBlockedStatusResponse>
     {
         @ApiMember(Name="GatewayId", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID GatewayId = null;
+        public String GatewayId = null;
         
-        public UUID getGatewayId() { return GatewayId; }
-        public GatewayToggleBlockedStatus setGatewayId(UUID value) { this.GatewayId = value; return this; }
+        public String getGatewayId() { return GatewayId; }
+        public GatewayToggleBlockedStatus setGatewayId(String value) { this.GatewayId = value; return this; }
         private static Object responseType = GatewayToggleBlockedStatusResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -764,10 +764,10 @@ public class dto
     public static class GatewayToggleUnblockedStatus implements IReturn<GatewayToggleUnblockedStatusResponse>
     {
         @ApiMember(Name="GatewayId", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="POST", ExcludeInSchema=true)
-        public UUID GatewayId = null;
+        public String GatewayId = null;
         
-        public UUID getGatewayId() { return GatewayId; }
-        public GatewayToggleUnblockedStatus setGatewayId(UUID value) { this.GatewayId = value; return this; }
+        public String getGatewayId() { return GatewayId; }
+        public GatewayToggleUnblockedStatus setGatewayId(String value) { this.GatewayId = value; return this; }
         private static Object responseType = GatewayToggleUnblockedStatusResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -788,10 +788,10 @@ public class dto
     public static class GatewayRestart implements IReturn<GatewayRestartResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayRestart setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayRestart setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayRestartResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -800,10 +800,10 @@ public class dto
     public static class GatewayShutdown implements IReturn<GatewayShutdownResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayShutdown setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayShutdown setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayShutdownResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -988,10 +988,10 @@ public class dto
     public static class GatewaySetAddOneSensorMode implements IReturn<GatewaySetAddOneSensorModeResponse>
     {
         @ApiMember(Name="Id", Description="Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewaySetAddOneSensorMode setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewaySetAddOneSensorMode setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewaySetAddOneSensorModeResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1000,10 +1000,10 @@ public class dto
     public static class GatewaySetRemoveOneSensorMode implements IReturn<GatewaySetRemoveOneSensorModeResponse>
     {
         @ApiMember(Name="Id", Description="Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewaySetRemoveOneSensorMode setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewaySetRemoveOneSensorMode setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewaySetRemoveOneSensorModeResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1012,10 +1012,10 @@ public class dto
     public static class GatewayNetworkClose implements IReturn<GatewayNetworkCloseResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="POST", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayNetworkClose setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayNetworkClose setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayNetworkCloseResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1024,10 +1024,10 @@ public class dto
     public static class GatewayNetworkMaintenance implements IReturn<GatewayNetworkMaintenanceResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayNetworkMaintenance setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayNetworkMaintenance setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayNetworkMaintenanceResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1464,7 +1464,7 @@ public class dto
     public static class GatewayConfigureSensor implements IReturn<GatewayConfigureSensorResponse>
     {
         @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="SensorId", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
         public String SensorId = null;
@@ -1472,8 +1472,8 @@ public class dto
         @ApiMember(Name="SensorConfiguration", Description="Sensor Configuration", ParameterType="body", DataType="SensorConfiguration", IsRequired=true)
         public SensorConfiguration Configuration = null;
         
-        public UUID getId() { return Id; }
-        public GatewayConfigureSensor setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayConfigureSensor setId(String value) { this.Id = value; return this; }
         public String getSensorId() { return SensorId; }
         public GatewayConfigureSensor setSensorId(String value) { this.SensorId = value; return this; }
         public SensorConfiguration getConfiguration() { return Configuration; }
@@ -1486,15 +1486,15 @@ public class dto
     public static class GatewayUpdateProperties implements IReturn<GatewayUpdatePropertiesResponse>
     {
         @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="SensorId", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
         public String SensorId = null;
 
         public HashMap<String,Object> Properties = null;
         
-        public UUID getId() { return Id; }
-        public GatewayUpdateProperties setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayUpdateProperties setId(String value) { this.Id = value; return this; }
         public String getSensorId() { return SensorId; }
         public GatewayUpdateProperties setSensorId(String value) { this.SensorId = value; return this; }
         public HashMap<String,Object> getProperties() { return Properties; }
@@ -1598,13 +1598,13 @@ public class dto
     public static class GatewayRemoveSensorForce implements IReturn<GatewayRemoveSensorForceResponse>
     {
         @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="SensorId", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
         public String SensorId = null;
         
-        public UUID getId() { return Id; }
-        public GatewayRemoveSensorForce setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayRemoveSensorForce setId(String value) { this.Id = value; return this; }
         public String getSensorId() { return SensorId; }
         public GatewayRemoveSensorForce setSensorId(String value) { this.SensorId = value; return this; }
         private static Object responseType = GatewayRemoveSensorForceResponse.class;
@@ -1615,10 +1615,10 @@ public class dto
     public static class GatewaySynchronizeSensorData implements IReturn<GatewaySynchronizeSensorDataResponse>
     {
         @ApiMember(Name="Id", Description="GatewayId", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewaySynchronizeSensorData setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewaySynchronizeSensorData setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewaySynchronizeSensorDataResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1783,10 +1783,10 @@ public class dto
     public static class GatewayPing implements IReturn<GatewayPingResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayPing setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayPing setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayPingResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1795,10 +1795,10 @@ public class dto
     public static class GatewayTunnelOpen implements IReturn<GatewayTunnelOpenResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayTunnelOpen setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayTunnelOpen setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayTunnelOpenResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1807,10 +1807,10 @@ public class dto
     public static class GatewayTunnelClose implements IReturn<GatewayTunnelCloseResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayTunnelClose setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayTunnelClose setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayTunnelCloseResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1850,10 +1850,10 @@ public class dto
     public static class GatewayNetworkStatus implements IReturn<GatewayNetworkStatusResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayNetworkStatus setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayNetworkStatus setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayNetworkStatusResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1862,13 +1862,13 @@ public class dto
     public static class GatewayDevices implements IReturn<GatewayDevicesResponse>
     {
         @ApiMember(Name="Id", Description="Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="Protocol", Description="Protocol", ParameterType="query", DataType="SensorProtocolType", Verb="GET")
         public SensorProtocolType Protocol = null;
         
-        public UUID getId() { return Id; }
-        public GatewayDevices setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayDevices setId(String value) { this.Id = value; return this; }
         public SensorProtocolType getProtocol() { return Protocol; }
         public GatewayDevices setProtocol(SensorProtocolType value) { this.Protocol = value; return this; }
         private static Object responseType = GatewayDevicesResponse.class;
@@ -1964,10 +1964,10 @@ public class dto
     public static class GatewayUPnPDevicesInfo implements IReturn<GatewayUPnPDevicesInfoResponse>
     {
         @ApiMember(Name="Id", Description="Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayUPnPDevicesInfo setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayUPnPDevicesInfo setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayUPnPDevicesInfoResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -1976,10 +1976,10 @@ public class dto
     public static class GatewayIPScan implements IReturn<GatewayIPScanResponse>
     {
         @ApiMember(Name="Id", Description="Id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public GatewayIPScan setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayIPScan setId(String value) { this.Id = value; return this; }
         private static Object responseType = GatewayIPScanResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -2305,14 +2305,14 @@ public class dto
     public static class GatewayRegister implements IReturn<GatewayRegisterResponse>
     {
         @ApiMember(Name="Id", Description="Gateway Id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public String Type = null;
         public String Manufacturer = null;
         public String GWVersion = null;
         
-        public UUID getId() { return Id; }
-        public GatewayRegister setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public GatewayRegister setId(String value) { this.Id = value; return this; }
         public String getType() { return Type; }
         public GatewayRegister setType(String value) { this.Type = value; return this; }
         public String getManufacturer() { return Manufacturer; }
@@ -2356,13 +2356,13 @@ public class dto
     public static class InstallationActivate implements IReturn<InstallationActivateResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="POST", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="Name", Description="Installation Name", ParameterType="body", DataType="string", IsRequired=true, Verb="POST")
         public String Name = null;
         
-        public UUID getId() { return Id; }
-        public InstallationActivate setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationActivate setId(String value) { this.Id = value; return this; }
         public String getName() { return Name; }
         public InstallationActivate setName(String value) { this.Name = value; return this; }
         private static Object responseType = InstallationActivateResponse.class;
@@ -2373,13 +2373,13 @@ public class dto
     public static class InstallationActivateAndAssign implements IReturn<InstallationActivateAndAssignResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="POST", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public String Name = null;
         public Integer OwnerId = null;
         
-        public UUID getId() { return Id; }
-        public InstallationActivateAndAssign setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationActivateAndAssign setId(String value) { this.Id = value; return this; }
         public String getName() { return Name; }
         public InstallationActivateAndAssign setName(String value) { this.Name = value; return this; }
         public Integer getOwnerId() { return OwnerId; }
@@ -2490,13 +2490,13 @@ public class dto
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET", ExcludeInSchema=true)
         // @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="ComfortStatus", Description="ComfortStatus", ParameterType="body", DataType="string", IsRequired=true, Verb="PATCH")
         public String ComfortStatus = null;
         
-        public UUID getId() { return Id; }
-        public InstallationComfortStatus setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationComfortStatus setId(String value) { this.Id = value; return this; }
         public String getComfortStatus() { return ComfortStatus; }
         public InstallationComfortStatus setComfortStatus(String value) { this.ComfortStatus = value; return this; }
         private static Object responseType = InstallationComfortStatusResponse.class;
@@ -2507,10 +2507,10 @@ public class dto
     public static class InstallationComfortMonthValues implements IReturn<InstallationComfortMonthValuesResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationComfortMonthValues setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationComfortMonthValues setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationComfortMonthValuesResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -2520,14 +2520,14 @@ public class dto
     public static class InstallationSecurityStatus implements IReturn<InstallationSecurityStatusResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public String SecurityStatus = null;
         public Date Date = null;
         public String Trigger = null;
         
-        public UUID getId() { return Id; }
-        public InstallationSecurityStatus setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationSecurityStatus setId(String value) { this.Id = value; return this; }
         public String getSecurityStatus() { return SecurityStatus; }
         public InstallationSecurityStatus setSecurityStatus(String value) { this.SecurityStatus = value; return this; }
         public Date getDate() { return Date; }
@@ -2542,7 +2542,7 @@ public class dto
     public static class InstallationPredictions implements IReturn<InstallationPredictionsResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="FromDate", Description="FromDate", ParameterType="query", DataType="string", Verb="GET")
         public String FromDate = null;
@@ -2556,8 +2556,8 @@ public class dto
         @ApiMember(Name="PageSize", Description="Pagination parameter page size", ParameterType="query", DataType="int", Verb="GET")
         public Integer PageSize = null;
         
-        public UUID getId() { return Id; }
-        public InstallationPredictions setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationPredictions setId(String value) { this.Id = value; return this; }
         public String getFromDate() { return FromDate; }
         public InstallationPredictions setFromDate(String value) { this.FromDate = value; return this; }
         public String getToDate() { return ToDate; }
@@ -2576,7 +2576,7 @@ public class dto
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET", ExcludeInSchema=true)
         // @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public Double DayEnergyTrendValue = null;
         public Double WeekEnergyTrendValue = null;
@@ -2586,8 +2586,8 @@ public class dto
         public String MonthEnergyTrendCode = null;
         public Date EnergyTrendDate = null;
         
-        public UUID getId() { return Id; }
-        public InstallationEnergyTrends setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationEnergyTrends setId(String value) { this.Id = value; return this; }
         public Double getDayEnergyTrendValue() { return DayEnergyTrendValue; }
         public InstallationEnergyTrends setDayEnergyTrendValue(Double value) { this.DayEnergyTrendValue = value; return this; }
         public Double getWeekEnergyTrendValue() { return WeekEnergyTrendValue; }
@@ -2612,7 +2612,7 @@ public class dto
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET", ExcludeInSchema=true)
         // @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public Double DayGasTrendValue = null;
         public Double WeekGasTrendValue = null;
@@ -2622,8 +2622,8 @@ public class dto
         public String MonthGasTrendCode = null;
         public Date GasTrendDate = null;
         
-        public UUID getId() { return Id; }
-        public InstallationGasTrends setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationGasTrends setId(String value) { this.Id = value; return this; }
         public Double getDayGasTrendValue() { return DayGasTrendValue; }
         public InstallationGasTrends setDayGasTrendValue(Double value) { this.DayGasTrendValue = value; return this; }
         public Double getWeekGasTrendValue() { return WeekGasTrendValue; }
@@ -2648,7 +2648,7 @@ public class dto
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET", ExcludeInSchema=true)
         // @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public Double DayHeatingTrendValue = null;
         public Double WeekHeatingTrendValue = null;
@@ -2658,8 +2658,8 @@ public class dto
         public String MonthHeatingTrendCode = null;
         public Date HeatingTrendDate = null;
         
-        public UUID getId() { return Id; }
-        public InstallationHeatingTrends setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationHeatingTrends setId(String value) { this.Id = value; return this; }
         public Double getDayHeatingTrendValue() { return DayHeatingTrendValue; }
         public InstallationHeatingTrends setDayHeatingTrendValue(Double value) { this.DayHeatingTrendValue = value; return this; }
         public Double getWeekHeatingTrendValue() { return WeekHeatingTrendValue; }
@@ -2684,7 +2684,7 @@ public class dto
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET", ExcludeInSchema=true)
         // @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public Double DayWaterTrendValue = null;
         public Double WeekWaterTrendValue = null;
@@ -2694,8 +2694,8 @@ public class dto
         public String MonthWaterTrendCode = null;
         public Date WaterTrendDate = null;
         
-        public UUID getId() { return Id; }
-        public InstallationWaterTrends setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationWaterTrends setId(String value) { this.Id = value; return this; }
         public Double getDayWaterTrendValue() { return DayWaterTrendValue; }
         public InstallationWaterTrends setDayWaterTrendValue(Double value) { this.DayWaterTrendValue = value; return this; }
         public Double getWeekWaterTrendValue() { return WeekWaterTrendValue; }
@@ -2718,13 +2718,13 @@ public class dto
     public static class InstallationEnergyTrend implements IReturn<InstallationEnergyTrendResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="Period", Description="Trend period", ParameterType="path", DataType="string", IsRequired=true, Verb="GET")
         public String Period = null;
         
-        public UUID getId() { return Id; }
-        public InstallationEnergyTrend setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationEnergyTrend setId(String value) { this.Id = value; return this; }
         public String getPeriod() { return Period; }
         public InstallationEnergyTrend setPeriod(String value) { this.Period = value; return this; }
         private static Object responseType = InstallationEnergyTrendResponse.class;
@@ -2752,7 +2752,7 @@ public class dto
     public static class InstallationTrees implements IReturn<InstallationTreesResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="Type", Description="Tree Type", ParameterType="query", DataType="int", IsRequired=true, Verb="GET")
         public String Type = null;
@@ -2763,8 +2763,8 @@ public class dto
         @ApiMember(Name="ToDate", Description="ToDate", ParameterType="query", DataType="string", Verb="GET")
         public Date ToDate = null;
         
-        public UUID getId() { return Id; }
-        public InstallationTrees setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationTrees setId(String value) { this.Id = value; return this; }
         public String getType() { return Type; }
         public InstallationTrees setType(String value) { this.Type = value; return this; }
         public Date getFromDate() { return FromDate; }
@@ -2779,7 +2779,7 @@ public class dto
     public static class InstallationLastMonthsTrees implements IReturn<InstallationLastMonthsTreesResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="MonthNum", Description="Number of months", ParameterType="path", DataType="int", IsRequired=true, Verb="GET")
         public Integer MonthNum = null;
@@ -2787,8 +2787,8 @@ public class dto
         @ApiMember(Name="Type", Description="Tree Type", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String Type = null;
         
-        public UUID getId() { return Id; }
-        public InstallationLastMonthsTrees setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationLastMonthsTrees setId(String value) { this.Id = value; return this; }
         public Integer getMonthNum() { return MonthNum; }
         public InstallationLastMonthsTrees setMonthNum(Integer value) { this.MonthNum = value; return this; }
         public String getType() { return Type; }
@@ -2801,7 +2801,7 @@ public class dto
     public static class InstallationConsumptionValues implements IReturn<InstallationConsumptionValuesResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="UserTimeZone", Description="UserTimeZone", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String UserTimeZone = null;
@@ -2809,8 +2809,8 @@ public class dto
         @ApiMember(Name="ConsumptionPeriod", Description="ConsumptionPeriod", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String ConsumptionPeriod = null;
         
-        public UUID getId() { return Id; }
-        public InstallationConsumptionValues setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationConsumptionValues setId(String value) { this.Id = value; return this; }
         public String getUserTimeZone() { return UserTimeZone; }
         public InstallationConsumptionValues setUserTimeZone(String value) { this.UserTimeZone = value; return this; }
         public String getConsumptionPeriod() { return ConsumptionPeriod; }
@@ -2823,7 +2823,7 @@ public class dto
     public static class InstallationPercentageConsumptionValues implements IReturn<InstallationPercentageConsumptionValuesResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="UserTimeZone", Description="UserTimeZone", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String UserTimeZone = null;
@@ -2831,8 +2831,8 @@ public class dto
         @ApiMember(Name="ConsumptionPeriod", Description="ConsumptionPeriod", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String ConsumptionPeriod = null;
         
-        public UUID getId() { return Id; }
-        public InstallationPercentageConsumptionValues setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationPercentageConsumptionValues setId(String value) { this.Id = value; return this; }
         public String getUserTimeZone() { return UserTimeZone; }
         public InstallationPercentageConsumptionValues setUserTimeZone(String value) { this.UserTimeZone = value; return this; }
         public String getConsumptionPeriod() { return ConsumptionPeriod; }
@@ -2868,13 +2868,13 @@ public class dto
     public static class InstallationEnergyConsumption implements IReturn<InstallationEnergyConsumptionResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="InstallationCategoryConsumption", Description="InstallationCategoryConsumption", ParameterType="body", DataType="InstallationCategoryConsumption", IsRequired=true, Verb="POST")
         public InstallationCategoryConsumption InstallationCategoryConsumption = null;
         
-        public UUID getId() { return Id; }
-        public InstallationEnergyConsumption setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationEnergyConsumption setId(String value) { this.Id = value; return this; }
         public InstallationCategoryConsumption getInstallationCategoryConsumption() { return InstallationCategoryConsumption; }
         public InstallationEnergyConsumption setInstallationCategoryConsumption(InstallationCategoryConsumption value) { this.InstallationCategoryConsumption = value; return this; }
         private static Object responseType = InstallationEnergyConsumptionResponse.class;
@@ -2885,13 +2885,13 @@ public class dto
     public static class InstallationEnergyConsumptionByCategoriesDay implements IReturn<InstallationEnergyConsumptionByCategoriesDayResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="TimeZone", Description="TimeZone standard name", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String TimeZone = null;
         
-        public UUID getId() { return Id; }
-        public InstallationEnergyConsumptionByCategoriesDay setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationEnergyConsumptionByCategoriesDay setId(String value) { this.Id = value; return this; }
         public String getTimeZone() { return TimeZone; }
         public InstallationEnergyConsumptionByCategoriesDay setTimeZone(String value) { this.TimeZone = value; return this; }
         private static Object responseType = InstallationEnergyConsumptionByCategoriesDayResponse.class;
@@ -2902,13 +2902,13 @@ public class dto
     public static class InstallationEnergyConsumptionByCategoriesWeek implements IReturn<InstallationEnergyConsumptionByCategoriesWeekResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="TimeZone", Description="TimeZone standard name", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String TimeZone = null;
         
-        public UUID getId() { return Id; }
-        public InstallationEnergyConsumptionByCategoriesWeek setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationEnergyConsumptionByCategoriesWeek setId(String value) { this.Id = value; return this; }
         public String getTimeZone() { return TimeZone; }
         public InstallationEnergyConsumptionByCategoriesWeek setTimeZone(String value) { this.TimeZone = value; return this; }
         private static Object responseType = InstallationEnergyConsumptionByCategoriesWeekResponse.class;
@@ -2919,13 +2919,13 @@ public class dto
     public static class InstallationEnergyConsumptionByCategoriesMonth implements IReturn<InstallationEnergyConsumptionByCategoriesMonthResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="TimeZone", Description="TimeZone standard name", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String TimeZone = null;
         
-        public UUID getId() { return Id; }
-        public InstallationEnergyConsumptionByCategoriesMonth setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationEnergyConsumptionByCategoriesMonth setId(String value) { this.Id = value; return this; }
         public String getTimeZone() { return TimeZone; }
         public InstallationEnergyConsumptionByCategoriesMonth setTimeZone(String value) { this.TimeZone = value; return this; }
         private static Object responseType = InstallationEnergyConsumptionByCategoriesMonthResponse.class;
@@ -3017,13 +3017,13 @@ public class dto
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET", ExcludeInSchema=true)
         // @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public String Type = null;
         public Integer ActiveSchedules = null;
         
-        public UUID getId() { return Id; }
-        public InstallationActiveSchedules setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationActiveSchedules setId(String value) { this.Id = value; return this; }
         public String getType() { return Type; }
         public InstallationActiveSchedules setType(String value) { this.Type = value; return this; }
         public Integer getActiveSchedules() { return ActiveSchedules; }
@@ -3070,13 +3070,13 @@ public class dto
     public static class InstallationDataUpdater implements IReturn<InstallationDataUpdaterResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public Double AverageTemperature = null;
         public Double AverageHumidity = null;
         
-        public UUID getId() { return Id; }
-        public InstallationDataUpdater setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationDataUpdater setId(String value) { this.Id = value; return this; }
         public Double getAverageTemperature() { return AverageTemperature; }
         public InstallationDataUpdater setAverageTemperature(Double value) { this.AverageTemperature = value; return this; }
         public Double getAverageHumidity() { return AverageHumidity; }
@@ -3089,13 +3089,13 @@ public class dto
     public static class InstallationOverallTemp implements IReturn<InstallationOverallTempResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="OverallTemp", Description="New Average Temperature", ParameterType="body", DataType="double?", IsRequired=true)
         public Double OverallTemp = null;
         
-        public UUID getId() { return Id; }
-        public InstallationOverallTemp setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationOverallTemp setId(String value) { this.Id = value; return this; }
         public Double getOverallTemp() { return OverallTemp; }
         public InstallationOverallTemp setOverallTemp(Double value) { this.OverallTemp = value; return this; }
         private static Object responseType = InstallationOverallTempResponse.class;
@@ -3106,13 +3106,13 @@ public class dto
     public static class InstallationOverallHumidity implements IReturn<InstallationOverallHumidityResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="OverallHumidity", Description="New Average Humidity", ParameterType="body", DataType="double?", IsRequired=true)
         public Double OverallHumidity = null;
         
-        public UUID getId() { return Id; }
-        public InstallationOverallHumidity setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationOverallHumidity setId(String value) { this.Id = value; return this; }
         public Double getOverallHumidity() { return OverallHumidity; }
         public InstallationOverallHumidity setOverallHumidity(Double value) { this.OverallHumidity = value; return this; }
         private static Object responseType = InstallationOverallHumidityResponse.class;
@@ -3167,13 +3167,13 @@ public class dto
     public static class InstallationName implements IReturn<InstallationNameResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="PATCH", ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="Name", Description="Installation Name", ParameterType="body", DataType="string", IsRequired=true, Verb="PATCH")
         public String Name = null;
         
-        public UUID getId() { return Id; }
-        public InstallationName setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationName setId(String value) { this.Id = value; return this; }
         public String getName() { return Name; }
         public InstallationName setName(String value) { this.Name = value; return this; }
         private static Object responseType = InstallationNameResponse.class;
@@ -3274,7 +3274,7 @@ public class dto
     public static class InstallationAddCamera implements IReturn<InstallationAddCameraResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public String IPAddress = null;
         public Integer Port = null;
@@ -3301,8 +3301,8 @@ public class dto
         public String User = null;
         public String Password = null;
         
-        public UUID getId() { return Id; }
-        public InstallationAddCamera setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationAddCamera setId(String value) { this.Id = value; return this; }
         public String getIpAddress() { return IPAddress; }
         public InstallationAddCamera setIpAddress(String value) { this.IPAddress = value; return this; }
         public Integer getPort() { return Port; }
@@ -3359,13 +3359,13 @@ public class dto
     public static class InstallationsUsersBatch implements IReturn<InstallationsUsersBatchResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="Users", Description="Users", ParameterType="body", DataType="List<AssignableUser>", IsRequired=true)
         public ArrayList<AssignableUser> Users = null;
         
-        public UUID getId() { return Id; }
-        public InstallationsUsersBatch setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationsUsersBatch setId(String value) { this.Id = value; return this; }
         public ArrayList<AssignableUser> getUsers() { return Users; }
         public InstallationsUsersBatch setUsers(ArrayList<AssignableUser> value) { this.Users = value; return this; }
         private static Object responseType = InstallationsUsersBatchResponse.class;
@@ -3393,7 +3393,7 @@ public class dto
     public static class InstallationDemandResponse implements IReturn<InstallationDemandResponseResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
-        public UUID Id = null;
+        public String Id = null;
 
         public String Type = null;
         public String EnergySource = null;
@@ -3406,8 +3406,8 @@ public class dto
         public String Tips = null;
         public String DRId = null;
         
-        public UUID getId() { return Id; }
-        public InstallationDemandResponse setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationDemandResponse setId(String value) { this.Id = value; return this; }
         public String getType() { return Type; }
         public InstallationDemandResponse setType(String value) { this.Type = value; return this; }
         public String getEnergySource() { return EnergySource; }
@@ -3436,13 +3436,13 @@ public class dto
     public static class InstallationUsers implements IReturn<InstallationUsersResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="Role", Description="Role", ParameterType="query", DataType="string")
         public String Role = null;
         
-        public UUID getId() { return Id; }
-        public InstallationUsers setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationUsers setId(String value) { this.Id = value; return this; }
         public String getRole() { return Role; }
         public InstallationUsers setRole(String value) { this.Role = value; return this; }
         private static Object responseType = InstallationUsersResponse.class;
@@ -3453,10 +3453,10 @@ public class dto
     public static class InstallationAssignableUsers implements IReturn<InstallationAssignableUsersResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationAssignableUsers setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationAssignableUsers setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationAssignableUsersResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3465,10 +3465,10 @@ public class dto
     public static class InstallationSensors implements IReturn<InstallationSensorsResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationSensors setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationSensors setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationSensorsResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3477,10 +3477,10 @@ public class dto
     public static class InstallationSensorsSummary implements IReturn<InstallationSensorsSummaryResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationSensorsSummary setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationSensorsSummary setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationSensorsSummaryResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3489,13 +3489,13 @@ public class dto
     public static class InstallationSensorsWithAreaIdAndName implements IReturn<InstallationSensorsWithAreaIdAndNameResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="Protocol", Description="Protocol name", ParameterType="query", DataType="SensorProtocolType?")
         public SensorProtocolType Protocol = null;
         
-        public UUID getId() { return Id; }
-        public InstallationSensorsWithAreaIdAndName setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationSensorsWithAreaIdAndName setId(String value) { this.Id = value; return this; }
         public SensorProtocolType getProtocol() { return Protocol; }
         public InstallationSensorsWithAreaIdAndName setProtocol(SensorProtocolType value) { this.Protocol = value; return this; }
         private static Object responseType = InstallationSensorsWithAreaIdAndNameResponse.class;
@@ -3523,10 +3523,10 @@ public class dto
     public static class InstallationDeviceAndArea implements IReturn<InstallationDeviceAndAreaResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationDeviceAndArea setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationDeviceAndArea setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationDeviceAndAreaResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3547,10 +3547,10 @@ public class dto
     public static class InstallationSensorsActuable implements IReturn<InstallationSensorsActuableResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="string", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationSensorsActuable setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationSensorsActuable setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationSensorsActuableResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3559,10 +3559,10 @@ public class dto
     public static class InstallationSensorsSecurity implements IReturn<InstallationSensorsSecurityResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationSensorsSecurity setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationSensorsSecurity setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationSensorsSecurityResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3571,10 +3571,10 @@ public class dto
     public static class InstallationSensorsComfort implements IReturn<InstallationSensorsComfortResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationSensorsComfort setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationSensorsComfort setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationSensorsComfortResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3583,10 +3583,10 @@ public class dto
     public static class InstallationSensorsComfortScheduler implements IReturn<InstallationSensorsComfortResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="string", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationSensorsComfortScheduler setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationSensorsComfortScheduler setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationSensorsComfortResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3607,10 +3607,10 @@ public class dto
     public static class InstallationCameras implements IReturn<InstallationCamerasResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationCameras setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationCameras setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationCamerasResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3619,10 +3619,10 @@ public class dto
     public static class InstallationPhotos implements IReturn<InstallationPhotosResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationPhotos setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationPhotos setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationPhotosResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3631,10 +3631,10 @@ public class dto
     public static class InstallationFloorplans implements IReturn<InstallationFloorplansResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationFloorplans setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationFloorplans setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationFloorplansResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3643,7 +3643,7 @@ public class dto
     public static class InstallationFloorplansWithAreasBatch implements IReturn<InstallationFloorplansWithAreasBatchResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true, Verb="GET")
-        public UUID Id = null;
+        public String Id = null;
 
         @ApiMember(Name="SensorId", Description="Sensor id", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String SensorId = null;
@@ -3651,8 +3651,8 @@ public class dto
         @ApiMember(Name="CameraId", Description="Camera id", ParameterType="query", DataType="string", IsRequired=true, Verb="GET")
         public String CameraId = null;
         
-        public UUID getId() { return Id; }
-        public InstallationFloorplansWithAreasBatch setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationFloorplansWithAreasBatch setId(String value) { this.Id = value; return this; }
         public String getSensorId() { return SensorId; }
         public InstallationFloorplansWithAreasBatch setSensorId(String value) { this.SensorId = value; return this; }
         public String getCameraId() { return CameraId; }
@@ -3665,10 +3665,10 @@ public class dto
     public static class InstallationAreas implements IReturn<InstallationAreasResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationAreas setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationAreas setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationAreasResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3677,10 +3677,10 @@ public class dto
     public static class InstallationComfortAreas implements IReturn<InstallationComfortAreasResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationComfortAreas setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationComfortAreas setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationComfortAreasResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3689,10 +3689,10 @@ public class dto
     public static class InstallationNodes implements IReturn<InstallationNodesResponse>
     {
         @ApiMember(Name="Id", Description="Installation id", ParameterType="path", DataType="Guid", IsRequired=true)
-        public UUID Id = null;
+        public String Id = null;
         
-        public UUID getId() { return Id; }
-        public InstallationNodes setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationNodes setId(String value) { this.Id = value; return this; }
         private static Object responseType = InstallationNodesResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3816,12 +3816,12 @@ public class dto
         @ApiMember(Name="ReportInstallation", Description="Report Installation", ParameterType="body", DataType="ReportInstallation", IsRequired=true, Verb="POST")
         // @ApiMember(Name="ReportInstallation", Description="Report Installation", ParameterType="body", DataType="ReportInstallation", IsRequired=true, Verb="PUT")
         // @ApiMember(Name="ReportInstallation", Description="Report Installation", ParameterType="body", DataType="ReportInstallation", IsRequired=true, Verb="DELETE")
-        public ArrayList<UUID> Installations = null;
+        public ArrayList<String> Installations = null;
         
         public Integer getId() { return Id; }
         public ReportInstallations setId(Integer value) { this.Id = value; return this; }
-        public ArrayList<UUID> getInstallations() { return Installations; }
-        public ReportInstallations setInstallations(ArrayList<UUID> value) { this.Installations = value; return this; }
+        public ArrayList<String> getInstallations() { return Installations; }
+        public ReportInstallations setInstallations(ArrayList<String> value) { this.Installations = value; return this; }
         private static Object responseType = ReportInstallationsResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3897,14 +3897,14 @@ public class dto
         public String Id = null;
 
         public Boolean IsLocked = null;
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         
         public String getId() { return Id; }
         public SensorLock setId(String value) { this.Id = value; return this; }
         public Boolean getIsLocked() { return IsLocked; }
         public SensorLock setIsLocked(Boolean value) { this.IsLocked = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public SensorLock setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorLock setInstallationId(String value) { this.InstallationId = value; return this; }
         private static Object responseType = SensorLockResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -3915,13 +3915,13 @@ public class dto
         @ApiMember(Name="Id", Description="Sensor id", ParameterType="path", DataType="string", IsRequired=true, ExcludeInSchema=true)
         public String Id = null;
 
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         public ArrayList<AssignableArea> Areas = null;
         
         public String getId() { return Id; }
         public SensorAreas setId(String value) { this.Id = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public SensorAreas setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorAreas setInstallationId(String value) { this.InstallationId = value; return this; }
         public ArrayList<AssignableArea> getAreas() { return Areas; }
         public SensorAreas setAreas(ArrayList<AssignableArea> value) { this.Areas = value; return this; }
         private static Object responseType = SensorAreasResponse.class;
@@ -5093,12 +5093,12 @@ public class dto
         public String Id = null;
 
         @ApiMember(Name="GatewayId", Description="Gateway id", ParameterType="body", DataType="Guid", IsRequired=true)
-        public UUID GatewayId = null;
+        public String GatewayId = null;
         
         public String getId() { return Id; }
         public SensorRemoveForce setId(String value) { this.Id = value; return this; }
-        public UUID getGatewayId() { return GatewayId; }
-        public SensorRemoveForce setGatewayId(UUID value) { this.GatewayId = value; return this; }
+        public String getGatewayId() { return GatewayId; }
+        public SensorRemoveForce setGatewayId(String value) { this.GatewayId = value; return this; }
         private static Object responseType = SensorRemoveForceResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -5127,7 +5127,7 @@ public class dto
         public String Id = null;
 
         @ApiMember(Name="InstallationId", Description="InstallationId", ParameterType="body", DataType="Guid", IsRequired=true)
-        public UUID InstallationId = null;
+        public String InstallationId = null;
 
         @ApiMember(Name="NewName", Description="NewName", ParameterType="body", DataType="string", IsRequired=true)
         public String NewName = null;
@@ -5137,8 +5137,8 @@ public class dto
         
         public String getId() { return Id; }
         public SensorNamePatch setId(String value) { this.Id = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public SensorNamePatch setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorNamePatch setInstallationId(String value) { this.InstallationId = value; return this; }
         public String getNewName() { return NewName; }
         public SensorNamePatch setNewName(String value) { this.NewName = value; return this; }
         public Boolean isPatchChildren() { return PatchChildren; }
@@ -5154,7 +5154,7 @@ public class dto
         public String Id = null;
 
         @ApiMember(Name="InstallationId", Description="InstallationId", ParameterType="body", DataType="Guid", IsRequired=true)
-        public UUID InstallationId = null;
+        public String InstallationId = null;
 
         @ApiMember(Name="NewArea", Description="NewArea", ParameterType="body", DataType="int", IsRequired=true)
         public Integer NewArea = null;
@@ -5164,8 +5164,8 @@ public class dto
         
         public String getId() { return Id; }
         public SensorAreaPatch setId(String value) { this.Id = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public SensorAreaPatch setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorAreaPatch setInstallationId(String value) { this.InstallationId = value; return this; }
         public Integer getNewArea() { return NewArea; }
         public SensorAreaPatch setNewArea(Integer value) { this.NewArea = value; return this; }
         public Boolean isPatchChildren() { return PatchChildren; }
@@ -5178,10 +5178,10 @@ public class dto
     public static class SensorCopyValuesActive implements IReturn<SensorCopyValuesBatchResponse>
     {
         @ApiMember(Name="InstallationId", Description="Installation id", ParameterType="query", DataType="Guid", IsRequired=true)
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         
-        public UUID getInstallationId() { return InstallationId; }
-        public SensorCopyValuesActive setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public SensorCopyValuesActive setInstallationId(String value) { this.InstallationId = value; return this; }
         private static Object responseType = SensorCopyValuesBatchResponse.class;
         public Object getResponseType() { return responseType; }
     }
@@ -7754,30 +7754,30 @@ public class dto
 
     public static class InstallationDemandResponseResponse extends ResponseBase
     {
-        public UUID DemandResponseId = null;
+        public String DemandResponseId = null;
         
-        public UUID getDemandResponseId() { return DemandResponseId; }
-        public InstallationDemandResponseResponse setDemandResponseId(UUID value) { this.DemandResponseId = value; return this; }
+        public String getDemandResponseId() { return DemandResponseId; }
+        public InstallationDemandResponseResponse setDemandResponseId(String value) { this.DemandResponseId = value; return this; }
     }
 
     public static class InstallationUsersResponse extends ResponseBase
     {
-        public UUID Id = null;
+        public String Id = null;
         public ArrayList<UserAuth> Users = null;
         
-        public UUID getId() { return Id; }
-        public InstallationUsersResponse setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationUsersResponse setId(String value) { this.Id = value; return this; }
         public ArrayList<UserAuth> getUsers() { return Users; }
         public InstallationUsersResponse setUsers(ArrayList<UserAuth> value) { this.Users = value; return this; }
     }
 
     public static class InstallationAssignableUsersResponse extends ResponseBase
     {
-        public UUID Id = null;
+        public String Id = null;
         public ArrayList<AssignableUser> Users = null;
         
-        public UUID getId() { return Id; }
-        public InstallationAssignableUsersResponse setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationAssignableUsersResponse setId(String value) { this.Id = value; return this; }
         public ArrayList<AssignableUser> getUsers() { return Users; }
         public InstallationAssignableUsersResponse setUsers(ArrayList<AssignableUser> value) { this.Users = value; return this; }
     }
@@ -8101,12 +8101,12 @@ public class dto
     public static class ReportDetailsResponse extends ResponseBase
     {
         public Report Report = null;
-        public ArrayList<UUID> InstallationsId = null;
+        public ArrayList<String> InstallationsId = null;
         
         public Report getReport() { return Report; }
         public ReportDetailsResponse setReport(Report value) { this.Report = value; return this; }
-        public ArrayList<UUID> getInstallationsId() { return InstallationsId; }
-        public ReportDetailsResponse setInstallationsId(ArrayList<UUID> value) { this.InstallationsId = value; return this; }
+        public ArrayList<String> getInstallationsId() { return InstallationsId; }
+        public ReportDetailsResponse setInstallationsId(ArrayList<String> value) { this.InstallationsId = value; return this; }
     }
 
     public static class ReportInstallationsResponse extends ResponseBase
@@ -9559,7 +9559,7 @@ public class dto
     public static class ComfortMonthValues
     {
         public Integer Id = null;
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         public String Name = null;
         public Integer Month = null;
         public String Year = null;
@@ -9574,8 +9574,8 @@ public class dto
         
         public Integer getId() { return Id; }
         public ComfortMonthValues setId(Integer value) { this.Id = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public ComfortMonthValues setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public ComfortMonthValues setInstallationId(String value) { this.InstallationId = value; return this; }
         public String getName() { return Name; }
         public ComfortMonthValues setName(String value) { this.Name = value; return this; }
         public Integer getMonth() { return Month; }
@@ -9663,7 +9663,7 @@ public class dto
     public static class InstallationCategoryConsumption
     {
         public Integer Id = null;
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         public String Category = null;
         public Double Day = null;
         public Double Week = null;
@@ -9671,8 +9671,8 @@ public class dto
         
         public Integer getId() { return Id; }
         public InstallationCategoryConsumption setId(Integer value) { this.Id = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public InstallationCategoryConsumption setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public InstallationCategoryConsumption setInstallationId(String value) { this.InstallationId = value; return this; }
         public String getCategory() { return Category; }
         public InstallationCategoryConsumption setCategory(String value) { this.Category = value; return this; }
         public Double getDay() { return Day; }
@@ -9779,12 +9779,12 @@ public class dto
 
     public static class InstallationWithSensorAndCategory
     {
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         public String SensorId = null;
         public String ConsumptionCategory = null;
         
-        public UUID getInstallationId() { return InstallationId; }
-        public InstallationWithSensorAndCategory setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public InstallationWithSensorAndCategory setInstallationId(String value) { this.InstallationId = value; return this; }
         public String getSensorId() { return SensorId; }
         public InstallationWithSensorAndCategory setSensorId(String value) { this.SensorId = value; return this; }
         public String getConsumptionCategory() { return ConsumptionCategory; }
@@ -9821,7 +9821,7 @@ public class dto
     public static class Floorplan
     {
         public Integer Id = null;
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         public String Name = null;
         public String ImageUri = null;
         public Float X_Ini = null;
@@ -9833,8 +9833,8 @@ public class dto
         
         public Integer getId() { return Id; }
         public Floorplan setId(Integer value) { this.Id = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public Floorplan setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public Floorplan setInstallationId(String value) { this.InstallationId = value; return this; }
         public String getName() { return Name; }
         public Floorplan setName(String value) { this.Name = value; return this; }
         public String getImageUri() { return ImageUri; }
@@ -9939,7 +9939,7 @@ public class dto
 
     public static class InstallationBase
     {
-        public UUID Id = null;
+        public String Id = null;
         public String Type = null;
         public Integer OwnerId = null;
         public String Name = null;
@@ -9959,8 +9959,8 @@ public class dto
         public String GWVersion = null;
         public String Environment = null;
         
-        public UUID getId() { return Id; }
-        public InstallationBase setId(UUID value) { this.Id = value; return this; }
+        public String getId() { return Id; }
+        public InstallationBase setId(String value) { this.Id = value; return this; }
         public String getType() { return Type; }
         public InstallationBase setType(String value) { this.Type = value; return this; }
         public Integer getOwnerId() { return OwnerId; }
@@ -10017,14 +10017,14 @@ public class dto
     {
         public Integer Id = null;
         public Integer ReportId = null;
-        public UUID InstallationId = null;
+        public String InstallationId = null;
         
         public Integer getId() { return Id; }
         public ReportInstallation setId(Integer value) { this.Id = value; return this; }
         public Integer getReportId() { return ReportId; }
         public ReportInstallation setReportId(Integer value) { this.ReportId = value; return this; }
-        public UUID getInstallationId() { return InstallationId; }
-        public ReportInstallation setInstallationId(UUID value) { this.InstallationId = value; return this; }
+        public String getInstallationId() { return InstallationId; }
+        public ReportInstallation setInstallationId(String value) { this.InstallationId = value; return this; }
     }
 
     public static class UserReport
@@ -10410,7 +10410,7 @@ public class dto
         public String Type = null;
         public String Subtype = null;
         public String Description = null;
-        public UUID TargetInstallation = null;
+        public String TargetInstallation = null;
         public Date Date = null;
         
         public Long getId() { return Id; }
@@ -10423,8 +10423,8 @@ public class dto
         public AdminSentNotification setSubtype(String value) { this.Subtype = value; return this; }
         public String getDescription() { return Description; }
         public AdminSentNotification setDescription(String value) { this.Description = value; return this; }
-        public UUID getTargetInstallation() { return TargetInstallation; }
-        public AdminSentNotification setTargetInstallation(UUID value) { this.TargetInstallation = value; return this; }
+        public String getTargetInstallation() { return TargetInstallation; }
+        public AdminSentNotification setTargetInstallation(String value) { this.TargetInstallation = value; return this; }
         public Date getDate() { return Date; }
         public AdminSentNotification setDate(Date value) { this.Date = value; return this; }
     }

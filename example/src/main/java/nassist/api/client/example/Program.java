@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
-import java.util.UUID;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
@@ -45,10 +44,11 @@ public class Program {
 	private static String PASSWORD = "demo";
 
 	private static String BASE_URL = "https://dev.encontrol.io/api";
+	//private static String BASE_URL = "http://dev.encontrol.io/api";
 
-	private static String INSTALLATION_ID = "00000000-0000-0000-0000-b827eb3761f7";
-	private static String SENSOR_ID = "127126ef-a96a-4177-9a7f-cd28f0e79326";
-	private static String CAMERA_ID = "c007ca97-9960-4a6e-9dd2-dfd61e39ad8d";
+	private static String INSTALLATION_ID = "";
+	private static String SENSOR_ID = "";
+	private static String CAMERA_ID = "4820eb34-0488-43fd-aab3-332afd32008f";
 
 	private static JsonServiceClient client;
 	private static AuthenticateResponse authDetails;
@@ -67,23 +67,23 @@ public class Program {
 
 		getInstallationDetails();
 		
-		uploadSensorValues();
+		//uploadSensorValues();
 
-		uploadSensorStatuses();
+		//uploadSensorStatuses();
 
-		getSensorValues();
+		//getSensorValues();
 
-		getSensorStatuses();
+		//getSensorStatuses();
 
-		getSensorsForInstallation();
+		//getSensorsForInstallation();
 
-		getNotificationsByType();
+		//getNotificationsByType();
 
-		uploadPicture();
+		//uploadPicture();	
 
-		downloadPicture();
+		//downloadPicture();
 		
-		createCustomNotification();
+		//createCustomNotification();
 	}
 	
 	public static void getInstallationDetails(){
@@ -167,7 +167,7 @@ public class Program {
 
 	public static void getSensorsForInstallation(){
 		InstallationSensors allSensorsRequest = new InstallationSensors();
-		allSensorsRequest.Id = UUID.fromString(INSTALLATION_ID);
+		allSensorsRequest.Id = INSTALLATION_ID;
 
 		InstallationSensorsResponse installationSensors = client.get(allSensorsRequest);
 
